@@ -239,15 +239,15 @@ export default function Home() {
                                         className="topBar-item-border d-none d-lg-inline">IEEE PES</a>
                                 </div>
                                 <div className="social-icons-header d-none d-md-block">
-                                    <a href="https://www.linkedin.com/company/ieee-pes-kerala/" target="_blank"><i
+                                    <a href="https://www.linkedin.com/company/ieee-pes-kerala/" target="_blank" aria-label="LinkedIn"><i
                                         className="fa-brands fa-linkedin-in"></i></a>
-                                    <a href="https://www.instagram.com/ieeepeskerala/" target="_blank"><i
+                                    <a href="https://www.instagram.com/ieeepeskerala/" target="_blank" aria-label="Instagram"><i
                                         className="fa-brands fa-instagram"></i></a>
-                                    <a href="https://www.facebook.com/ieeepeskerala" target="_blank"><i
+                                    <a href="https://www.facebook.com/ieeepeskerala" target="_blank" aria-label="Facebook"><i
                                         className="fa-brands fa-facebook-f"></i></a>
-                                    <a href="https://twitter.com/ieeepeskerala" target="_blank"><i
+                                    <a href="https://twitter.com/ieeepeskerala" target="_blank" aria-label="Twitter"><i
                                         className="fa-brands fa-x-twitter"></i></a>
-                                    <a href="https://whatsapp.com/channel/0029VajmXb82ER6ZqI0P8R1I" target="_blank"><i
+                                    <a href="https://whatsapp.com/channel/0029VajmXb82ER6ZqI0P8R1I" target="_blank" aria-label="WhatsApp"><i
                                         className="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
@@ -446,7 +446,7 @@ export default function Home() {
                                 <div className="update-box h-100" data-aos="fade-right">
                                     <div className="update-box-title">
                                         <i className="ri-calendar-event-line"></i>
-                                        <h4>Upcoming Events</h4>
+                                        <h3>Upcoming Events</h3>
                                     </div>
                                     <div className="swiper update-swiper upcoming-update-swiper">
                                         <div className="swiper-wrapper">
@@ -456,7 +456,7 @@ export default function Home() {
                                                         <Image src="/images/ieee-images/Events/agm2026.png" alt="AGM 2026" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                     </div>
                                                     <div className="swiper-update-body">
-                                                        <h5>AGM 2026 - Annual General Meeting</h5>
+                                                        <h4>AGM 2026 - Annual General Meeting</h4>
                                                         <div className="update-desc">
                                                             The IEEE PES Kerala Chapter warmly invites all members to be part of
                                                             the Annual General Meeting 2026. Reflect, Reconnect, Reignite.
@@ -475,7 +475,7 @@ export default function Home() {
                                                         <Image src="/images/ieee-images/Events/pesgre_event.png" alt="PESGRE" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                     </div>
                                                     <div className="swiper-update-body">
-                                                        <h5>PESGRE 2026 - International Conference</h5>
+                                                        <h4>PESGRE 2026 - International Conference</h4>
                                                         <div className="update-desc">
                                                             The premier international conference on Power Electronics, Smart
                                                             Grid and Renewable Energy (PESGRE) returns to Kerala.
@@ -492,7 +492,7 @@ export default function Home() {
                                                         <Image src="/images/ieee-images/Events/smartgrid_event.png" alt="Workshop" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                     </div>
                                                     <div className="swiper-update-body">
-                                                        <h5>Smart Grid Workshop & Training</h5>
+                                                        <h4>Smart Grid Workshop & Training</h4>
                                                         <div className="update-desc">
                                                             Master the future of power systems with our hands-on Smart Grid
                                                             workshop. Industry certification included.
@@ -516,7 +516,7 @@ export default function Home() {
                                 <div className="update-box h-100" data-aos="fade-left">
                                     <div className="update-box-title">
                                         <i className="ri-history-line"></i>
-                                        <h4>Recent Events</h4>
+                                        <h3>Recent Events</h3>
                                     </div>
                                     <div className="swiper update-swiper recent-update-swiper">
                                         <div className="swiper-wrapper">
@@ -526,7 +526,7 @@ export default function Home() {
                                                         <Image src="/images/ieee-images/recent_1.png" alt="Workshop" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                     </div>
                                                     <div className="swiper-update-body">
-                                                        <h5>Power System Protection Workshop</h5>
+                                                        <h4>Power System Protection Workshop</h4>
                                                         <div className="update-desc">
                                                             A comprehensive hands-on session on modern power system protection
                                                             techniques held at GEC Barton Hill.
@@ -541,7 +541,7 @@ export default function Home() {
                                                         <Image src="/images/ieee-images/recent_2.png" alt="Seminar" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                     </div>
                                                     <div className="swiper-update-body">
-                                                        <h5>IEEE PES Day 2025 Celebrations</h5>
+                                                        <h4>IEEE PES Day 2025 Celebrations</h4>
                                                         <div className="update-desc">
                                                             Celebrating the spirit of Power & Energy Society with state-wide
                                                             virtual events and competitions.
@@ -562,7 +562,7 @@ export default function Home() {
                                 <div className="update-box" data-aos="fade-up" data-aos-delay="100">
                                     <div className="update-box-title">
                                         <i className="ri-notification-3-line"></i>
-                                        <h4>Announcements</h4>
+                                        <h3>Announcements</h3>
                                     </div>
                                     <ul className="notice-board">
                                         <li className="notice-item">
@@ -1224,7 +1224,7 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="col-lg-2 col-md-6 col-6">
-                                <h6 className="footer-heading">Quick Links</h6>
+                                <h4 className="footer-heading">Quick Links</h4>
                                 <ul className="footer-links">
                                     <li><Link href="/upcoming-events">Upcoming Events</Link></li>
                                     <li><Link href="/student-branches">Student Branches</Link></li>
@@ -1235,7 +1235,7 @@ export default function Home() {
                                     <li><Link href="/awards">Awards</Link></li>
                                 </ul>            </div>
                             <div className="col-lg-2 col-md-6 col-6">
-                                <h6 className="footer-heading">Get Started</h6>
+                                <h4 className="footer-heading">Get Started</h4>
                                 <ul className="footer-links">
                                     <li><a href="https://www.ieee.org/" target="_blank">IEEE</a></li>
                                     <li><a href="https://ieee-pes.org/" target="_blank">IEEE PES</a></li>
@@ -1243,7 +1243,7 @@ export default function Home() {
                                     <li><Link href="/membership-benefits">Membership Benefits</Link></li>
                                 </ul>            </div>
                             <div className="col-lg-4 col-md-6">
-                                <h6 className="footer-heading">Contact Info</h6>
+                                <h4 className="footer-heading">Contact Info</h4>
                                 <ul className="footer-links footer-contact">
                                     <li>
                                         <i className="bi bi-envelope-fill"></i>

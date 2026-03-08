@@ -1,2316 +1,369 @@
-07/02/2026, 09:46
-
-about:blank
-
-http://localhost:4455/index.html
-
-62
-
-84
-
-96
-
-100
-
-62
-
-84
-
-96
-
-100
-
-Performance
-
-Accessibility
-
-Best
-Practices
-
-SEO
-
-62
-Performance
-Values are estimated and may vary. The performance score is
-calculated directly from these metrics. See calculator.
-0–49
-
-50–89
-
-90–100
-
-METRICS
-
-Expand view
-
-First Contentful Paint
-
-Largest Contentful Paint
-
-5.2 s
-
-10.8 s
-
-about:blank
-
-1/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Total Blocking Time
-
-Cumulative Layout Shift
-
-0 ms
-
-0
-
-Speed Index
-
-5.2 s
-
-Show audits relevant to:
-
-All
-
-FCP
-
-LCP
-
-TBT
-
-CLS
-
-INSIGHTS
-
-Render blocking requests — Est savings of 3,650 ms
-Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network
-requests out of the critical path. FCP
-
-LCP
-
-Unscored
-
-Transfer
-
-URL
-
-Size
-
-Google Fonts
-
-Duration
-
-1.1 KiB
-
-860 ms
-
-1.1 KiB
-
-860 ms
-
-2.7 KiB
-
-840 ms
-
-2.7 KiB
-
-840 ms
-
-87.1 KiB
-
-1,700 ms
-
-…js/bootstrap.bundle.min.js (cdn.jsdelivr.net)
-
-24.0 KiB
-
-170 ms
-
-…fonts/remixicon.css (cdn.jsdelivr.net)
-
-17.9 KiB
-
-170 ms
-
-…swiper@11/swiper-bundle.min.css (cdn.jsdelivr.net)
-
-4.8 KiB
-
-…css/bootstrap.min.css (cdn.jsdelivr.net)
-
-26.9 KiB
-
-350 ms
-
-…font/bootstrap-icons.min.css (cdn.jsdelivr.net)
-
-13.5 KiB
-
-1,000 ms
-
-Cdn
-
-19.1 KiB
-
-1,180 ms
-
-…css/all.min.css (cdnjs.cloudflare.com)
-
-19.1 KiB
-
-1,180 ms
-
-Cdn
-
-/css2?family=… (fonts.googleapis.com)
-
-Unpkg
-
-Cdn
-
-…dist/aos.css (unpkg.com)
-
-JSDelivr CDN
-
-Cloudflare CDN
-
-Cdn
-
-Use efficient cache lifetimes — Est savings of 4,222 KiB
-A long cache lifetime can speed up repeat visits to your page. Learn more about caching. FCP
-
-about:blank
-
-LCP
-
-Unscored
-
-2/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Show 3rd-party resources (2)
-Request
-
-localhost
-
-Cache TTL
-
-Transfer
-Size
-4,218 KiB
-
-1st Party
-
-…ieee-images/hero%20.png (localhost)
-
-None
-
-2,856 KiB
-
-…Gallery/gallery_3.png (localhost)
-
-None
-
-106 KiB
-
-…Events/pesday_event.png (localhost)
-
-None
-
-100 KiB
-
-…Events/smartgrid_event.png (localhost)
-
-None
-
-98 KiB
-
-…Gallery/gallery_4.png (localhost)
-
-None
-
-94 KiB
-
-…Events/agm2026.png (localhost)
-
-None
-
-93 KiB
-
-…Flagships/akpessc_flagship_177….png (localhost)
-
-None
-
-93 KiB
-
-…Gallery/gallery_2.png (localhost)
-
-None
-
-92 KiB
-
-…ieee-images/about_modern.png (localhost)
-
-None
-
-85 KiB
-
-…ieee-images/BobyPhilp.jpeg (localhost)
-
-None
-
-83 KiB
-
-…Events/pesgre_event.png (localhost)
-
-None
-
-80 KiB
-
-…ieee-images/recent_2.png (localhost)
-
-None
-
-77 KiB
-
-…Gallery/gallery_1.png (localhost)
-
-None
-
-77 KiB
-
-…Flagships/intellect_flagship_177….png (localhost)
-
-None
-
-72 KiB
-
-…Events/renewable_event.png (localhost)
-
-None
-
-64 KiB
-
-…Flagships/wow_flagship_177….png (localhost)
-
-None
-
-62 KiB
-
-…ieee-images/recent_1.png (localhost)
-
-None
-
-60 KiB
-
-…ieee-images/IEEE_logo.png (localhost)
-
-None
-
-17 KiB
-
-…ieee-images/PESKC.png (localhost)
-
-None
-
-9 KiB
-
-…Video/Herovideo.mp4 (localhost)
-
-None
-
-0 KiB
-
-JSDelivr CDN
-
-48 KiB
-
-Cdn
-
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net)
-
-7d
-
-43 KiB
-
-…swiper@11/swiper-bundle.min.css (cdn.jsdelivr.net)
-
-7d
-
-5 KiB
-
-Improve image delivery — Est savings of 715 KiB
-Reducing the download time of images can improve the perceived load time of the page and LCP. Learn more
-about optimizing image size FCP
-
-about:blank
-
-LCP
-
-Unscored
-
-3/32
-
-07/02/2026, 09:46
-
-about:blank
-
-URL
-
-localhost
-
-1st Party
-
-Resource
-Size
-
-Est Savings
-
-760.6 KiB
-
-715.1 KiB
-
-97.5 KiB
-
-91.9 KiB
-
-img
-…Events/smartgrid_event.png (localhost)
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-30.8 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (185x185).
-
-89.3 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-…Events/agm2026.png (localhost)
-
-92.8 KiB
-
-87.2 KiB
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-26.1 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (185x185).
-
-85.0 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-
-…Flagships/akpessc_flagship_177….png (localhost)
-
-92.4 KiB
-
-87.1 KiB
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-25.7 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (179x179).
-
-85.1 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-
-…ieee-images/BobyPhilp.jpeg (localhost)
-
-82.8 KiB
-
-82.5 KiB
-
-This image file is larger than it needs to be
-(800x800) for its displayed dimensions (46x46). Use
-
-82.5 KiB
-
-responsive images to reduce the image download
-size.
-img
-
-about:blank
-
-…ieee-images/about_modern.png (localhost)
-
-85.1 KiB
-
-78.3 KiB
-
-4/32
-
-07/02/2026, 09:46
-
-about:blank
-
-URL
-
-Resource
-Size
-
-Est Savings
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-18.4 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (205x205).
-
-76.4 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-…Events/pesgre_event.png (localhost)
-
-80.2 KiB
-
-74.6 KiB
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-13.5 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (185x185).
-
-73.5 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-…ieee-images/recent_2.png (localhost)
-
-76.9 KiB
-
-71.4 KiB
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-10.3 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (185x185).
-
-70.5 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-
-…Gallery/gallery_1.png (localhost)
-
-76.5 KiB
-
-71.2 KiB
-
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-9.8 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (179x179).
-
-70.5 KiB
-
-Use responsive images to reduce the image
-download size.
-img
-
-about:blank
-
-…ieee-images/recent_1.png (localhost)
-
-59.8 KiB
-
-54.8 KiB
-
-5/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Resource
-
-URL
-
-Size
-
-Est Savings
-
-This image file is larger than it needs to be
-(640x640) for its displayed dimensions (185x185).
-
-54.8 KiB
-
-Use responsive images to reduce the image
-download size.
-
-…ieee-images/IEEE_logo.png (localhost)
-
-16.6 KiB
-
-16.0 KiB
-
-img
-Using a modern image format (WebP, AVIF) or
-increasing the image compression could improve
-
-8.5 KiB
-
-this image's download size.
-This image file is larger than it needs to be
-(429x117) for its displayed dimensions (115x31).
-Use responsive images to reduce the image
-
-15.4 KiB
-
-download size.
-
-Font display — Est savings of 110 ms
-Consider setting font-display to swap or optional to ensure text is consistently visible. swap can be further
-optimized to mitigate layout shifts with font metric overrides. FCP
-
-URL
-
-Unscored
-
-Est Savings
-
-Cloudflare CDN
-
-Cdn
-
-…webfonts/fa-solid-900.woff2 (cdnjs.cloudflare.com)
-
-JSDelivr CDN
-
-110 ms
-
-Cdn
-
-…fonts/bootstrap-icons.woff2?dd67030… (cdn.jsdelivr.net)
-
-50 ms
-
-LCP request discovery
-Optimize LCP by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading LCP
-Unscored
-
-fetchpriority=high should be applied
-Request is discoverable in initial document
-lazy load not applied
-
-about:blank
-
-6/32
-
-07/02/2026, 09:46
-
-about:blank
-
-img
-
-Network dependency tree
-Avoid chaining critical requests by reducing the length of chains, reducing the download size of resources, or
-deferring the download of unnecessary resources to improve page load. LCP Unscored
-
-Maximum critical path latency: 598 ms
-Initial Navigation
-/index.html (localhost) - 40 ms, 114.97 KiB
-/css2?family=… (fonts.googleapis.com) - 431 ms, 1.11 KiB
-…v12/LDIoaomQN….woff2 (fonts.gstatic.com) - 598 ms, 26.66 KiB
-…dist/aos.js (unpkg.com) - 400 ms, 4.63 KiB
-…dist/aos.css (unpkg.com) - 394 ms, 2.68 KiB
-…css/all.min.css (cdnjs.cloudflare.com) - 185 ms, 19.08 KiB
-…webfonts/fa-solid-900.woff2 (cdnjs.cloudflare.com) - 393 ms, 153.55 KiB
-…fonts/remixicon.css (cdn.jsdelivr.net) - 190 ms, 17.91 KiB
-…fonts/remixicon.woff2?t=170… (cdn.jsdelivr.net) - 389 ms, 159.74 KiB
-…font/bootstrap-icons.min.css (cdn.jsdelivr.net) - 176 ms, 13.53 KiB
-…fonts/bootstrap-icons.woff2?dd67030… (cdn.jsdelivr.net) - 364 ms, 127.71 KiB
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net) - 273 ms, 43.18 KiB
-…js/bootstrap.bundle.min.js (cdn.jsdelivr.net) - 273 ms, 23.99 KiB
-…swiper@11/swiper-bundle.min.css (cdn.jsdelivr.net) - 186 ms, 4.77 KiB
-…css/bootstrap.min.css (cdn.jsdelivr.net) - 180 ms, 26.91 KiB
-
-Preconnected origins
-preconnect hints help the browser establish a connection earlier in the page load, saving time when the
-first request for that origin is made. The following are the origins that the page preconnected to.
-
-Origin
-
-Source
-
-https://fonts.googleapis.com/
-
-link
-
-https://fonts.gstatic.com/
-
-link
-
-Preconnect candidates
-about:blank
-
-7/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Add preconnect hints to your most important origins, but try to use no more than 4.
-
-Origin
-
-Est LCP savings
-
-https://cdn.jsdelivr.net
-
-300 ms
-
-https://cdnjs.cloudflare.com
-
-270 ms
-
-Document request latency — Est savings of 77 KiB
-Your first network request is the most important. Reduce its latency by avoiding redirects, ensuring a fast server
-response, and enabling text compression. FCP
-
-LCP
-
-Unscored
-
-Avoids redirects
-Server responds quickly (observed 0 ms)
-No compression applied
-
-Layout shift culprits
-Layout shifts occur when elements move absent any user interaction. Investigate the causes of layout shifts, such
-as elements being added, removed, or their fonts changing as the page loads. CLS
-
-Element
-
-Unscored
-
-Layout shift score
-
-Total
-
-0.000
-div.marquee-text
-0.000
-
-…v12/LDIoaomQN….woff2 (fonts.gstatic.com)
-
-Web font
-
-Optimize DOM size
-A large DOM can increase the duration of style calculations and layout reflows, impacting page responsiveness. A
-large DOM will also increase memory usage. Learn how to avoid an excessive DOM size. Unscored
-
-Statistic
-
-Element
-
-Value
-
-Total elements
-
-680
-img
-
-DOM depth
-
-about:blank
-
-15
-
-8/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Statistic
-
-Element
-
-Value
-div.box-layout
-
-Most children
-
-14
-
-LCP breakdown
-Each subpart has specific improvement strategies. Ideally, most of the LCP time should be spent on loading the
-resources, not within delays. LCP Unscored
-
-Subpart
-
-Duration
-
-Time to first byte
-
-0 ms
-
-Resource load delay
-
-20 ms
-
-Resource load duration
-
-20 ms
-
-Element render delay
-
-460 ms
-img
-
-3rd parties
-3rd party code can significantly impact load performance. Reduce and defer loading of 3rd party code to prioritize
-your page's content. Unscored
-
-Transfer
-
-Main thread
-
-size
-
-time
-
-418 KiB
-
-37 ms
-
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net)
-
-43 KiB
-
-34 ms
-
-…js/bootstrap.bundle.min.js (cdn.jsdelivr.net)
-
-24 KiB
-
-3 ms
-
-…fonts/remixicon.woff2?t=170… (cdn.jsdelivr.net)
-
-160 KiB
-
-0 ms
-
-…fonts/bootstrap-icons.woff2?dd67030… (cdn.jsdelivr.net)
-
-128 KiB
-
-0 ms
-
-…css/bootstrap.min.css (cdn.jsdelivr.net)
-
-27 KiB
-
-0 ms
-
-…fonts/remixicon.css (cdn.jsdelivr.net)
-
-18 KiB
-
-0 ms
-
-…font/bootstrap-icons.min.css (cdn.jsdelivr.net)
-
-14 KiB
-
-0 ms
-
-…swiper@11/swiper-bundle.min.css (cdn.jsdelivr.net)
-
-5 KiB
-
-0 ms
-
-mnojpmjdmbbfmejpflffifhffcmidifd
-
-0 KiB
-
-4 ms
-
-3rd party
-
-JSDelivr CDN
-
-about:blank
-
-Cdn
-
-9/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Transfer
-
-Main thread
-
-size
-
-time
-
-0 KiB
-
-4 ms
-
-7 KiB
-
-3 ms
-
-…dist/aos.js (unpkg.com)
-
-5 KiB
-
-3 ms
-
-…dist/aos.css (unpkg.com)
-
-3 KiB
-
-0 ms
-
-173 KiB
-
-0 ms
-
-…webfonts/fa-solid-900.woff2 (cdnjs.cloudflare.com)
-
-154 KiB
-
-0 ms
-
-…css/all.min.css (cdnjs.cloudflare.com)
-
-19 KiB
-
-0 ms
-
-Google Fonts
-
-28 KiB
-
-0 ms
-
-…v12/LDIoaomQN….woff2 (fonts.gstatic.com)
-
-27 KiB
-
-0 ms
-
-/css2?family=… (fonts.googleapis.com)
-
-1 KiB
-
-0 ms
-
-3rd party
-
-chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/bundles/web-discoverycontent-script.bundle.js
-
-Unpkg
-
-Cdn
-
-Cloudflare CDN
-
-Cdn
-
-Cdn
-
-These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed
-information.
-
-DIAGNOSTICS
-
-Reduce unused CSS — Est savings of 86 KiB
-Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes
-consumed by network activity. Learn how to reduce unused CSS. FCP
-
-LCP
-
-Unscored
-
-Show 3rd-party resources (4)
-Transfer
-
-Est
-
-Size
-
-Savings
-
-57.4 KiB
-
-55.8 KiB
-
-…css/bootstrap.min.css (cdn.jsdelivr.net)
-
-26.8 KiB
-
-25.5 KiB
-
-…fonts/remixicon.css (cdn.jsdelivr.net)
-
-17.5 KiB
-
-17.3 KiB
-
-…font/bootstrap-icons.min.css (cdn.jsdelivr.net)
-
-13.1 KiB
-
-13.0 KiB
-
-Cdn
-
-18.5 KiB
-
-18.3 KiB
-
-…css/all.min.css (cdnjs.cloudflare.com)
-
-18.5 KiB
-
-18.3 KiB
-
-43.6 KiB
-
-12.3 KiB
-
-URL
-
-JSDelivr CDN
-
-Cloudflare CDN
-
-Unattributable
-
-about:blank
-
-Cdn
-
-10/32
-
-07/02/2026, 09:46
-
-about:blank
-
-URL
-
-:root { --base-color: #006da6; --dark-blue: #162340; --header-color: #2c364c;
-… } …
-
-Transfer
-
-Est
-
-Size
-
-Savings
-
-43.6 KiB
-
-12.3 KiB
-
-Reduce unused JavaScript — Est savings of 24 KiB
-Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by
-network activity. Learn how to reduce unused JavaScript. FCP
-
-LCP
-
-Unscored
-
-URL
-
-JSDelivr CDN
-
-Cdn
-
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net)
-…
-
-Transfer
-
-Est
-
-Size
-
-Savings
-
-43.0 KiB
-
-23.6 KiB
-
-43.0 KiB
-
-23.6 KiB
-
-42.9 KiB
-
-23.6 KiB
-
-Image elements do not have explicit width and height
-Set an explicit width and height on image elements to reduce layout shifts and improve CLS. Learn how to set
-image dimensions CLS
-
-Unscored
-
-URL
-
-localhost
-
-1st Party
-
-img
-…ieee-images/about_modern.png (localhost)
-
-img
-…ieee-images/IEEE_logo.png (localhost)
-
-img
-
-…ieee-images/PESKC.png (localhost)
-
-Minify CSS — Est savings of 20 KiB
-
-about:blank
-
-11/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Minifying CSS files can reduce network payload sizes. Learn how to minify CSS. FCP
-
-URL
-
-:root { --base-color: #006da6; --dark-blue: #162340; --header-color: #2c364c;
-… } …
-
-LCP
-
-Unscored
-
-Transfer
-
-Est
-
-Size
-
-Savings
-
-43.6 KiB
-
-19.8 KiB
-
-Minify JavaScript — Est savings of 2 KiB
-Minifying JavaScript files can reduce payload sizes and script parse time. Learn how to minify JavaScript. FCP
-LCP
-
-Unscored
-
-URL
-
-inline: AOS.init({ duratio…
-
-Transfer
-
-Est
-
-Size
-
-Savings
-
-4.7 KiB
-
-2.2 KiB
-
-Avoid enormous network payloads — Total size was 9,119 KiB
-Large network payloads cost users real money and are highly correlated with long load times. Learn how to
-reduce payload sizes. Unscored
-Show 3rd-party resources (3)
-Transfer
-
-URL
-
-localhost
-
-Size
-
-1st Party
-
-…Video/Herovideo.mp4 (localhost)
-
-4,160.2 KiB
-
-…ieee-images/hero%20.png (localhost)
-
-2,856.4 KiB
-
-/index.html (localhost)
-
-115.0 KiB
-
-…Gallery/gallery_3.png (localhost)
-
-105.6 KiB
-
-…Events/pesday_event.png (localhost)
-
-100.2 KiB
-
-…Events/smartgrid_event.png (localhost)
-
-97.7 KiB
-
-…Gallery/gallery_4.png (localhost)
-
-94.1 KiB
-
-JSDelivr CDN
-about:blank
-
-7,529.1 KiB
-
-Cdn
-
-287.5 KiB
-
-12/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Transfer
-
-URL
-
-Size
-
-…fonts/remixicon.woff2?t=170… (cdn.jsdelivr.net)
-
-159.7 KiB
-
-…fonts/bootstrap-icons.woff2?dd67030… (cdn.jsdelivr.net)
-
-127.7 KiB
-
-Cloudflare CDN
-
-153.5 KiB
-
-Cdn
-
-153.5 KiB
-
-…webfonts/fa-solid-900.woff2 (cdnjs.cloudflare.com)
-
-Minimize main-thread work — 2.3 s
-Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS
-payloads helps with this. Learn how to minimize main-thread work TBT
-
-Unscored
-
-Category
-
-Time Spent
-
-Other
-
-916 ms
-
-Style & Layout
-
-891 ms
-
-Script Evaluation
-
-326 ms
-
-Rendering
-
-84 ms
-
-Parse HTML & CSS
-
-82 ms
-
-Script Parsing & Compilation
-
-26 ms
-
-Avoid long main-thread tasks — 7 long tasks found
-Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. Learn how to
-avoid long main-thread tasks TBT
-
-Unscored
-
-Show 3rd-party resources (2)
-Start
-
-URL
-
-localhost
-
-about:blank
-
-Time
-
-Duration
-
-484 ms
-
-1st Party
-
-/index.html (localhost)
-
-1,296 ms
-
-169 ms
-
-/index.html (localhost)
-
-1,465 ms
-
-152 ms
-
-13/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Start
-
-URL
-
-Time
-
-Duration
-
-/index.html (localhost)
-
-1,617 ms
-
-103 ms
-
-/index.html (localhost)
-
-1,202 ms
-
-60 ms
-
-Unattributable
-
-114 ms
-
-1,720 ms
-
-Unattributable
-
-JSDelivr CDN
-
-Unpkg
-
-54 ms
-
-Cdn
-
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net)
-
-114 ms
-
-15,099 ms
-
-54 ms
-
-53 ms
-
-Cdn
-
-…dist/aos.js (unpkg.com)
-
-15,046 ms
-
-53 ms
-
-More information about the performance of your application. These numbers don't directly affect the Performance score.
-
-PASSED AUDITS (10)
-
-Hide
-
-Duplicated JavaScript
-Remove large, duplicate JavaScript modules from bundles to reduce unnecessary bytes consumed by network
-activity. FCP
-
-LCP
-
-Unscored
-
-Forced reflow
-A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have
-been invalidated by a change to the DOM state. This can result in poor performance. Learn more about forced
-reflows and possible mitigations. Unscored
-
-INP breakdown
-Start investigating how to improve INP by looking at the longest subpart. Unscored
-
-Legacy JavaScript
-Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for
-modern browsers. Consider modifying your JavaScript build process to not transpile Baseline features, unless you
-know you must support older browsers. Learn why most sites can deploy ES6+ code without transpiling FCP
-
-LCP
-
-Unscored
-
-about:blank
-
-14/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Modern HTTP
-HTTP/2 and HTTP/3 offer many benefits over HTTP/1.1, such as multiplexing. Learn more about using modern
-HTTP. FCP
-
-LCP
-
-Unscored
-
-Optimize viewport for mobile
-Tap interactions may be delayed by up to 300 ms if the viewport is not optimized for mobile. Unscored
-
-meta
-
-User Timing marks and measures
-Consider instrumenting your app with the User Timing API to measure your app's real-world performance during
-key user experiences. Learn more about User Timing marks. Unscored
-
-JavaScript execution time — 0.3 s
-Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS
-payloads helps with this. Learn how to reduce Javascript execution time. TBT
-
-Unscored
-
-Show 3rd-party resources (1)
-Total
-URL
-
-CPU
-
-Script Evaluation
-
-Script Parse
-
-1,177 ms
-
-93 ms
-
-5 ms
-
-1,177 ms
-
-93 ms
-
-5 ms
-
-512 ms
-
-189 ms
-
-9 ms
-
-512 ms
-
-189 ms
-
-9 ms
-
-Unattributable
-
-494 ms
-
-8 ms
-
-0 ms
-
-Unattributable
-
-494 ms
-
-8 ms
-
-0 ms
-
-Time
-
-localhost
-
-1st Party
-
-/index.html (localhost)
-
-JSDelivr CDN
-
-Cdn
-
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net)
-
-Avoid non-composited animations
-Animations which are not composited can be janky and increase CLS. Learn how to avoid non-composited
-animations CLS
-
-about:blank
-
-Unscored
-
-15/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Page didn't prevent back/forward cache restoration
-Many navigations are performed by going back to a previous page, or forwards again. The back/forward cache
-(bfcache) can speed up these return navigations. Learn more about the bfcache Unscored
-
-84
-Accessibility
-These checks highlight opportunities to improve the accessibility of
-your web app. Automatic detection can only detect a subset of
-issues and does not guarantee the accessibility of your web app, so
-manual testing is also encouraged.
-NAMES AND LABELS
-
-Buttons do not have an accessible name
-When a button doesn't have an accessible name, screen readers announce it as "button", making it unusable for
-users who rely on screen readers. Learn how to make buttons more accessible.
-
-Failing Elements
-
-button.navbar-toggler
-
-These are opportunities to improve the semantics of the controls in your application. This may enhance the experience
-for users of assistive technology, like a screen reader.
-
-CONTRAST
-
-Background and foreground colors do not have a sufficient contrast ratio.
-Low-contrast text is difficult or impossible for many users to read. Learn how to provide sufficient color contrast.
-
-Failing Elements
-
-a.btn-glass.btn-glass-primary
-
-about:blank
-
-16/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Failing Elements
-
-Links rely on color to be distinguishable.
-Low-contrast text is difficult or impossible for many users to read. Link text that is discernible improves the
-experience for users with low vision. Learn how to make links distinguishable.
-
-Failing Elements
-
-a
-p
-
-These are opportunities to improve the legibility of your content.
-
-NAVIGATION
-
-Heading elements are not in a sequentially-descending order
-Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to
-navigate and understand when using assistive technologies. Learn more about heading order.
-
-Failing Elements
-
-h3
-
-h4
-
-h6
-
-h5
-
-about:blank
-
-17/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Failing Elements
-
-h4
-h4.m-0.fw-800
-h4
-
-h5
-h4
-h6.footer-heading
-
-These are opportunities to improve keyboard navigation in your application.
-
-BEST PRACTICES
-
-Document does not have a main landmark.
-One main landmark helps screen reader users navigate a web page. Learn more about landmarks.
-
-Failing Elements
-
-html.no-js
-
-Identical links have the same purpose.
-Links with the same destination should have the same description, to help users understand the link's purpose
-and decide whether to follow it. Learn more about identical links. Unscored
-
-Failing Elements
-
-a.btn-register.mb-3
-
-a.btn-register.mb-3
-
-about:blank
-
-18/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Failing Elements
-a.btn-register.mb-3
-
-a.btn-register.mb-3
-
-These items highlight common accessibility best practices.
-
-AUDIO AND VIDEO
-
-<video> elements contain a <track> element with [kind="captions"]
-
-When a video provides a caption it is easier for deaf and hearing impaired users to access its information. Learn
-more about video captions. Unscored
-
-Failing Elements
-
-video.hero-video-bg
-
-These are opportunities to provide alternative content for audio and video. This may improve the experience for users
-with hearing or vision impairments.
-ADDITIONAL ITEMS TO MANUALLY CHECK (10)
-
-Hide
-
-Interactive controls are keyboard focusable
-Custom interactive controls are keyboard focusable and display a focus indicator. Learn how to make custom
-controls focusable. Unscored
-
-Interactive elements indicate their purpose and state
-Interactive elements, such as links and buttons, should indicate their state and be distinguishable from noninteractive elements. Learn how to decorate interactive elements with affordance hints. Unscored
-
-The page has a logical tab order
-Tabbing through the page follows the visual layout. Users cannot focus elements that are offscreen. Learn more
-about logical tab ordering. Unscored
-
-Visual order on the page follows DOM order
-
-about:blank
-
-19/32
-
-07/02/2026, 09:46
-
-about:blank
-
-DOM order matches the visual order, improving navigation for assistive technology. Learn more about DOM and
-visual ordering. Unscored
-
-User focus is not accidentally trapped in a region
-A user can tab into and out of any control or region without accidentally trapping their focus. Learn how to avoid
-focus traps. Unscored
-
-The user's focus is directed to new content added to the page
-If new content, such as a dialog, is added to the page, the user's focus is directed to it. Learn how to direct
-focus to new content. Unscored
-
-HTML5 landmark elements are used to improve navigation
-Landmark elements (<main>, <nav>, etc.) are used to improve the keyboard navigation of the page for assistive
-technology. Learn more about landmark elements. Unscored
-
-Offscreen content is hidden from assistive technology
-Offscreen content is hidden with display: none or aria-hidden=true. Learn how to properly hide offscreen content.
-Unscored
-
-Custom controls have associated labels
-Custom interactive controls have associated labels, provided by aria-label or aria-labelledby. Learn more about
-custom controls and labels. Unscored
-
-Custom controls have ARIA roles
-Custom interactive controls have appropriate ARIA roles. Learn how to add roles to custom controls. Unscored
-
-These items address areas which an automated testing tool cannot cover. Learn more in our guide on conducting an
-accessibility review.
-
-PASSED AUDITS (20)
-
-Hide
-
-[aria-*] attributes match their roles
-
-Each ARIA role supports a specific subset of aria-* attributes. Mismatching these invalidates the aria-*
-attributes. Learn how to match ARIA attributes to their roles.
-
-[aria-hidden="true"] is not present on the document <body>
-
-about:blank
-
-20/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Assistive technologies, like screen readers, work inconsistently when aria-hidden="true" is set on the
-document <body>. Learn how aria-hidden affects the document body.
-
-[role]s have all required [aria-*] attributes
-
-Some ARIA roles have required attributes that describe the state of the element to screen readers. Learn more
-about roles and required attributes.
-
-[role] values are valid
-
-ARIA roles must have valid values in order to perform their intended accessibility functions. Learn more about
-valid ARIA roles.
-
-[aria-*] attributes have valid values
-
-Assistive technologies, like screen readers, can't interpret ARIA attributes with invalid values. Learn more about
-valid values for ARIA attributes.
-
-[aria-*] attributes are valid and not misspelled
-
-Assistive technologies, like screen readers, can't interpret ARIA attributes with invalid names. Learn more about
-valid ARIA attributes.
-
-Image elements have [alt] attributes
-Informative elements should aim for short, descriptive alternate text. Decorative elements can be ignored with an
-empty alt attribute. Learn more about the alt attribute.
-
-[user-scalable="no"] is not used in the <meta name="viewport"> element and the [maximum-scale] attribute
-
-is not less than 5.
-Disabling zooming is problematic for users with low vision who rely on screen magnification to properly see the
-contents of a web page. Learn more about the viewport meta tag.
-
-button, link, and menuitem elements have accessible names
-
-When an element doesn't have an accessible name, screen readers announce it with a generic name, making it
-unusable for users who rely on screen readers. Learn how to make command elements more accessible.
-
-ARIA attributes are used as specified for the element's role
-Some ARIA attributes are only allowed on an element under certain conditions. Learn more about conditional ARIA
-attributes.
-
-about:blank
-
-21/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Elements use only permitted ARIA attributes
-Using ARIA attributes in roles where they are prohibited can mean that important information is not communicated
-to users of assistive technologies. Learn more about prohibited ARIA roles.
-
-Document has a <title> element
-The title gives screen reader users an overview of the page, and search engine users rely on it heavily to
-determine if a page is relevant to their search. Learn more about document titles.
-
-<html> element has a [lang] attribute
-
-If a page doesn't specify a lang attribute, a screen reader assumes that the page is in the default language that
-the user chose when setting up the screen reader. If the page isn't actually in the default language, then the
-screen reader might not announce the page's text correctly. Learn more about the lang attribute.
-
-<html> element has a valid value for its [lang] attribute
-
-Specifying a valid BCP 47 language helps screen readers announce text properly. Learn how to use the lang
-attribute.
-
-Links have a discernible name
-Link text (and alternate text for images, when used as links) that is discernible, unique, and focusable improves
-the navigation experience for screen reader users. Learn how to make links accessible.
-
-Lists contain only <li> elements and script supporting elements (<script> and <template>).
-Screen readers have a specific way of announcing lists. Ensuring proper list structure aids screen reader output.
-Learn more about proper list structure.
-
-List items (<li>) are contained within <ul>, <ol> or <menu> parent elements
-Screen readers require list items (<li>) to be contained within a parent <ul>, <ol> or <menu> to be announced
-properly. Learn more about proper list structure.
-
-No element has a [tabindex] value greater than 0
-A value greater than 0 implies an explicit navigation ordering. Although technically valid, this often creates
-frustrating experiences for users who rely on assistive technologies. Learn more about the tabindex attribute.
-
-Touch targets have sufficient size and spacing.
-Touch targets with sufficient size and spacing help users who may have difficulty targeting small controls to
-activate the targets. Learn more about touch targets.
-about:blank
-
-22/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Deprecated ARIA roles were not used
-Deprecated ARIA roles may not be processed correctly by assistive technology. Learn more about deprecated ARIA
-roles.
-
-NOT APPLICABLE (33)
-
-Hide
-
-[accesskey] values are unique
-
-Access keys let users quickly focus a part of the page. For proper navigation, each access key must be unique.
-Learn more about access keys. Unscored
-
-Elements with role="dialog" or role="alertdialog" have accessible names.
-ARIA dialog elements without accessible names may prevent screen readers users from discerning the purpose of
-these elements. Learn how to make ARIA dialog elements more accessible. Unscored
-
-[aria-hidden="true"] elements do not contain focusable descendents
-
-Focusable descendents within an [aria-hidden="true"] element prevent those interactive elements from being
-available to users of assistive technologies like screen readers. Learn how aria-hidden affects focusable
-elements. Unscored
-
-ARIA input fields have accessible names
-When an input field doesn't have an accessible name, screen readers announce it with a generic name, making it
-unusable for users who rely on screen readers. Learn more about input field labels. Unscored
-
-ARIA meter elements have accessible names
-When a meter element doesn't have an accessible name, screen readers announce it with a generic name, making
-it unusable for users who rely on screen readers. Learn how to name meter elements. Unscored
-
-ARIA progressbar elements have accessible names
-When a progressbar element doesn't have an accessible name, screen readers announce it with a generic name,
-making it unusable for users who rely on screen readers. Learn how to label progressbar elements. Unscored
-
-Elements with an ARIA [role] that require children to contain a specific [role] have all required children.
-Some ARIA parent roles must contain specific child roles to perform their intended accessibility functions. Learn
-more about roles and required children elements. Unscored
-
-about:blank
-
-23/32
-
-07/02/2026, 09:46
-
-about:blank
-
-[role]s are contained by their required parent element
-
-Some ARIA child roles must be contained by specific parent roles to properly perform their intended accessibility
-functions. Learn more about ARIA roles and required parent element. Unscored
-
-Elements with the role=text attribute do not have focusable descendents.
-Adding role=text around a text node split by markup enables VoiceOver to treat it as one phrase, but the
-element's focusable descendents will not be announced. Learn more about the role=text attribute. Unscored
-
-ARIA toggle fields have accessible names
-When a toggle field doesn't have an accessible name, screen readers announce it with a generic name, making it
-unusable for users who rely on screen readers. Learn more about toggle fields. Unscored
-
-ARIA tooltip elements have accessible names
-When a tooltip element doesn't have an accessible name, screen readers announce it with a generic name, making
-it unusable for users who rely on screen readers. Learn how to name tooltip elements. Unscored
-
-ARIA treeitem elements have accessible names
-When a treeitem element doesn't have an accessible name, screen readers announce it with a generic name,
-making it unusable for users who rely on screen readers. Learn more about labeling treeitem elements.
-Unscored
-
-The page contains a heading, skip link, or landmark region
-Adding ways to bypass repetitive content lets keyboard users navigate the page more efficiently. Learn more about
-bypass blocks. Unscored
-
-<dl>'s contain only properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements.
-
-When definition lists are not properly marked up, screen readers may produce confusing or inaccurate output.
-Learn how to structure definition lists correctly. Unscored
-
-Definition list items are wrapped in <dl> elements
-Definition list items (<dt> and <dd>) must be wrapped in a parent <dl> element to ensure that screen readers
-can properly announce them. Learn how to structure definition lists correctly. Unscored
-
-ARIA IDs are unique
-The value of an ARIA ID must be unique to prevent other instances from being overlooked by assistive
-technologies. Learn how to fix duplicate ARIA IDs. Unscored
-
-about:blank
-
-24/32
-
-07/02/2026, 09:46
-
-about:blank
-
-No form fields have multiple labels
-Form fields with multiple labels can be confusingly announced by assistive technologies like screen readers which
-use either the first, the last, or all of the labels. Learn how to use form labels. Unscored
-
-<frame> or <iframe> elements have a title
-
-Screen reader users rely on frame titles to describe the contents of frames. Learn more about frame titles.
-Unscored
-
-<html> element has an [xml:lang] attribute with the same base language as the [lang] attribute.
-
-If the webpage does not specify a consistent language, then the screen reader might not announce the page's
-text correctly. Learn more about the lang attribute. Unscored
-
-Input buttons have discernible text.
-Adding discernable and accessible text to input buttons may help screen reader users understand the purpose of
-the input button. Learn more about input buttons. Unscored
-
-<input type="image"> elements have [alt] text
-
-When an image is being used as an <input> button, providing alternative text can help screen reader users
-understand the purpose of the button. Learn about input image alt text. Unscored
-
-Form elements have associated labels
-Labels ensure that form controls are announced properly by assistive technologies, like screen readers. Learn more
-about form element labels. Unscored
-
-The document does not use <meta http-equiv="refresh">
-Users do not expect a page to refresh automatically, and doing so will move focus back to the top of the page.
-This may create a frustrating or confusing experience. Learn more about the refresh meta tag. Unscored
-
-<object> elements have alternate text
-
-Screen readers cannot translate non-text content. Adding alternate text to <object> elements helps screen
-readers convey meaning to users. Learn more about alt text for object elements. Unscored
-
-Select elements have associated label elements.
-Form elements without effective labels can create frustrating experiences for screen reader users. Learn more
-about the select element. Unscored
-
-about:blank
-
-25/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Skip links are focusable.
-Including a skip link can help users skip to the main content to save time. Learn more about skip links. Unscored
-
-Cells in a <table> element that use the [headers] attribute refer to table cells within the same table.
-Screen readers have features to make navigating tables easier. Ensuring <td> cells using the [headers] attribute
-only refer to other cells in the same table may improve the experience for screen reader users. Learn more about
-the headers attribute. Unscored
-
-<th> elements and elements with [role="columnheader"/"rowheader"] have data cells they describe.
-
-Screen readers have features to make navigating tables easier. Ensuring table headers always refer to some set of
-cells may improve the experience for screen reader users. Learn more about table headers. Unscored
-
-[lang] attributes have a valid value
-
-Specifying a valid BCP 47 language on elements helps ensure that text is pronounced correctly by a screen reader.
-Learn how to use the lang attribute. Unscored
-
-Tables have different content in the summary attribute and <caption>.
-The summary attribute should describe the table structure, while <caption> should have the onscreen title.
-Accurate table mark-up helps users of screen readers. Learn more about summary and caption. Unscored
-
-All heading elements contain content.
-A heading with no content or inaccessible text prevent screen reader users from accessing information on the
-page's structure. Learn more about headings. Unscored
-
-Uses ARIA roles only on compatible elements
-Many HTML elements can only be assigned certain ARIA roles. Using ARIA roles where they are not allowed can
-interfere with the accessibility of the web page. Learn more about ARIA roles. Unscored
-
-Image elements do not have [alt] attributes that are redundant text.
-Informative elements should aim for short, descriptive alternative text. Alternative text that is exactly the same as
-the text adjacent to the link or image is potentially confusing for screen reader users, because the text will be
-read twice. Learn more about the alt attribute. Unscored
-
-about:blank
-
-26/32
-
-07/02/2026, 09:46
-
-about:blank
-
-96
-Best Practices
-GENERAL
-
-Browser errors were logged to the console
-Errors logged to the console indicate unresolved problems. They can come from network request failures and
-other browser concerns. Learn more about this errors in console diagnostic audit
-
-Source
-
-Description
-
-localhost
-
-1st Party
-
-%E2%80%94Pngtree%E2%…
-0dots_5429616.png:1
-
-Failed to load resource: the server responded with a
-status of 404 (File not found)
-
-TRUST AND SAFETY
-
-Ensure CSP is effective against XSS attacks
-A strong Content Security Policy (CSP) significantly reduces the risk of cross-site scripting (XSS) attacks. Learn
-how to use a CSP to prevent XSS Unscored
-
-Description
-
-Directive
-
-Severity
-
-No CSP found in enforcement mode
-
-High
-
-Use a strong HSTS policy
-Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and
-eavesdropping attacks. A rollout in stages, starting with a low max-age is recommended. Learn more about using
-a strong HSTS policy. Unscored
-
-Description
-
-No HSTS header found
-
-about:blank
-
-Directive
-
-Severity
-
-High
-
-27/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Ensure proper origin isolation with COOP
-The Cross-Origin-Opener-Policy (COOP) can be used to isolate the top-level window from other documents such as
-pop-ups. Learn more about deploying the COOP header. Unscored
-
-Description
-
-Directive
-
-Severity
-
-No COOP header found
-
-High
-
-Mitigate clickjacking with XFO or CSP
-The X-Frame-Options (XFO) header or the frame-ancestors directive in the Content-Security-Policy
-(CSP) header control where a page can be embedded. These can mitigate clickjacking attacks by blocking some
-or all sites from embedding the page. Learn more about mitigating clickjacking. Unscored
-
-Description
-
-Severity
-
-No frame control policy found
-
-High
-
-Mitigate DOM-based XSS with Trusted Types
-The require-trusted-types-for directive in the Content-Security-Policy (CSP) header instructs user
-agents to control the data passed to DOM XSS sink functions. Learn more about mitigating DOM-based XSS with
-Trusted Types. Unscored
-
-Description
-
-Severity
-
-No `Content-Security-Policy` header with Trusted Types directive found
-
-High
-
-PASSED AUDITS (12)
-
-Hide
-
-Uses HTTPS
-All sites should be protected with HTTPS, even ones that don't handle sensitive data. This includes avoiding mixed
-content, where some resources are loaded over HTTP despite the initial request being served over HTTPS. HTTPS
-prevents intruders from tampering with or passively listening in on the communications between your app and your
-users, and is a prerequisite for HTTP/2 and many new web platform APIs. Learn more about HTTPS.
-
-Avoids deprecated APIs
-Deprecated APIs will eventually be removed from the browser. Learn more about deprecated APIs.
-
-about:blank
-
-28/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Avoids third-party cookies
-Third-party cookies may be blocked in some contexts. Learn more about preparing for third-party cookie
-restrictions.
-
-Allows users to paste into input fields
-Preventing input pasting is a bad practice for the UX, and weakens security by blocking password managers.Learn
-more about user-friendly input fields.
-
-Avoids requesting the geolocation permission on page load
-Users are mistrustful of or confused by sites that request their location without context. Consider tying the request
-to a user action instead. Learn more about the geolocation permission.
-
-Avoids requesting the notification permission on page load
-Users are mistrustful of or confused by sites that request to send notifications without context. Consider tying the
-request to user gestures instead. Learn more about responsibly getting permission for notifications.
-
-Displays images with correct aspect ratio
-Image display dimensions should match natural aspect ratio. Learn more about image aspect ratio.
-
-Serves images with appropriate resolution
-Image natural dimensions should be proportional to the display size and the pixel ratio to maximize image clarity.
-Learn how to provide responsive images.
-
-Page has the HTML doctype
-Specifying a doctype prevents the browser from switching to quirks-mode. Learn more about the doctype
-declaration.
-
-Properly defines charset
-A character encoding declaration is required. It can be done with a <meta> tag in the first 1024 bytes of the
-HTML or in the Content-Type HTTP response header. Learn more about declaring the character encoding.
-
-No issues in the Issues panel in Chrome Devtools
-Issues logged to the Issues panel in Chrome Devtools indicate unresolved problems. They can come from
-network request failures, insufficient security controls, and other browser concerns. Open up the Issues panel in
-Chrome DevTools for more details on each issue.
-
-about:blank
-
-29/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Page has valid source maps
-Source maps translate minified code to the original source code. This helps developers debug in production. In
-addition, Lighthouse is able to provide further insights. Consider deploying source maps to take advantage of
-these benefits. Learn more about source maps. Unscored
-
-URL
-
-JSDelivr CDN
-
-Map URL
-
-Cdn
-
-…swiper@11/swiper-bundle.min.js (cdn.jsdelivr.net)
-
-…swiper@11/swiper-bundle.min.js.map (cdn.jsdelivr.net)
-
-Warning: missing 1 item in `.sourcesContent`
-
-…js/bootstrap.bundle.min.js (cdn.jsdelivr.net)
-
-…js/bootstrap.bundle.min.js.map (cdn.jsdelivr.net)
-
-NOT APPLICABLE (2)
-
-Hide
-
-Redirects HTTP traffic to HTTPS
-Make sure that you redirect all HTTP traffic to HTTPS in order to enable secure web features for all your users.
-Learn more. Unscored
-
-Detected JavaScript libraries
-All front-end JavaScript libraries detected on the page. Learn more about this JavaScript library detection
-diagnostic audit. Unscored
-
-100
-SEO
-These checks ensure that your page is following basic search engine
-optimization advice. There are many additional factors Lighthouse
-does not score here that may affect your search ranking, including
-performance on Core Web Vitals. Learn more about Google Search
-Essentials.
-ADDITIONAL ITEMS TO MANUALLY CHECK (1)
-
-Hide
-
-Structured data is valid
-
-about:blank
-
-30/32
-
-07/02/2026, 09:46
-
-about:blank
-
-Run the Structured Data Testing Tool to validate structured data. Learn more about Structured Data. Unscored
-
-Run these additional validators on your site to check additional SEO best practices.
-
-PASSED AUDITS (8)
-
-Hide
-
-Page isn’t blocked from indexing
-Search engines are unable to include your pages in search results if they don't have permission to crawl them.
-Learn more about crawler directives.
-
-Document has a <title> element
-The title gives screen reader users an overview of the page, and search engine users rely on it heavily to
-determine if a page is relevant to their search. Learn more about document titles.
-
-Document has a meta description
-Meta descriptions may be included in search results to concisely summarize page content. Learn more about the
-meta description.
-
-Page has successful HTTP status code
-Pages with unsuccessful HTTP status codes may not be indexed properly. Learn more about HTTP status codes.
-
-Links have descriptive text
-Descriptive link text helps search engines understand your content. Learn how to make links more accessible.
-
-Links are crawlable
-Search engines may use href attributes on links to crawl websites. Ensure that the href attribute of anchor
-elements links to an appropriate destination, so more pages of the site can be discovered. Learn how to make
-links crawlable
-
-Image elements have [alt] attributes
-Informative elements should aim for short, descriptive alternate text. Decorative elements can be ignored with an
-empty alt attribute. Learn more about the alt attribute.
-
-Document has a valid hreflang
-hreflang links tell search engines what version of a page they should list in search results for a given language or
-region. Learn more about hreflang.
-
-about:blank
-
-31/32
-
-07/02/2026, 09:46
-
-about:blank
-
-NOT APPLICABLE (2)
-
-Hide
-
-robots.txt is valid
-If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be
-crawled or indexed. Learn more about robots.txt. Unscored
-
-Document has a valid rel=canonical
-Canonical links suggest which URL to show in search results. Learn more about canonical links. Unscored
-
-Captured at Feb 7, 2026, 9:46
-
-Emulated Moto G Power with
-
-AM GMT+5:30
-
-Lighthouse 13.0.1
-
-Initial page load
-
-Slow 4G throttling
-
-Single page session
-Using Chromium 144.0.0.0
-with devtools
-
-Generated by Lighthouse 13.0.1 | File an issue
-
-about:blank
-
-32/32
-
-
+2026-03-08T10:34:57.345Z	Initializing build environment...
+2026-03-08T10:34:59.324Z	Success: Finished initializing build environment
+2026-03-08T10:34:59.803Z	Cloning repository...
+2026-03-08T10:35:01.872Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2026-03-08T10:35:01.873Z	Restoring from dependencies cache
+2026-03-08T10:35:01.876Z	Restoring from build output cache
+2026-03-08T10:35:01.996Z	Installing project dependencies: npm clean-install --progress=false
+2026-03-08T10:35:12.990Z	
+2026-03-08T10:35:12.993Z	added 343 packages, and audited 344 packages in 11s
+2026-03-08T10:35:12.994Z	
+2026-03-08T10:35:12.994Z	140 packages are looking for funding
+2026-03-08T10:35:12.994Z	  run `npm fund` for details
+2026-03-08T10:35:13.005Z	
+2026-03-08T10:35:13.005Z	3 vulnerabilities (1 moderate, 1 high, 1 critical)
+2026-03-08T10:35:13.005Z	
+2026-03-08T10:35:13.005Z	To address all issues, run:
+2026-03-08T10:35:13.005Z	  npm audit fix
+2026-03-08T10:35:13.005Z	
+2026-03-08T10:35:13.005Z	Run `npm audit` for details.
+2026-03-08T10:35:13.185Z	Executing user build command: npm run build
+2026-03-08T10:35:13.427Z	
+2026-03-08T10:35:13.427Z	> ieee-pes-kerala@0.1.0 build
+2026-03-08T10:35:13.427Z	> next build
+2026-03-08T10:35:13.427Z	
+2026-03-08T10:35:14.009Z	⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-03-08T10:35:14.010Z	Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-03-08T10:35:14.011Z	This information is used to shape Next.js' roadmap and prioritize features.
+2026-03-08T10:35:14.011Z	You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-03-08T10:35:14.011Z	https://nextjs.org/telemetry
+2026-03-08T10:35:14.011Z	
+2026-03-08T10:35:14.034Z	▲ Next.js 16.1.6 (Turbopack)
+2026-03-08T10:35:14.034Z	
+2026-03-08T10:35:14.090Z	  Creating an optimized production build ...
+2026-03-08T10:35:19.121Z	✓ Compiled successfully in 4.7s
+2026-03-08T10:35:19.121Z	  Running TypeScript ...
+2026-03-08T10:35:19.321Z	  Collecting page data using 1 worker ...
+2026-03-08T10:35:19.730Z	  Generating static pages using 1 worker (0/3) ...
+2026-03-08T10:35:19.897Z	✓ Generating static pages using 1 worker (3/3) in 167.0ms
+2026-03-08T10:35:19.902Z	  Finalizing page optimization ...
+2026-03-08T10:35:19.913Z	
+2026-03-08T10:35:19.915Z	Route (app)
+2026-03-08T10:35:19.917Z	┌ ○ /
+2026-03-08T10:35:19.917Z	└ ○ /_not-found
+2026-03-08T10:35:19.917Z	
+2026-03-08T10:35:19.917Z	
+2026-03-08T10:35:19.917Z	○  (Static)  prerendered as static content
+2026-03-08T10:35:19.918Z	
+2026-03-08T10:35:20.011Z	Success: Build command completed
+2026-03-08T10:35:20.193Z	Executing user deploy command: npx wrangler deploy
+2026-03-08T10:35:21.308Z	npm warn exec The following package was not found and will be installed: wrangler@4.71.0
+2026-03-08T10:35:29.425Z	
+2026-03-08T10:35:29.425Z	 ⛅️ wrangler 4.71.0
+2026-03-08T10:35:29.425Z	───────────────────
+2026-03-08T10:35:29.565Z	
+2026-03-08T10:35:29.565Z	Detected Project Settings:
+2026-03-08T10:35:29.565Z	 - Worker Name: ieeepeskc
+2026-03-08T10:35:29.565Z	 - Framework: Next.js
+2026-03-08T10:35:29.565Z	 - Build Command: npm run build
+2026-03-08T10:35:29.565Z	 - Output Directory: .next
+2026-03-08T10:35:29.566Z	
+2026-03-08T10:35:29.566Z	? Do you want to modify these settings?
+2026-03-08T10:35:29.566Z	🤖 Using fallback value in non-interactive context: no
+2026-03-08T10:35:29.568Z	
+2026-03-08T10:35:29.568Z	📦 Install packages:
+2026-03-08T10:35:29.572Z	 - wrangler (devDependency)
+2026-03-08T10:35:29.572Z	
+2026-03-08T10:35:29.572Z	📝 Update package.json scripts:
+2026-03-08T10:35:29.575Z	 - "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+2026-03-08T10:35:29.576Z	 - "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+2026-03-08T10:35:29.577Z	
+2026-03-08T10:35:29.577Z	📄 Create wrangler.jsonc:
+2026-03-08T10:35:29.577Z	  {
+2026-03-08T10:35:29.577Z	    "$schema": "node_modules/wrangler/config-schema.json",
+2026-03-08T10:35:29.577Z	    "name": "ieeepeskc",
+2026-03-08T10:35:29.577Z	    "compatibility_date": "2025-09-27",
+2026-03-08T10:35:29.577Z	    "observability": {
+2026-03-08T10:35:29.577Z	      "enabled": true
+2026-03-08T10:35:29.577Z	    },
+2026-03-08T10:35:29.578Z	    "compatibility_flags": [
+2026-03-08T10:35:29.581Z	      "nodejs_compat"
+2026-03-08T10:35:29.581Z	    ]
+2026-03-08T10:35:29.581Z	  }
+2026-03-08T10:35:29.581Z	
+2026-03-08T10:35:29.581Z	🛠️  Configuring project for Next.js with OpenNext by running `@opennextjs/cloudflare migrate`
+2026-03-08T10:35:29.581Z	
+2026-03-08T10:35:29.581Z	? Proceed with setup?
+2026-03-08T10:35:29.581Z	🤖 Using fallback value in non-interactive context: yes
+2026-03-08T10:35:34.154Z	npm warn exec The following package was not found and will be installed: @opennextjs/cloudflare@1.17.1
+2026-03-08T10:35:51.966Z	npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+2026-03-08T10:35:52.651Z	npm warn deprecated glob@9.3.5: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-03-08T10:36:01.612Z	
+2026-03-08T10:36:01.612Z	┌───────────────────────────────┐
+2026-03-08T10:36:01.612Z	│ OpenNext — Cloudflare migrate │
+2026-03-08T10:36:01.612Z	└───────────────────────────────┘
+2026-03-08T10:36:01.612Z	
+2026-03-08T10:36:01.612Z	🚀 Setting up the OpenNext Cloudflare adapter...
+2026-03-08T10:36:01.612Z	
+2026-03-08T10:36:01.620Z	⚙️  Installing dependencies...
+2026-03-08T10:36:01.621Z	
+2026-03-08T10:36:01.776Z	npm warn using --force Recommended protections disabled.
+2026-03-08T10:36:07.683Z	npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+2026-03-08T10:36:07.981Z	npm warn deprecated glob@9.3.5: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-03-08T10:36:10.346Z	
+2026-03-08T10:36:10.346Z	added 273 packages, and audited 644 packages in 9s
+2026-03-08T10:36:10.347Z	
+2026-03-08T10:36:10.347Z	187 packages are looking for funding
+2026-03-08T10:36:10.347Z	  run `npm fund` for details
+2026-03-08T10:36:10.351Z	
+2026-03-08T10:36:10.352Z	3 vulnerabilities (1 moderate, 1 high, 1 critical)
+2026-03-08T10:36:10.352Z	
+2026-03-08T10:36:10.352Z	To address all issues, run:
+2026-03-08T10:36:10.352Z	  npm audit fix
+2026-03-08T10:36:10.354Z	
+2026-03-08T10:36:10.355Z	Run `npm audit` for details.
+2026-03-08T10:36:10.532Z	npm warn using --force Recommended protections disabled.
+2026-03-08T10:36:12.514Z	
+2026-03-08T10:36:12.514Z	added 1 package, and audited 645 packages in 2s
+2026-03-08T10:36:12.517Z	
+2026-03-08T10:36:12.517Z	187 packages are looking for funding
+2026-03-08T10:36:12.517Z	  run `npm fund` for details
+2026-03-08T10:36:12.520Z	
+2026-03-08T10:36:12.520Z	3 vulnerabilities (1 moderate, 1 high, 1 critical)
+2026-03-08T10:36:12.520Z	
+2026-03-08T10:36:12.520Z	To address all issues, run:
+2026-03-08T10:36:12.521Z	  npm audit fix
+2026-03-08T10:36:12.522Z	
+2026-03-08T10:36:12.522Z	Run `npm audit` for details.
+2026-03-08T10:36:12.543Z	⚙️  Creating wrangler.jsonc...
+2026-03-08T10:36:12.543Z	
+2026-03-08T10:36:14.396Z	⚙️  Creating open-next.config.ts...
+2026-03-08T10:36:14.396Z	
+2026-03-08T10:36:14.396Z	⚙️  Creating .dev.vars file...
+2026-03-08T10:36:14.396Z	
+2026-03-08T10:36:14.397Z	⚙️  Creating public/_headers file...
+2026-03-08T10:36:14.397Z	
+2026-03-08T10:36:14.397Z	⚙️  Updating package.json scripts...
+2026-03-08T10:36:14.397Z	
+2026-03-08T10:36:14.397Z	⚙️  Updating .gitignore file...
+2026-03-08T10:36:14.398Z	
+2026-03-08T10:36:14.398Z	⚙️  Updating Next.js config...
+2026-03-08T10:36:14.398Z	
+2026-03-08T10:36:14.398Z	⚙️  Checking for edge runtime usage...
+2026-03-08T10:36:14.398Z	
+2026-03-08T10:36:14.406Z	🎉 OpenNext Cloudflare adapter complete!
+2026-03-08T10:36:14.406Z	
+2026-03-08T10:36:14.406Z	Next steps:
+2026-03-08T10:36:14.406Z	- Run: "npm run preview" to build and preview your Cloudflare application locally
+2026-03-08T10:36:14.407Z	- Run: "npm run deploy" to deploy your application to Cloudflare Workers
+2026-03-08T10:36:14.407Z	
+2026-03-08T10:36:14.520Z	├ Adding Wrangler files to the .gitignore file
+2026-03-08T10:36:14.520Z	│ updated .gitignore file
+2026-03-08T10:36:14.521Z	│
+2026-03-08T10:36:14.521Z	[build] Running: npx opennextjs-cloudflare build
+2026-03-08T10:36:16.431Z	[build] 
+2026-03-08T10:36:16.431Z	[build] ┌─────────────────────────────┐
+2026-03-08T10:36:16.431Z	[build] │ OpenNext — Cloudflare build │
+2026-03-08T10:36:16.431Z	[build] └─────────────────────────────┘
+2026-03-08T10:36:16.431Z	[build] 
+2026-03-08T10:36:16.432Z	[build] 
+2026-03-08T10:36:16.550Z	[build] App directory: /opt/buildhome/repo
+2026-03-08T10:36:16.550Z	[build] 
+2026-03-08T10:36:16.550Z	[build] Next.js version : 16.1.6
+2026-03-08T10:36:16.550Z	[build] 
+2026-03-08T10:36:16.553Z	[build] @opennextjs/cloudflare version: 1.17.1
+2026-03-08T10:36:16.554Z	[build] 
+2026-03-08T10:36:16.555Z	[build] @opennextjs/aws version: 3.9.16
+2026-03-08T10:36:16.555Z	[build] 
+2026-03-08T10:36:16.558Z	[build] 
+2026-03-08T10:36:16.558Z	[build] ┌─────────────────────────────────┐
+2026-03-08T10:36:16.558Z	[build] │ OpenNext — Building Next.js app │
+2026-03-08T10:36:16.559Z	[build] └─────────────────────────────────┘
+2026-03-08T10:36:16.559Z	[build] 
+2026-03-08T10:36:16.559Z	[build] 
+2026-03-08T10:36:16.703Z	[build] 
+2026-03-08T10:36:16.704Z	[build] > ieee-pes-kerala@0.1.0 build
+2026-03-08T10:36:16.704Z	[build] > next build
+2026-03-08T10:36:16.704Z	[build] 
+2026-03-08T10:36:16.704Z	[build] 
+2026-03-08T10:36:17.345Z	[build] ▲ Next.js 16.1.6 (Turbopack)
+2026-03-08T10:36:17.346Z	[build] 
+2026-03-08T10:36:17.346Z	[build] 
+2026-03-08T10:36:17.346Z	[build] 
+2026-03-08T10:36:18.344Z	[build] Using secrets defined in .dev.vars
+2026-03-08T10:36:18.345Z	[build] 
+2026-03-08T10:36:18.373Z	[build]   Creating an optimized production build ...
+2026-03-08T10:36:18.373Z	[build] 
+2026-03-08T10:36:19.670Z	[build] Using secrets defined in .dev.vars
+2026-03-08T10:36:19.670Z	[build] 
+2026-03-08T10:36:28.045Z	[build] ✓ Compiled successfully in 9.2s
+2026-03-08T10:36:28.045Z	[build] 
+2026-03-08T10:36:28.055Z	[build]   Running TypeScript ...
+2026-03-08T10:36:28.057Z	[build] 
+2026-03-08T10:36:28.273Z	[build]   Collecting page data using 1 worker ...
+2026-03-08T10:36:28.274Z	[build] 
+2026-03-08T10:36:28.937Z	[build]   Generating static pages using 1 worker (0/3) ...
+2026-03-08T10:36:28.937Z	[build] 
+2026-03-08T10:36:29.122Z	[build] ✓ Generating static pages using 1 worker (3/3) in 186.9ms
+2026-03-08T10:36:29.123Z	[build] 
+2026-03-08T10:36:29.131Z	[build]   Finalizing page optimization ...
+2026-03-08T10:36:29.131Z	[build] 
+2026-03-08T10:36:29.690Z	[build] 
+2026-03-08T10:36:29.690Z	[build] Route (app)
+2026-03-08T10:36:29.690Z	[build] ┌ ○ /
+2026-03-08T10:36:29.690Z	[build] └ ○ /_not-found
+2026-03-08T10:36:29.690Z	[build] 
+2026-03-08T10:36:29.690Z	[build] 
+2026-03-08T10:36:29.691Z	[build] ○  (Static)  prerendered as static content
+2026-03-08T10:36:29.691Z	[build] 
+2026-03-08T10:36:29.691Z	[build] 
+2026-03-08T10:36:29.782Z	[build] 
+2026-03-08T10:36:29.784Z	[build] ┌──────────────────────────────┐
+2026-03-08T10:36:29.785Z	[build] │ OpenNext — Generating bundle │
+2026-03-08T10:36:29.785Z	[build] └──────────────────────────────┘
+2026-03-08T10:36:29.785Z	[build] 
+2026-03-08T10:36:29.785Z	[build] 
+2026-03-08T10:36:29.835Z	[build] Bundling middleware function...
+2026-03-08T10:36:29.835Z	[build] 
+2026-03-08T10:36:29.881Z	[build] Bundling static assets...
+2026-03-08T10:36:29.882Z	[build] 
+2026-03-08T10:36:29.960Z	[build] Bundling cache assets...
+2026-03-08T10:36:29.961Z	[build] 
+2026-03-08T10:36:29.969Z	[build] Building server function: default...
+2026-03-08T10:36:29.970Z	[build] 
+2026-03-08T10:36:32.737Z	[build] Applying code patches: 2.457s
+2026-03-08T10:36:32.737Z	[build] 
+2026-03-08T10:36:33.176Z	[build] # copyPackageTemplateFiles
+2026-03-08T10:36:33.181Z	[build] 
+2026-03-08T10:36:33.181Z	[build] ⚙️ Bundling the OpenNext server...
+2026-03-08T10:36:33.181Z	[build] 
+2026-03-08T10:36:33.181Z	[build] 
+2026-03-08T10:36:34.744Z	[build] Worker saved in `.open-next/worker.js` 🚀
+2026-03-08T10:36:34.744Z	[build] 
+2026-03-08T10:36:34.746Z	[build] 
+2026-03-08T10:36:34.747Z	[build] OpenNext build complete.
+2026-03-08T10:36:34.748Z	[build] 
+2026-03-08T10:36:34.880Z	OpenNext project detected, calling `opennextjs-cloudflare deploy`
+2026-03-08T10:36:37.948Z	
+2026-03-08T10:36:37.948Z	┌──────────────────────────────┐
+2026-03-08T10:36:37.948Z	│ OpenNext — Cloudflare deploy │
+2026-03-08T10:36:37.949Z	└──────────────────────────────┘
+2026-03-08T10:36:37.949Z	
+2026-03-08T10:36:37.986Z	Using secrets defined in .dev.vars
+2026-03-08T10:36:38.783Z	
+2026-03-08T10:36:38.783Z	Populating R2 incremental cache...
+2026-03-08T10:36:40.496Z	Successfully populated cache with 3 assets
+2026-03-08T10:36:40.497Z	Tag cache does not need populating
+2026-03-08T10:36:41.567Z	
+2026-03-08T10:36:41.569Z	 ⛅️ wrangler 4.71.0
+2026-03-08T10:36:41.569Z	───────────────────
+2026-03-08T10:36:41.577Z	
+2026-03-08T10:36:41.577Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-03-08T10:36:42.763Z	? Would you like to continue?
+2026-03-08T10:36:42.764Z	🤖 Using fallback value in non-interactive context: yes
+2026-03-08T10:36:43.510Z	🌀 Building list of assets...
+2026-03-08T10:36:43.513Z	✨ Read 105 files from the assets directory /opt/buildhome/repo/.open-next/assets
+2026-03-08T10:36:43.617Z	🌀 Starting asset upload...
+2026-03-08T10:36:45.435Z	🌀 Found 1 new or modified static asset to upload. Proceeding with upload...
+2026-03-08T10:36:45.436Z	+ /BUILD_ID
+2026-03-08T10:36:46.358Z	Uploaded 1 of 1 asset
+2026-03-08T10:36:46.358Z	✨ Success! Uploaded 1 file (83 already uploaded) (0.92 sec)
+2026-03-08T10:36:46.358Z	
+2026-03-08T10:36:46.512Z	Total Upload: 6024.21 KiB / gzip: 1502.68 KiB
+2026-03-08T10:36:47.811Z	Your Worker has access to the following bindings:
+2026-03-08T10:36:47.812Z	Binding                                                            Resource       
+2026-03-08T10:36:47.812Z	env.NEXT_INC_CACHE_R2_BUCKET (ieee-pes-kerala-opennext-cache)      R2 Bucket      
+2026-03-08T10:36:47.812Z	env.WORKER_SELF_REFERENCE (ieee-pes-kerala)                        Worker         
+2026-03-08T10:36:47.812Z	env.IMAGES                                                         Images         
+2026-03-08T10:36:47.812Z	env.ASSETS                                                         Assets         
+2026-03-08T10:36:47.812Z	
+2026-03-08T10:36:47.817Z	
+2026-03-08T10:36:47.887Z	▲ [WARNING] The local configuration being used (generated from your local configuration file) differs from the remote configuration of your Worker set via the Cloudflare Dashboard:
+2026-03-08T10:36:47.887Z	
+2026-03-08T10:36:47.887Z	   {
+2026-03-08T10:36:47.888Z	  +  assets: {
+2026-03-08T10:36:47.888Z	  +    binding: "ASSETS"
+2026-03-08T10:36:47.888Z	  +  }
+2026-03-08T10:36:47.888Z	  -  compatibility_date: "2026-03-08"
+2026-03-08T10:36:47.888Z	  +  compatibility_date: "2025-09-27"
+2026-03-08T10:36:47.888Z	  -  workers_dev: false
+2026-03-08T10:36:47.888Z	  +  workers_dev: true
+2026-03-08T10:36:47.888Z	  -  preview_urls: false
+2026-03-08T10:36:47.888Z	  +  preview_urls: true
+2026-03-08T10:36:47.888Z	     r2_buckets: [
+2026-03-08T10:36:47.888Z	       {
+2026-03-08T10:36:47.888Z	  -      binding: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.888Z	  +      binding: "NEXT_INC_CACHE_R2_BUCKET"
+2026-03-08T10:36:47.888Z	  -      bucket_name: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.889Z	  +      bucket_name: "ieee-pes-kerala-opennext-cache"
+2026-03-08T10:36:47.889Z	       }
+2026-03-08T10:36:47.889Z	     ]
+2026-03-08T10:36:47.890Z	     observability: {
+2026-03-08T10:36:47.890Z	  -    enabled: false
+2026-03-08T10:36:47.890Z	  +    enabled: true
+2026-03-08T10:36:47.890Z	       logs: {
+2026-03-08T10:36:47.890Z	  -      enabled: false
+2026-03-08T10:36:47.890Z	  +      enabled: true
+2026-03-08T10:36:47.890Z	       }
+2026-03-08T10:36:47.890Z	     }
+2026-03-08T10:36:47.890Z	   }
+2026-03-08T10:36:47.890Z	  
+2026-03-08T10:36:47.890Z	  
+2026-03-08T10:36:47.890Z	  Deploying the Worker will override the remote configuration with your local one.
+2026-03-08T10:36:47.890Z	
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.891Z	✘ [ERROR] A request to the Cloudflare API (/accounts/c426fc3738d1fc036c8a6b90ad162485/workers/scripts/ieeepeskc/versions) failed.
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.891Z	  Service binding 'WORKER_SELF_REFERENCE' references Worker 'ieee-pes-kerala' which was not found. Verify the Worker exists in your account and that the service name in your configuration is correct. [code: 10143]
+2026-03-08T10:36:47.891Z	  To learn more about this error, visit: https://developers.cloudflare.com/workers/configuration/bindings/about-service-bindings/
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.891Z	  
+2026-03-08T10:36:47.891Z	  If you think this is a bug, please open an issue at: https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.892Z	
+2026-03-08T10:36:47.892Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-08_10-36-41_332.log"
+2026-03-08T10:36:47.892Z	ERROR Wrangler deploy command failed:
+2026-03-08T10:36:47.892Z	▲ [WARNING] The local configuration being used (generated from your local configuration file) differs from the remote configuration of your Worker set via the Cloudflare Dashboard:
+2026-03-08T10:36:47.893Z	
+2026-03-08T10:36:47.893Z	   {
+2026-03-08T10:36:47.893Z	  +  assets: {
+2026-03-08T10:36:47.893Z	  +    binding: "ASSETS"
+2026-03-08T10:36:47.893Z	  +  }
+2026-03-08T10:36:47.893Z	  -  compatibility_date: "2026-03-08"
+2026-03-08T10:36:47.893Z	  +  compatibility_date: "2025-09-27"
+2026-03-08T10:36:47.893Z	  -  workers_dev: false
+2026-03-08T10:36:47.893Z	  +  workers_dev: true
+2026-03-08T10:36:47.893Z	  -  preview_urls: false
+2026-03-08T10:36:47.893Z	  +  preview_urls: true
+2026-03-08T10:36:47.893Z	     r2_buckets: [
+2026-03-08T10:36:47.893Z	       {
+2026-03-08T10:36:47.893Z	  -      binding: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.893Z	  +      binding: "NEXT_INC_CACHE_R2_BUCKET"
+2026-03-08T10:36:47.893Z	  -      bucket_name: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.893Z	  +      bucket_name: "ieee-pes-kerala-opennext-cache"
+2026-03-08T10:36:47.894Z	       }
+2026-03-08T10:36:47.894Z	     ]
+2026-03-08T10:36:47.894Z	     observability: {
+2026-03-08T10:36:47.894Z	  -    enabled: false
+2026-03-08T10:36:47.894Z	  +    enabled: true
+2026-03-08T10:36:47.894Z	       logs: {
+2026-03-08T10:36:47.894Z	  -      enabled: false
+2026-03-08T10:36:47.894Z	  +      enabled: true
+2026-03-08T10:36:47.894Z	       }
+2026-03-08T10:36:47.894Z	     }
+2026-03-08T10:36:47.894Z	   }
+2026-03-08T10:36:47.894Z	  
+2026-03-08T10:36:47.894Z	  
+2026-03-08T10:36:47.894Z	  Deploying the Worker will override the remote configuration with your local one.
+2026-03-08T10:36:47.894Z	
+2026-03-08T10:36:47.894Z	
+2026-03-08T10:36:47.895Z	✘ [ERROR] A request to the Cloudflare API (/accounts/c426fc3738d1fc036c8a6b90ad162485/workers/scripts/ieeepeskc/versions) failed.
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	  Service binding 'WORKER_SELF_REFERENCE' references Worker 'ieee-pes-kerala' which was not found. Verify the Worker exists in your account and that the service name in your configuration is correct. [code: 10143]
+2026-03-08T10:36:47.895Z	  To learn more about this error, visit: https://developers.cloudflare.com/workers/configuration/bindings/about-service-bindings/
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	  
+2026-03-08T10:36:47.895Z	  If you think this is a bug, please open an issue at: https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-08_10-36-41_332.log"
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.934Z	
+2026-03-08T10:36:47.985Z	✘ [ERROR] 
+2026-03-08T10:36:47.985Z	
+2026-03-08T10:36:47.985Z	
+2026-03-08T10:36:48.003Z	If you think this is a bug then please create an issue at https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-08T10:36:48.005Z	? Would you like to report this error to Cloudflare? Wrangler's output and the error details will be shared with the Wrangler team to help us diagnose and fix the issue.
+2026-03-08T10:36:48.005Z	🤖 Using fallback value in non-interactive context: no
+2026-03-08T10:36:48.025Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-08_10-35-28_726.log"
+2026-03-08T10:36:48.087Z	Failed: error occurred while running deploy command
