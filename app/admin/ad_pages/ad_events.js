@@ -1,87 +1,33 @@
 'use client';
 import { useState, useEffect } from 'react';
+import useAdminManager from '../hooks/useAdminManager';
 
 export default function EventsAdmin() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [events, setEvents] = useState([]);
+    const {
+        items: events,
+        isModalOpen,
+        setIsModalOpen,
+        selectedItem,
+        setSelectedItem,
+        tempImages,
+        newPreviews,
+        handleFileChange,
+        removeImage,
+        handleSubmit,
+        handleDelete,
+        openModal,
+        closeModal
+    } = useAdminManager('events');
 
-    useEffect(() => {
-        fetch('/api/admin')
-            .then(res => res.json())
-            .then(data => {
-                if (data.events) {
-                    setEvents(data.events);
-                }
-            })
-            .catch(err => console.error(err));
-    }, []);
-
-    const [tempImages, setTempImages] = useState([]);
-    const [newPreviews, setNewPreviews] = useState([]);
     const [isOnline, setIsOnline] = useState(false);
 
     useEffect(() => {
         if (selectedItem) {
             setIsOnline(selectedItem.location === 'Online');
-            setTempImages(selectedItem.images || (selectedItem.imageUrl ? [selectedItem.imageUrl] : []));
         } else {
             setIsOnline(false);
-            setTempImages([]);
         }
-        setNewPreviews([]);
     }, [selectedItem]);
-
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        const previews = files.map(file => URL.createObjectURL(file));
-        setNewPreviews([...newPreviews, ...previews]);
-    };
-
-    const removeImage = (url, isLocal) => {
-        if (isLocal) {
-            setNewPreviews(newPreviews.filter(img => img !== url));
-        } else {
-            setTempImages(tempImages.filter(img => img !== url));
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('type', 'events');
-        if (selectedItem) {
-            formData.append('editId', selectedItem.id);
-            formData.append('keptImages', JSON.stringify(tempImages));
-        }
-
-        try {
-            const res = await fetch('/api/admin', {
-                method: selectedItem ? 'PUT' : 'POST',
-                body: formData
-            });
-            if (res.ok) {
-                const { item } = await res.json();
-                if (selectedItem) {
-                    setEvents(events.map(i => i.id === selectedItem.id ? item : i));
-                } else {
-                    setEvents([item, ...events]);
-                }
-                setSelectedItem(null);
-                setIsModalOpen(false);
-                e.target.reset();
-            }
-        } catch (error) {
-            console.error("Error submitting:", error);
-        }
-    };
-
-    const handleDelete = async (index, id) => {
-        if (id) {
-            await fetch(`/api/admin?type=events&id=${id}`, { method: 'DELETE' });
-        }
-        setEvents(events.filter((_, i) => i !== index));
-    };
 
     return (
         <>

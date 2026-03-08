@@ -1,56 +1,17 @@
 'use client';
 import { useState, useEffect } from 'react';
+import useAdminManager from '../hooks/useAdminManager';
 
 export default function ChaptersAdmin() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const [chapters, setChapters] = useState([]);
-
-    useEffect(() => {
-        fetch('/api/admin')
-            .then(res => res.json())
-            .then(data => {
-                if (data.chapters) {
-                    setChapters(data.chapters);
-                }
-            })
-            .catch(err => console.error(err));
-    }, []);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('type', 'chapters');
-        if (selectedItem) formData.append('editId', selectedItem.id);
-
-        try {
-            const res = await fetch('/api/admin', {
-                method: selectedItem ? 'PUT' : 'POST',
-                body: formData
-            });
-            if (res.ok) {
-                const { item } = await res.json();
-                if (selectedItem) {
-                    setChapters(chapters.map(i => i.id === selectedItem.id ? item : i));
-                } else {
-                    setChapters([item, ...chapters]);
-                }
-                setSelectedItem(null);
-                setIsModalOpen(false);
-                e.target.reset();
-            }
-        } catch (error) {
-            console.error("Error submitting:", error);
-        }
-    };
-
-    const handleDelete = async (index, id) => {
-        if (id) {
-            await fetch(`/api/admin?type=chapters&id=${id}`, { method: 'DELETE' });
-        }
-        setChapters(chapters.filter((_, i) => i !== index));
-    };
+    const {
+        items: chapters,
+        isModalOpen,
+        setIsModalOpen,
+        selectedItem,
+        setSelectedItem,
+        handleSubmit,
+        handleDelete
+    } = useAdminManager('chapters');
 
     return (
         <>

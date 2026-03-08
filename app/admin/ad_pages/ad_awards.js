@@ -1,84 +1,21 @@
 'use client';
 import { useState, useEffect } from 'react';
+import useAdminManager from '../hooks/useAdminManager';
 
 export default function AwardsAdmin() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const [awards, setAwards] = useState([]);
-    const [tempImages, setTempImages] = useState([]);
-    const [newPreviews, setNewPreviews] = useState([]);
-
-    useEffect(() => {
-        fetch('/api/admin')
-            .then(res => res.json())
-            .then(data => {
-                if (data.awards) {
-                    setAwards(data.awards);
-                }
-            })
-            .catch(err => console.error(err));
-    }, []);
-
-    useEffect(() => {
-        if (selectedItem) {
-            setTempImages(selectedItem.images || (selectedItem.imageUrl ? [selectedItem.imageUrl] : []));
-        } else {
-            setTempImages([]);
-        }
-        setNewPreviews([]);
-    }, [selectedItem]);
-
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        const previews = files.map(file => URL.createObjectURL(file));
-        setNewPreviews([...newPreviews, ...previews]);
-    };
-
-    const removeImage = (url, isLocal) => {
-        if (isLocal) {
-            setNewPreviews(newPreviews.filter(img => img !== url));
-        } else {
-            setTempImages(tempImages.filter(img => img !== url));
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('type', 'awards');
-        if (selectedItem) {
-            formData.append('editId', selectedItem.id);
-            formData.append('keptImages', JSON.stringify(tempImages));
-        }
-
-        try {
-            const res = await fetch('/api/admin', {
-                method: selectedItem ? 'PUT' : 'POST',
-                body: formData
-            });
-            if (res.ok) {
-                const { item } = await res.json();
-                if (selectedItem) {
-                    setAwards(awards.map(i => i.id === selectedItem.id ? item : i));
-                } else {
-                    setAwards([item, ...awards]);
-                }
-                setSelectedItem(null);
-                setIsModalOpen(false);
-                e.target.reset();
-            }
-        } catch (error) {
-            console.error("Error submitting:", error);
-        }
-    };
-
-    const handleDelete = async (index, id) => {
-        if (id) {
-            await fetch(`/api/admin?type=awards&id=${id}`, { method: 'DELETE' });
-        }
-        setAwards(awards.filter((_, i) => i !== index));
-    };
+    const {
+        items: awards,
+        isModalOpen,
+        setIsModalOpen,
+        selectedItem,
+        setSelectedItem,
+        tempImages,
+        newPreviews,
+        handleFileChange,
+        removeImage,
+        handleSubmit,
+        handleDelete
+    } = useAdminManager('awards');
 
     return (
         <>

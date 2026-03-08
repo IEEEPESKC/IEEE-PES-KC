@@ -1,56 +1,17 @@
 'use client';
 import { useState, useEffect } from 'react';
+import useAdminManager from '../hooks/useAdminManager';
 
 export default function NewslettersAdmin() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const [lists, setLists] = useState([]);
-
-    useEffect(() => {
-        fetch('/api/admin')
-            .then(res => res.json())
-            .then(data => {
-                if (data.newsletters) {
-                    setLists(data.newsletters);
-                }
-            })
-            .catch(err => console.error(err));
-    }, []);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('type', 'newsletters');
-        if (selectedItem) formData.append('editId', selectedItem.id);
-
-        try {
-            const res = await fetch('/api/admin', {
-                method: selectedItem ? 'PUT' : 'POST',
-                body: formData
-            });
-            if (res.ok) {
-                const { item } = await res.json();
-                if (selectedItem) {
-                    setLists(lists.map(i => i.id === selectedItem.id ? item : i));
-                } else {
-                    setLists([item, ...lists]);
-                }
-                setSelectedItem(null);
-                setIsModalOpen(false);
-                e.target.reset();
-            }
-        } catch (error) {
-            console.error("Error submitting:", error);
-        }
-    };
-
-    const handleDelete = async (index, id) => {
-        if (id) {
-            await fetch(`/api/admin?type=newsletters&id=${id}`, { method: 'DELETE' });
-        }
-        setLists(lists.filter((_, i) => i !== index));
-    };
+    const {
+        items: lists,
+        isModalOpen,
+        setIsModalOpen,
+        selectedItem,
+        setSelectedItem,
+        handleSubmit,
+        handleDelete
+    } = useAdminManager('newsletters');
 
     return (
         <>

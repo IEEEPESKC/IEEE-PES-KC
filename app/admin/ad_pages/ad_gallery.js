@@ -1,85 +1,21 @@
 'use client';
 import { useState, useEffect } from 'react';
+import useAdminManager from '../hooks/useAdminManager';
 
 export default function GalleryAdmin() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const [images, setImages] = useState([]);
-    const [tempImages, setTempImages] = useState([]);
-
-    useEffect(() => {
-        fetch('/api/admin')
-            .then(res => res.json())
-            .then(data => {
-                if (data.gallery) {
-                    setImages(data.gallery);
-                }
-            })
-            .catch(err => console.error(err));
-    }, []);
-
-    const [newPreviews, setNewPreviews] = useState([]);
-
-    useEffect(() => {
-        if (selectedItem) {
-            setTempImages(selectedItem.images || (selectedItem.imageUrl ? [selectedItem.imageUrl] : []));
-        } else {
-            setTempImages([]);
-        }
-        setNewPreviews([]);
-    }, [selectedItem]);
-
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        const previews = files.map(file => URL.createObjectURL(file));
-        setNewPreviews([...newPreviews, ...previews]);
-    };
-
-    const removeImage = (url, isLocal) => {
-        if (isLocal) {
-            setNewPreviews(newPreviews.filter(img => img !== url));
-        } else {
-            setTempImages(tempImages.filter(img => img !== url));
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('type', 'gallery');
-        if (selectedItem) {
-            formData.append('editId', selectedItem.id);
-            formData.append('keptImages', JSON.stringify(tempImages));
-        }
-
-        try {
-            const res = await fetch('/api/admin', {
-                method: selectedItem ? 'PUT' : 'POST',
-                body: formData
-            });
-            if (res.ok) {
-                const { item } = await res.json();
-                if (selectedItem) {
-                    setImages(images.map(i => i.id === selectedItem.id ? item : i));
-                } else {
-                    setImages([item, ...images]);
-                }
-                setSelectedItem(null);
-                setIsModalOpen(false);
-                e.target.reset();
-            }
-        } catch (error) {
-            console.error("Error submitting:", error);
-        }
-    };
-
-    const handleDelete = async (index, id) => {
-        if (id) {
-            await fetch(`/api/admin?type=gallery&id=${id}`, { method: 'DELETE' });
-        }
-        setImages(images.filter((_, i) => i !== index));
-    };
+    const {
+        items: images,
+        isModalOpen,
+        setIsModalOpen,
+        selectedItem,
+        setSelectedItem,
+        tempImages,
+        newPreviews,
+        handleFileChange,
+        removeImage,
+        handleSubmit,
+        handleDelete
+    } = useAdminManager('gallery');
 
     return (
         <>
