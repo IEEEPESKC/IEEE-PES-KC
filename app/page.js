@@ -273,38 +273,38 @@ export default function Home() {
                                     <li className="nav-item dropdown">
                                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">About</a>
                                         <ul className="dropdown-menu">
-                                            <li><Link href="/about" className="dropdown-item">About IEEE PES</Link></li>
-                                            <li><Link href="/vision-mission" className="dropdown-item">Vision & Mission</Link></li>
-                                            <li><Link href="/history" className="dropdown-item">History</Link></li>
+                                            <li><Link href="/pages/about" className="dropdown-item">About IEEE PES</Link></li>
+                                            <li><Link href="/pages/vision-mission" className="dropdown-item">Vision & Mission</Link></li>
+                                            <li><Link href="/pages/history" className="dropdown-item">History</Link></li>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Execom</a>
                                         <ul className="dropdown-menu">
-                                            <li><Link href="/execom" className="dropdown-item">Executive Committee</Link></li>
-                                            <li><Link href="/past-execom" className="dropdown-item">Past Execom</Link></li>
+                                            <li><Link href="/pages/execom" className="dropdown-item">Executive Committee</Link></li>
+                                            <li><Link href="/pages/past-execom" className="dropdown-item">Past Execom</Link></li>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activities</a>
                                         <ul className="dropdown-menu">
-                                            <li><Link href="/student-branches" className="dropdown-item">Student Branch
+                                            <li><Link href="/pages/student-branches" className="dropdown-item">Student Branch
                                                 Chapters</Link></li>
-                                            <li><Link href="/initiatives" className="dropdown-item">Initiatives</Link></li>
-                                            <li><Link href="/awards" className="dropdown-item">Awards</Link></li>
+                                            <li><Link href="/pages/initiatives" className="dropdown-item">Initiatives</Link></li>
+                                            <li><Link href="/pages/awards" className="dropdown-item">Awards</Link></li>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Events</a>
                                         <ul className="dropdown-menu">
-                                            <li><Link href="/upcoming-events" className="dropdown-item">Upcoming Events</Link></li>
-                                            <li><Link href="/past-events" className="dropdown-item">Past Events</Link></li>
+                                            <li><Link href="/pages/upcoming-events" className="dropdown-item">Upcoming Events</Link></li>
+                                            <li><Link href="/pages/past-events" className="dropdown-item">Past Events</Link></li>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Membership</a>
                                         <ul className="dropdown-menu">
-                                            <li><Link href="/membership-benefits" className="dropdown-item">Membership Benefits</Link>
+                                            <li><Link href="/pages/membership-benefits" className="dropdown-item">Membership Benefits</Link>
                                             </li>
                                             <li><a href="https://www.ieee.org/membership/join/index.html" target="_blank"
                                                 className="dropdown-item">Join IEEE</a></li>
@@ -313,16 +313,16 @@ export default function Home() {
                                         </ul>
                                     </li>
                                     <li className="nav-item">
-                                        <Link href="/gallery" className="nav-link">Gallery</Link>
+                                        <Link href="/pages/gallery" className="nav-link">Gallery</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link href="/resources" className="nav-link">Resources</Link>
+                                        <Link href="/pages/resources" className="nav-link">Resources</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link href="/newsletters" className="nav-link">Newsletters</Link>
+                                        <Link href="/pages/newsletters" className="nav-link">Newsletters</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link href="/contact" className="nav-link">Contact</Link>
+                                        <Link href="/pages/contact" className="nav-link">Contact</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -353,10 +353,10 @@ export default function Home() {
                             </p>
 
                             <div className="hero-buttons" data-aos="fade-up" data-aos-delay="500">
-                                <Link href="/about" className="btn-glass btn-glass-primary">
+                                <Link href="/pages/about" className="btn-glass btn-glass-primary">
                                     Our Legacy <i className="fa-solid fa-arrow-right"></i>
                                 </Link>
-                                <Link href="/upcoming-events" className="btn-glass">
+                                <Link href="/pages/upcoming-events" className="btn-glass">
                                     Join Mission <i className="fa-solid fa-bolt"></i>
                                 </Link>
                             </div>        </div>
@@ -608,7 +608,7 @@ export default function Home() {
                                         </li>
                                     </ul>
                                     <div className="view-all-announcements">
-                                        <Link href="/announcements" className="btn-view-all">
+                                        <Link href="/pages/announcements" className="btn-view-all">
                                             View All Announcements <i className="ri-arrow-right-line"></i>
                                         </Link>
                                     </div>        </div>
@@ -662,10 +662,10 @@ export default function Home() {
                                     </div>
                                 </div>
                                 <div className="d-flex gap-4 flex-wrap">
-                                    <Link href="/about" className="btn-base-color">
+                                    <Link href="/pages/about" className="btn-base-color">
                                         Our Story <i className="fa-solid fa-arrow-right ms-2"></i>
                                     </Link>
-                                    <Link href="/student-branches"
+                                    <Link href="/pages/student-branches"
                                         className="btn btn-outline-primary px-4 py-2 rounded-pill fw-700">
                                         Explore Student Branches
                                     </Link>
@@ -916,7 +916,7 @@ export default function Home() {
                                     Our Events</h2>
                             </div>
                             <div className="col-lg-4 text-lg-end mt-3 mt-lg-0" data-aos="fade-left">
-                                <Link href="/upcoming-events" className="btn btn-outline-primary px-5 py-3 rounded-pill fw-700"
+                                <Link href="/pages/upcoming-events" className="btn btn-outline-primary px-5 py-3 rounded-pill fw-700"
                                     style={{ borderWidth: '2px' }}>
                                     View All Events <i className="fa-solid fa-arrow-right ms-2"></i>
                                 </Link>
@@ -1025,7 +1025,7 @@ export default function Home() {
                                 <h2 className="section-title">Image Gallery</h2>
                             </div>
                             <div className="col-lg-4 text-lg-end mt-3 mt-lg-0" data-aos="fade-left">
-                                <Link href="/gallery" className="btn btn-outline-primary px-5 py-3 rounded-pill fw-700">
+                                <Link href="/pages/gallery" className="btn btn-outline-primary px-5 py-3 rounded-pill fw-700">
                                     View All Gallery <i className="fa-solid fa-arrow-right ms-2"></i>
                                 </Link>
                             </div>
@@ -1227,13 +1227,13 @@ export default function Home() {
                             <div className="col-lg-2 col-md-6 col-6">
                                 <h4 className="footer-heading">Quick Links</h4>
                                 <ul className="footer-links">
-                                    <li><Link href="/upcoming-events">Upcoming Events</Link></li>
-                                    <li><Link href="/student-branches">Student Branches</Link></li>
-                                    <li><Link href="/execom">Execom</Link></li>
-                                    <li><Link href="/gallery">Gallery</Link></li>
-                                    <li><Link href="/resources">Resources</Link></li>
-                                    <li><Link href="/newsletters">Newsletters</Link></li>
-                                    <li><Link href="/awards">Awards</Link></li>
+                                    <li><Link href="/pages/upcoming-events">Upcoming Events</Link></li>
+                                    <li><Link href="/pages/student-branches">Student Branches</Link></li>
+                                    <li><Link href="/pages/execom">Execom</Link></li>
+                                    <li><Link href="/pages/gallery">Gallery</Link></li>
+                                    <li><Link href="/pages/resources">Resources</Link></li>
+                                    <li><Link href="/pages/newsletters">Newsletters</Link></li>
+                                    <li><Link href="/pages/awards">Awards</Link></li>
                                 </ul>            </div>
                             <div className="col-lg-2 col-md-6 col-6">
                                 <h4 className="footer-heading">Get Started</h4>
@@ -1241,7 +1241,7 @@ export default function Home() {
                                     <li><a href="https://www.ieee.org/" target="_blank">IEEE</a></li>
                                     <li><a href="https://ieee-pes.org/" target="_blank">IEEE PES</a></li>
                                     <li><a href="https://ieeekerala.org/" target="_blank">IEEE Kerala Section</a></li>
-                                    <li><Link href="/membership-benefits">Membership Benefits</Link></li>
+                                    <li><Link href="/pages/membership-benefits">Membership Benefits</Link></li>
                                 </ul>            </div>
                             <div className="col-lg-4 col-md-6">
                                 <h4 className="footer-heading">Contact Info</h4>

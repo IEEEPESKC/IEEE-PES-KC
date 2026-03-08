@@ -46,52 +46,52 @@ export default function Navbar() {
                             <li className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">About</a>
                                 <ul className="dropdown-menu">
-                                    <li><Link href="app/(pages)/about/page.js" className="dropdown-item">About IEEE PES</Link></li>
-                                    <li><Link href="/vision-mission" className="dropdown-item">Vision &amp; Mission</Link></li>
-                                    <li><Link href="/history" className="dropdown-item">History</Link></li>
+                                    <li><Link href="/pages/about" className="dropdown-item">About IEEE PES</Link></li>
+                                    <li><Link href="/pages/vision-mission" className="dropdown-item">Vision &amp; Mission</Link></li>
+                                    <li><Link href="/pages/history" className="dropdown-item">History</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Execom</a>
                                 <ul className="dropdown-menu">
-                                    <li><Link href="/execom" className="dropdown-item">Executive Committee</Link></li>
-                                    <li><Link href="/past-execom" className="dropdown-item">Past Execom</Link></li>
+                                    <li><Link href="/pages/execom" className="dropdown-item">Executive Committee</Link></li>
+                                    <li><Link href="/pages/past-execom" className="dropdown-item">Past Execom</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activities</a>
                                 <ul className="dropdown-menu">
-                                    <li><Link href="/student-branches" className="dropdown-item">Student Branch Chapters</Link></li>
-                                    <li><Link href="/initiatives" className="dropdown-item">Initiatives</Link></li>
-                                    <li><Link href="/awards" className="dropdown-item">Awards</Link></li>
+                                    <li><Link href="/pages/student-branches" className="dropdown-item">Student Branch Chapters</Link></li>
+                                    <li><Link href="/pages/initiatives" className="dropdown-item">Initiatives</Link></li>
+                                    <li><Link href="/pages/awards" className="dropdown-item">Awards</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Events</a>
                                 <ul className="dropdown-menu">
-                                    <li><Link href="/upcoming-events" className="dropdown-item">Upcoming Events</Link></li>
-                                    <li><Link href="/past-events" className="dropdown-item">Past Events</Link></li>
+                                    <li><Link href="/pages/upcoming-events" className="dropdown-item">Upcoming Events</Link></li>
+                                    <li><Link href="/pages/past-events" className="dropdown-item">Past Events</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Membership</a>
                                 <ul className="dropdown-menu">
-                                    <li><Link href="/membership-benefits" className="dropdown-item">Membership Benefits</Link></li>
+                                    <li><Link href="/pages/membership-benefits" className="dropdown-item">Membership Benefits</Link></li>
                                     <li><a href="https://www.ieee.org/membership/join/index.html" target="_blank" rel="noreferrer" className="dropdown-item">Join IEEE</a></li>
                                     <li><a href="https://ieee-pes.org/membership/" target="_blank" rel="noreferrer" className="dropdown-item">Join IEEE PES</a></li>
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <Link href="/gallery" className="nav-link">Gallery</Link>
+                                <Link href="/pages/gallery" className="nav-link">Gallery</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/resources" className="nav-link">Resources</Link>
+                                <Link href="/pages/resources" className="nav-link">Resources</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/newsletters" className="nav-link">Newsletters</Link>
+                                <Link href="/pages/newsletters" className="nav-link">Newsletters</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/contact" className="nav-link">Contact</Link>
+                                <Link href="/pages/contact" className="nav-link">Contact</Link>
                             </li>
                         </ul>
                     </div>

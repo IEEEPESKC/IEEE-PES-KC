@@ -1,0 +1,672 @@
+:root {
+    --admin-cyprus: #004643;
+    --admin-sand: #F0EDE5;
+    --admin-hover: #005c58;
+    --admin-text-dark: #1a1a1a;
+    --admin-text-light: #ffffff;
+    --admin-border: #e0dcd0;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--admin-sand);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--admin-text-dark);
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 260px;
+    background-color: var(--admin-cyprus);
+    color: var(--admin-text-light);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    padding: 24px 0;
+    z-index: 100;
+}
+
+.admin-brand {
+    padding: 0 24px 24px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+}
+
+.admin-brand h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--admin-text-light);
+}
+
+.admin-brand p {
+    font-size: 0.85rem;
+    margin: 4px 0 0 0;
+    opacity: 0.8;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 16px;
+    flex: 1;
+}
+
+.admin-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    gap: 12px;
+}
+
+.admin-nav-item i {
+    font-size: 1.2rem;
+}
+
+.admin-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--admin-text-light);
+}
+
+.admin-nav-item.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--admin-text-light);
+}
+
+.admin-footer {
+    padding: 24px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Sidebar Action Buttons */
+.admin-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: inherit;
+}
+
+.admin-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--admin-text-light);
+}
+
+.admin-action-btn i {
+    font-size: 1.1rem;
+}
+
+.admin-action-btn.danger {
+    color: #ff6b6b;
+}
+
+.admin-action-btn.danger:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #ff6b6b;
+}
+
+.admin-action-btn.primary {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--admin-text-light);
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.admin-action-btn.primary:hover {
+    background-color: var(--admin-sand);
+    color: var(--admin-cyprus);
+}
+
+/* Main Content */
+.admin-main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 40px;
+    background-color: var(--admin-sand);
+    min-height: 100vh;
+}
+
+.admin-header {
+    margin-bottom: 32px;
+}
+
+.admin-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--admin-cyprus);
+    margin-bottom: 8px;
+}
+
+.admin-header p {
+    color: #555;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Toolbar (Search & Add Button) */
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.admin-search {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.admin-search i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.admin-search input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    outline: none;
+}
+
+.admin-btn-primary {
+    background-color: var(--admin-cyprus);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.admin-btn-primary:hover {
+    background-color: var(--admin-hover);
+    color: #fff;
+}
+
+/* Cards / List */
+.admin-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.admin-card-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.admin-list-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid var(--admin-border);
+    flex-shrink: 0;
+    background-color: var(--admin-sand);
+}
+
+.admin-card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-card-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--admin-cyprus);
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background-color: var(--admin-sand);
+    color: var(--admin-cyprus);
+    font-weight: 600;
+}
+
+.admin-card-meta {
+    display: flex;
+    gap: 24px;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.admin-card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.admin-card-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.admin-btn-text {
+    color: var(--admin-cyprus);
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.admin-btn-text:hover {
+    background-color: var(--admin-sand);
+}
+
+/* Modals */
+.admin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 70, 67, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+}
+
+.admin-modal {
+    background: var(--admin-sand);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+.admin-modal-header {
+    padding: 24px;
+    border-bottom: 1px solid rgba(0, 70, 67, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--admin-cyprus);
+    font-weight: 700;
+}
+
+.admin-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--admin-cyprus);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-modal-close:hover {
+    background: rgba(0, 70, 67, 0.05);
+}
+
+.admin-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* Forms inside modal */
+.admin-form-group {
+    margin-bottom: 20px;
+}
+
+.admin-form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--admin-cyprus);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.admin-form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.admin-form-control:focus {
+    border-color: var(--admin-cyprus);
+}
+
+.admin-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.admin-btn-secondary {
+    background: none;
+    border: 1px solid var(--admin-cyprus);
+    color: var(--admin-cyprus);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-btn-secondary:hover {
+    background: rgba(0, 70, 67, 0.05);
+}
+
+/* File Upload */
+.admin-file-upload {
+    border: 2px dashed #dcd8cc;
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-file-upload:hover {
+    border-color: var(--admin-cyprus);
+    background: #fff;
+}
+
+.admin-file-upload i {
+    font-size: 2rem;
+    color: var(--admin-cyprus);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.admin-file-upload p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Side Panel */
+.admin-sidepanel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 70, 67, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.admin-sidepanel-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.admin-sidepanel {
+    background: var(--admin-sand);
+    width: 100%;
+    max-width: 550px;
+    height: 100vh;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-sidepanel.active {
+    transform: translateX(0);
+}
+
+.admin-sidepanel-header {
+    padding: 24px;
+    border-bottom: 1px solid rgba(0, 70, 67, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+}
+
+.admin-sidepanel-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--admin-cyprus);
+    font-weight: 700;
+}
+
+.admin-sidepanel-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--admin-cyprus);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-sidepanel-close:hover {
+    background: rgba(0, 70, 67, 0.05);
+}
+
+.admin-sidepanel-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Glass Popup System */
+.admin-glass-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 24px;
+}
+
+.admin-glass-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.admin-glass-popup {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 32px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.admin-glass-overlay.active .admin-glass-popup {
+    transform: scale(1) translateY(0);
+}
+
+.admin-glass-popup h3 {
+    font-size: 1.5rem;
+    color: var(--admin-cyprus);
+    margin: 16px 0 12px;
+}
+
+.admin-glass-popup p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.popup-icon {
+    font-size: 3.5rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.admin-glass-popup.success .popup-icon {
+    color: #28a745;
+}
+
+.admin-glass-popup.danger .popup-icon {
+    color: #dc3545;
+}
+
+.admin-glass-popup.warning .popup-icon {
+    color: #f0ad4e;
+}
+
+.admin-glass-popup.info .popup-icon {
+    color: #17a2b8;
+}
+
+.admin-glass-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.admin-glass-btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-family: inherit;
+}
+
+.admin-glass-btn.cancel {
+    background: rgba(0, 0, 0, 0.05);
+    color: #666;
+}
+
+.admin-glass-btn.confirm {
+    background: var(--admin-cyprus);
+    color: #fff;
+}
+
+.admin-glass-btn.confirm.danger {
+    background: #dc3545;
+}
+
+.admin-glass-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.admin-glass-btn:active {
+    transform: translateY(0);
+}
+
+/* Edit Log Special Styling */
+.admin-glass-popup.log {
+    max-width: 500px;
+}
+
+.admin-glass-popup.log ul::-webkit-scrollbar {
+    width: 5px;
+}
+
+.admin-glass-popup.log ul::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+
+.admin-glass-popup.log ul::-webkit-scrollbar-thumb {
+    background: rgba(0, 70, 67, 0.2);
+    border-radius: 10px;
+}

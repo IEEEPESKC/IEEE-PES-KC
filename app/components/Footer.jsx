@@ -22,13 +22,13 @@ export default function Footer() {
                     <div className="col-lg-2 col-md-6 col-6">
                         <h4 className="footer-heading">Quick Links</h4>
                         <ul className="footer-links">
-                            <li><Link href="/upcoming-events">Upcoming Events</Link></li>
-                            <li><Link href="/student-branches">Student Branches</Link></li>
-                            <li><Link href="/execom">Execom</Link></li>
-                            <li><Link href="/gallery">Gallery</Link></li>
-                            <li><Link href="/resources">Resources</Link></li>
-                            <li><Link href="/newsletters">Newsletters</Link></li>
-                            <li><Link href="/awards">Awards</Link></li>
+                            <li><Link href="/pages/upcoming-events">Upcoming Events</Link></li>
+                            <li><Link href="/pages/student-branches">Student Branches</Link></li>
+                            <li><Link href="/pages/execom">Execom</Link></li>
+                            <li><Link href="/pages/gallery">Gallery</Link></li>
+                            <li><Link href="/pages/resources">Resources</Link></li>
+                            <li><Link href="/pages/newsletters">Newsletters</Link></li>
+                            <li><Link href="/pages/awards">Awards</Link></li>
                         </ul>
                     </div>
                     <div className="col-lg-2 col-md-6 col-6">
@@ -37,7 +37,7 @@ export default function Footer() {
                             <li><a href="https://www.ieee.org/" target="_blank" rel="noreferrer">IEEE</a></li>
                             <li><a href="https://ieee-pes.org/" target="_blank" rel="noreferrer">IEEE PES</a></li>
                             <li><a href="https://ieeekerala.org/" target="_blank" rel="noreferrer">IEEE Kerala Section</a></li>
-                            <li><Link href="/membership-benefits">Membership Benefits</Link></li>
+                            <li><Link href="/pages/membership-benefits">Membership Benefits</Link></li>
                         </ul>
                     </div>
                     <div className="col-lg-4 col-md-6">
