@@ -1,22 +1,44 @@
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
+'use client';
+import { useState, useEffect } from 'react';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 import Image from 'next/image';
-
-export const metadata = {
-    title: 'Past Events | IEEE PES Kerala Chapter',
-    description: 'A look back at events organized by IEEE PES Kerala Chapter.',
-};
-
-const pastEvents = [
-    { img: '/images/ieee-images/recent_1.png', title: 'Power System Protection Workshop', date: 'Jan 2025', venue: 'GEC Barton Hill', desc: 'A comprehensive hands-on session on modern power system protection techniques.' },
-    { img: '/images/ieee-images/recent_2.png', title: 'IEEE PES Day 2025 Celebrations', date: 'Feb 2025', venue: 'State-wide Virtual', desc: 'Celebrating the spirit of Power & Energy Society with state-wide virtual events and competitions.' },
-    { img: '/images/ieee-images/Gallery/gallery_1.png', title: 'AKPESSC 2024', date: 'Nov 2024', venue: 'Kozhikode', desc: 'The All Kerala Power & Energy Society Student Congress — a grand gathering of 500+ students.' },
-    { img: '/images/ieee-images/Gallery/gallery_2.png', title: 'Intellect 2024 — State Quiz', date: 'Oct 2024', venue: 'Ernakulam', desc: 'State-level technical quiz that challenged the brightest engineering minds across Kerala.' },
-    { img: '/images/ieee-images/Gallery/gallery_3.png', title: 'Women in Power (WoW) 2024', date: 'Sep 2024', venue: 'Trivandrum', desc: 'A flagship event empowering women engineers in the energy sector.' },
-    { img: '/images/ieee-images/Gallery/gallery_4.png', title: 'Industrial Visit — KSEB', date: 'Aug 2024', venue: 'Kochi', desc: 'Members visited KSEB facilities to understand live grid operations and power distribution.' },
-];
+import Link from 'next/link';
 
 export default function PastEventsPage() {
+    const [events, setEvents] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [visibleCount, setVisibleCount] = useState(12);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/admin');
+                const result = await response.json();
+                if (result.success && result.data && result.data.events) {
+                    const pastEvents = result.data.events.filter(e => {
+                        const tags = Array.isArray(e.tags) ? e.tags : (typeof e.tags === 'string' ? e.tags.split(',').map(t => t.trim()) : []);
+                        return tags.some(t => {
+                            const tl = t.toLowerCase();
+                            return tl === 'past' || tl === 'recent' || tl === 'past event' || tl === 'recent event' || tl === 'past events' || tl === 'recent events';
+                        });
+                    });
+                    setEvents(pastEvents);
+                }
+            } catch (error) {
+                console.error("Error fetching events data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleLoadMore = () => {
+        setVisibleCount(prev => prev + 12);
+    };
+
     return (
         <PageLayout>
             <PageBanner
@@ -27,31 +49,66 @@ export default function PastEventsPage() {
 
             <section className="section-padding">
                 <div className="container">
-                    <div className="section-header mb-5">
+
+                    <div className="section-header mb-5 text-center">
                         <span className="section-badge">Looking Back</span>
-                        <h2 className="section-title mt-3">Events We&apos;ve Organized</h2>
-                        <p className="section-desc">A collection of memorable events that have shaped our community over the years.</p>
+                        <h2 className="section-title mt-3">Events We've Organized</h2>
+                        <p className="section-desc mx-auto" style={{ maxWidth: '600px' }}>A collection of memorable events that have shaped our community over the years.</p>
                     </div>
 
-                    <div className="row g-4">
-                        {pastEvents.map((e, i) => (
-                            <div key={i} className="col-md-6 col-lg-4">
-                                <div className="event-card">
-                                    <div className="event-card-image">
-                                        <Image src={e.img} alt={e.title} width={640} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                    </div>
-                                    <div className="event-card-body">
-                                        <div>
-                                            <span className="event-date"><i className="bi bi-calendar-check"></i> {e.date}</span>
-                                            <h3 style={{ fontSize: '1.1rem' }}>{e.title}</h3>
-                                            <p className="event-venue"><i className="bi bi-geo-alt-fill"></i> {e.venue}</p>
-                                            <p style={{ color: '#666', fontSize: 14 }}>{e.desc}</p>
-                                        </div>
-                                        <span className="btn-register" style={{ cursor: 'default', opacity: 0.7 }}>Completed</span>
-                                    </div>
-                                </div>
+                    {isLoading ? (
+                        <div className="text-center py-5">
+                            <div className="spinner-border text-success" role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>
-                        ))}
+                        </div>
+                    ) : (
+                        <>
+                            <div className="row g-4 mb-4">
+                                {events.length > 0 ? events.slice(0, visibleCount).map((e, i) => (
+                                    <div key={i} className="col-md-6 col-lg-4">
+                                        <div className="event-card">
+                                            <div className="event-card-image">
+                                                {e.imageUrl ? (
+                                                    <Image src={e.imageUrl} alt={e.title} width={640} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                                ) : (
+                                                    <div style={{ width: '100%', height: '100%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                        <i className="ri-image-line" style={{ fontSize: '2rem', color: '#ccc' }}></i>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="event-card-body">
+                                                <div>
+                                                    <span className="event-date"><i className="bi bi-calendar-check"></i> {e.date || 'TBA'}</span>
+                                                    <h3 style={{ fontSize: '1.1rem' }}>{e.title}</h3>
+                                                    <p className="event-venue"><i className="bi bi-geo-alt-fill"></i> {e.venue || 'TBA'}</p>
+                                                    <p style={{ color: '#666', fontSize: 14 }}>{e.description || e.desc}</p>
+                                                </div>
+                                                <span className="btn-register" style={{ cursor: 'default', opacity: 0.7 }}>Completed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )) : (
+                                    <div className="col-12 text-center py-5">
+                                        <p className="text-muted">No past events are available currently.</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {visibleCount < events.length && (
+                                <div className="text-center mb-5">
+                                    <button onClick={handleLoadMore} className="btn btn-outline-secondary px-4 py-2 rounded-pill fw-bold">
+                                        Load More Events <i className="ri-arrow-down-line ms-1"></i>
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    )}
+
+                    <div className="text-center mt-5 pt-4 border-top">
+                        <Link href="/pages/upcoming-events" className="btn btn-outline-success px-4 py-2 rounded-pill fw-bold">
+                            View Upcoming Events <i className="ri-arrow-right-line ms-1"></i>
+                        </Link>
                     </div>
                 </div>
             </section>

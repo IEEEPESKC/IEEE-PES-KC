@@ -11,9 +11,31 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { useState } from 'react';
 
 export default function Home() {
+    const [events, setEvents] = useState([]);
+    const [announcements, setAnnouncements] = useState([]);
+    const [gallery, setGallery] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
+        fetch('/api/admin')
+            .then(res => res.json())
+            .then(data => {
+                setEvents(data.events || []);
+                setAnnouncements(data.announcements || []);
+                setGallery(data.gallery || []);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.error("Error fetching home data:", err);
+                setIsLoading(false);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (isLoading) return;
         // Helper to load AOS/Swiper if they are global
         const initScripts = () => {
             AOS.init({
@@ -31,18 +53,21 @@ export default function Home() {
                 }
             });
 
+            // Destroy existing swipers to recreate them with new dynamic content if necessary
+            // Note: Simple loop/re-init is usually fine with React if handled correctly
+
             // Initialize Swiper
-            const swiper = new Swiper('.gallery-swiper', {
+            new Swiper('.gallery-swiper', {
                 modules: [Navigation, Pagination, Autoplay],
                 slidesPerView: 1,
                 spaceBetween: 20,
                 pagination: {
-                    el: '.swiper-pagination',
+                    el: '.gallery-swiper .swiper-pagination',
                     clickable: true,
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: '.gallery-swiper .swiper-button-next',
+                    prevEl: '.gallery-swiper .swiper-button-prev',
                 },
                 breakpoints: {
                     576: { slidesPerView: 2 },
@@ -62,8 +87,8 @@ export default function Home() {
                 slidesPerView: 1,
                 spaceBetween: 15,
                 autoplay: { delay: 4000 },
-                pagination: { el: '.swiper-pagination', clickable: true },
-                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                pagination: { el: '.upcoming-update-swiper .swiper-pagination', clickable: true },
+                navigation: { nextEl: '.upcoming-update-swiper .swiper-button-next', prevEl: '.upcoming-update-swiper .swiper-button-prev' },
                 loop: true
             });
 
@@ -72,7 +97,7 @@ export default function Home() {
                 slidesPerView: 1,
                 spaceBetween: 15,
                 autoplay: { delay: 5000 },
-                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                navigation: { nextEl: '.recent-update-swiper .swiper-button-next', prevEl: '.recent-update-swiper .swiper-button-prev' },
                 loop: true
             });
 
@@ -164,6 +189,11 @@ export default function Home() {
                 });
             });
 
+            const closeBtn = document.querySelector('.gallery-preview-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeGalleryPreview);
+            }
+
             // High-Performance 144fps 3D Interpolated Tilt
             const heroSection = document.querySelector('.hero-section');
             const heroIsland = document.querySelector('.hero-island');
@@ -201,19 +231,44 @@ export default function Home() {
                     if (!rafId) rafId = requestAnimationFrame(updateTilt);
                 }, { passive: true });
             }
-
-
-            // Fix for removed inline onclick
-            const closeBtn = document.querySelector('.gallery-preview-close');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeGalleryPreview);
-            }
         };
 
-        // Slight delay to ensure external scripts are loaded
         const timer = setTimeout(initScripts, 500);
         return () => clearTimeout(timer);
-    }, []);
+    }, [isLoading, events, gallery, announcements]);
+
+    const getCategorizedEvents = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const upcoming = [];
+        const recent = [];
+        const past = [];
+
+        events.forEach(event => {
+            const evDate = new Date(event.date);
+            evDate.setHours(0, 0, 0, 0);
+
+            if (evDate > today) {
+                upcoming.push(event);
+            } else {
+                const diffTime = Math.abs(today - evDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays <= 30) {
+                    recent.push(event);
+                } else {
+                    past.push(event);
+                }
+            }
+        });
+
+        return { upcoming, recent, past };
+    };
+
+    const { upcoming, recent, past } = getCategorizedEvents();
+    const akpesscEvents = events.filter(e => e.tag?.toLowerCase().includes('akpessc'));
+    const wowEvents = events.filter(e => e.tag?.toLowerCase().includes('wow'));
+    const displayEventsCards = [...recent, ...past].slice(0, 4);
 
     return (
         <>
@@ -451,59 +506,38 @@ export default function Home() {
                                     </div>
                                     <div className="swiper update-swiper upcoming-update-swiper">
                                         <div className="swiper-wrapper">
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Events/agm2026.png" alt="AGM 2026" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h4>AGM 2026 - Annual General Meeting</h4>
-                                                        <div className="update-desc">
-                                                            The IEEE PES Kerala Chapter warmly invites all members to be part of
-                                                            the Annual General Meeting 2026. Reflect, Reconnect, Reignite.
+                                            {upcoming.length > 0 ? upcoming.map((event, idx) => (
+                                                <div className="swiper-slide" key={idx}>
+                                                    <div className="swiper-update-card">
+                                                        <div className="swiper-update-img">
+                                                            <Image src={event.imageUrl || "/images/ieee-images/Events/pesgre_event.png"} alt={event.title} width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                         </div>
-                                                        <a href="https://tinyurl.com/ieeepeskc-agm2026" target="_blank"
-                                                            className="btn-register mb-3">Register Now</a>
-                                                        <p className="text-muted small mb-0"><i className="ri-map-pin-line"></i> Kochi |
-                                                            <i className="ri-time-line"></i> 1 Feb
-                                                        </p>
+                                                        <div className="swiper-update-body">
+                                                            <h4>{event.title}</h4>
+                                                            <div className="update-desc">
+                                                                {event.description || event.details || "No description provided."}
+                                                            </div>
+                                                            {event.link || event.url ? (
+                                                                <a href={event.link || event.url} target="_blank" className="btn-register mb-3">Register Now</a>
+                                                            ) : (
+                                                                <Link href="/pages/upcoming-events" className="btn-register mb-3">Learn More</Link>
+                                                            )}
+                                                            <p className="text-muted small mb-0">
+                                                                <i className="ri-map-pin-line"></i> {event.location || "Online"} |
+                                                                <i className="ri-time-line"></i> {new Date(event.date).toLocaleDateString()}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Events/pesgre_event.png" alt="PESGRE" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h4>PESGRE 2026 - International Conference</h4>
-                                                        <div className="update-desc">
-                                                            The premier international conference on Power Electronics, Smart
-                                                            Grid and Renewable Energy (PESGRE) returns to Kerala.
+                                            )) : (
+                                                <div className="swiper-slide">
+                                                    <div className="swiper-update-card">
+                                                        <div className="swiper-update-body text-center p-5">
+                                                            <p>No upcoming events currently scheduled.</p>
                                                         </div>
-                                                        <a href="#" className="btn-register mb-3">Register Now</a>
-                                                        <p className="text-muted small mb-0"><i className="ri-map-pin-line"></i>
-                                                            Trivandrum | <i className="ri-time-line"></i> 15-18 Feb</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Events/smartgrid_event.png" alt="Workshop" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h4>Smart Grid Workshop & Training</h4>
-                                                        <div className="update-desc">
-                                                            Master the future of power systems with our hands-on Smart Grid
-                                                            workshop. Industry certification included.
-                                                        </div>
-                                                        <a href="#" className="btn-register mb-3">Register Now</a>
-                                                        <p className="text-muted small mb-0"><i className="ri-map-pin-line"></i> NIT
-                                                            Calicut | <i className="ri-time-line"></i> 10 Mar</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            )}
                                         </div>
                                         <div className="swiper-button-next"></div>
                                         <div className="swiper-button-prev"></div>
@@ -521,36 +555,30 @@ export default function Home() {
                                     </div>
                                     <div className="swiper update-swiper recent-update-swiper">
                                         <div className="swiper-wrapper">
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/recent_1.png" alt="Workshop" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h4>Power System Protection Workshop</h4>
-                                                        <div className="update-desc">
-                                                            A comprehensive hands-on session on modern power system protection
-                                                            techniques held at GEC Barton Hill.
+                                            {recent.length > 0 ? recent.map((event, idx) => (
+                                                <div className="swiper-slide" key={idx}>
+                                                    <div className="swiper-update-card">
+                                                        <div className="swiper-update-img">
+                                                            <Image src={event.imageUrl || "/images/ieee-images/recent_1.png"} alt={event.title} width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                         </div>
-                                                        <p className="text-muted small mb-0">Held at GEC Barton Hill</p>
+                                                        <div className="swiper-update-body">
+                                                            <h4>{event.title}</h4>
+                                                            <div className="update-desc">
+                                                                {event.description || event.details || "Recent successful event."}
+                                                            </div>
+                                                            <p className="text-muted small mb-0">Held on {new Date(event.date).toLocaleDateString()}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/recent_2.png" alt="Seminar" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h4>IEEE PES Day 2025 Celebrations</h4>
-                                                        <div className="update-desc">
-                                                            Celebrating the spirit of Power & Energy Society with state-wide
-                                                            virtual events and competitions.
+                                            )) : (
+                                                <div className="swiper-slide">
+                                                    <div className="swiper-update-card">
+                                                        <div className="swiper-update-body text-center p-5">
+                                                            <p>No recent events recorded in the last 30 days.</p>
                                                         </div>
-                                                        <p className="text-muted small mb-0">State-wide virtual events</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            )}
                                         </div>
                                         <div className="swiper-button-next"></div>
                                         <div className="swiper-button-prev"></div>
@@ -566,46 +594,26 @@ export default function Home() {
                                         <h3>Announcements</h3>
                                     </div>
                                     <ul className="notice-board">
-                                        <li className="notice-item">
-                                            <div className="notice-date">NEW</div>
-                                            <div className="notice-content">
-                                                <h6>Call for Volunteers 2026</h6>
-                                                <p>Join the IEEE PES Kerala Web Team and Creative Team. Apply by Feb 20.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li className="notice-item">
-                                            <div className="notice-date">IMPORTANT</div>
-                                            <div className="notice-content">
-                                                <h6>Best Student Branch Results</h6>
-                                                <p>The annual PES SB Performance results are out. Check your ranking.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li className="notice-item">
-                                            <div className="notice-date">UPCOMING</div>
-                                            <div className="notice-content">
-                                                <h6>Execom Training Session</h6>
-                                                <p>Mandatory training for all newly elected SB Execom members on Feb 25.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li className="notice-item">
-                                            <div className="notice-date">UPDATE</div>
-                                            <div className="notice-content">
-                                                <h6>Awards Nominations Open</h6>
-                                                <p>Submit nominations for the Outstanding Professional Award by March
-                                                    15.</p>
-                                            </div>
-                                        </li>
-                                        <li className="notice-item">
-                                            <div className="notice-date">INFO</div>
-                                            <div className="notice-content">
-                                                <h6>Chapter Membership Drive</h6>
-                                                <p>Exclusive benefits for members joining this month. Refer a friend!
-                                                </p>
-                                            </div>
-                                        </li>
+                                        {announcements.length > 0 ? announcements.map((ann, idx) => (
+                                            <li className="notice-item" key={idx}>
+                                                <div className="notice-date">{ann.tag || "NEW"}</div>
+                                                <div className="notice-content">
+                                                    <h6>{ann.title}</h6>
+                                                    <p>{ann.description || ann.details}</p>
+                                                    {ann.url && (
+                                                        <a href={ann.url} target="_blank" className="notice-link mt-2 d-inline-block" style={{ fontSize: '0.85rem', color: 'var(--accent-color)' }}>
+                                                            Learn More <i className="ri-arrow-right-up-line"></i>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </li>
+                                        )) : (
+                                            <li className="notice-item">
+                                                <div className="notice-content text-center w-100 p-4">
+                                                    <p>No active announcements at the moment.</p>
+                                                </div>
+                                            </li>
+                                        )}
                                     </ul>
                                     <div className="view-all-announcements">
                                         <Link href="/pages/announcements" className="btn-view-all">
@@ -769,44 +777,41 @@ export default function Home() {
                                     </div>
                                     <div className="swiper flagship-swiper akpessc-swiper">
                                         <div className="swiper-wrapper">
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Flagships/akpessc_flagship_1770434008791.png" alt="AKPESSC" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h5>AKPESSC 2025 - State Student Congress</h5>
-                                                        <div className="update-desc">
-                                                            The All Kerala Power & Energy Society Student Congress is our crown
-                                                            jewel event, bringing together hundreds of students for technical
-                                                            excellence and networking. ⚡🎓<br /><br />
-                                                            Witness the largest gathering of PES enthusiasts in Kerala with
-                                                            keynote
-                                                            sessions from industrial giants.
+                                            {akpesscEvents.length > 0 ? akpesscEvents.map((event, idx) => (
+                                                <div className="swiper-slide" key={idx}>
+                                                    <div className="swiper-update-card">
+                                                        <div className="swiper-update-img">
+                                                            <Image src={event.imageUrl || "/images/ieee-images/Flagships/akpessc_flagship_1770434008791.png"} alt={event.title} width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                         </div>
-                                                        <a href="#" className="btn-register mb-3">Register Now</a>
-                                                        <p className="text-muted small mb-0"><i className="ri-map-pin-line"></i> TBD |
-                                                            <i className="ri-calendar-line"></i> Annual
-                                                        </p>
+                                                        <div className="swiper-update-body">
+                                                            <h5>{event.title}</h5>
+                                                            <div className="update-desc">
+                                                                {event.description || event.details}
+                                                            </div>
+                                                            {event.link || event.url ? (
+                                                                <a href={event.link || event.url} target="_blank" className="btn-register mb-3">Register Now</a>
+                                                            ) : (
+                                                                <Link href="/pages/upcoming-events" className="btn-register mb-3">Learn More</Link>
+                                                            )}
+                                                            <p className="text-muted small mb-0"><i className="ri-map-pin-line"></i> {event.location || "TBD"} |
+                                                                <i className="ri-calendar-line"></i> {event.date ? new Date(event.date).toLocaleDateString() : "Annual"}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Gallery/gallery_1.png" alt="AKPESSC Highlights" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h5>Industry Interface & Workshops</h5>
-                                                        <div className="update-desc">
-                                                            Bridging the gap between academia and industry with keynote sessions
-                                                            from global energy leaders and interactive workshops.
+                                            )) : (
+                                                <div className="swiper-slide">
+                                                    <div className="swiper-update-card">
+                                                        <div className="swiper-update-img">
+                                                            <Image src="/images/ieee-images/Flagships/akpessc_flagship_1770434008791.png" alt="AKPESSC" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                         </div>
-                                                        <p className="text-muted small mb-0"><i className="ri-group-line"></i> 500+
-                                                            Participants</p>
+                                                        <div className="swiper-update-body">
+                                                            <h5>AKPESSC - All Kerala Power & Energy Society Student Congress</h5>
+                                                            <p>Our premier flagship event for students across Kerala.</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            )}
                                         </div>
                                         <div className="swiper-pagination"></div>
                                         <div className="swiper-button-next"></div>
@@ -823,79 +828,58 @@ export default function Home() {
                                         <div className="dynamic-header-container">
                                             <div className="swiper header-swiper">
                                                 <div className="swiper-wrapper">
-                                                    <div className="swiper-slide header-item-slide">WOW</div>
-                                                    <div className="swiper-slide header-item-slide">Intellect</div>
-                                                    <div className="swiper-slide header-item-slide">PES Day Celebrations</div>
+                                                    {wowEvents.map((_, i) => <div className="swiper-slide header-item-slide" key={i}>WOW</div>)}
+                                                    {events.filter(e => e.tag?.toLowerCase().includes('intellect')).map((_, i) => <div className="swiper-slide header-item-slide" key={i}>Intellect</div>)}
+                                                    {events.filter(e => e.tag?.toLowerCase().includes('pes day')).map((_, i) => <div className="swiper-slide header-item-slide" key={i}>PES Day</div>)}
+                                                    {(wowEvents.length === 0 && events.filter(e => e.tag?.toLowerCase().includes('intellect')).length === 0 && events.filter(e => e.tag?.toLowerCase().includes('pes day')).length === 0) && (
+                                                        <>
+                                                            <div className="swiper-slide header-item-slide">WOW</div>
+                                                            <div className="swiper-slide header-item-slide">Intellect</div>
+                                                        </>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="swiper flagship-swiper dynamic-flagship-swiper">
                                         <div className="swiper-wrapper">
-                                            {/* WOW Group */}
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card mb-3">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Flagships/wow_flagship_1770434024340.png" alt="WOW" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h5>Women in Power - Leadership</h5>
-                                                        <div className="update-desc">
-                                                            Empowering women engineers to lead the energy transition through
-                                                            specialized workshops.
+                                            {[
+                                                ...wowEvents,
+                                                ...events.filter(e => e.tag?.toLowerCase().includes('intellect')),
+                                                ...events.filter(e => e.tag?.toLowerCase().includes('pes day'))
+                                            ].length > 0 ? [
+                                                ...wowEvents,
+                                                ...events.filter(e => e.tag?.toLowerCase().includes('intellect')),
+                                                ...events.filter(e => e.tag?.toLowerCase().includes('pes day'))
+                                            ].map((event, idx) => (
+                                                <div className="swiper-slide" key={idx}>
+                                                    <div className="swiper-update-card mb-3">
+                                                        <div className="swiper-update-img">
+                                                            <Image src={event.imageUrl || "/images/ieee-images/Flagships/wow_flagship_1770434024340.png"} alt={event.title} width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                                        </div>
+                                                        <div className="swiper-update-body">
+                                                            <h5>{event.title}</h5>
+                                                            <div className="update-desc">
+                                                                {event.description || event.details}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-body p-3">
-                                                        <h6>Tech-HER Workshop</h6>
-                                                        <p className="small text-muted mb-0">Coding and hardware session for female
-                                                            members.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* Intellect Group */}
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card mb-3">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/Flagships/intellect_flagship_1770434044351.png" alt="Intellect" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h5>State Level Quiz 2026</h5>
-                                                        <div className="update-desc">
-                                                            Our premier technical quiz challenging the brightest minds.
+                                            )) : (
+                                                <>
+                                                    <div className="swiper-slide">
+                                                        <div className="swiper-update-card mb-3">
+                                                            <div className="swiper-update-img">
+                                                                <Image src="/images/ieee-images/Flagships/wow_flagship_1770434024340.png" alt="WOW" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                                            </div>
+                                                            <div className="swiper-update-body">
+                                                                <h5>Women in Power</h5>
+                                                                <p>Empowering women engineers to lead the energy transition.</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-body p-3">
-                                                        <h6>Paper Presentations</h6>
-                                                        <p className="small text-muted mb-0">Showcase your research and innovations.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* PES Day Group */}
-                                            <div className="swiper-slide">
-                                                <div className="swiper-update-card mb-3">
-                                                    <div className="swiper-update-img">
-                                                        <Image src="/images/ieee-images/recent_1.png" alt="PES Day Celebrations" width={640} height={480} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                                    </div>
-                                                    <div className="swiper-update-body">
-                                                        <h5>PES Day Flagship Event</h5>
-                                                        <div className="update-desc">
-                                                            Celebrating global IEEE PES accomplishments in Kerala.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="swiper-update-card">
-                                                    <div className="swiper-update-body p-3">
-                                                        <h6>Green Energy Walk</h6>
-                                                        <p className="small text-muted mb-0">Public outreach for clean energy
-                                                            awareness.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                </>
+                                            )}
                                         </div>
                                         <div className="swiper-pagination"></div>
                                     </div>
@@ -922,96 +906,35 @@ export default function Home() {
                                 </Link>
                             </div>        </div>
                         <div className="row g-4">
-                            <div className="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
-                                <div className="event-card">
-                                    <div className="event-card-image">
-                                        <Image src="/images/ieee-images/Events/agm2026.png" alt="Annual General Meeting 2026" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                    </div>
-                                    <div className="event-card-body">
-                                        <div>
-                                            <span className="event-date"><i className="bi bi-calendar-check"></i> 1 Feb 2026</span>
-                                            <h3>Annual General Meeting 2026</h3>
-                                            <div className="event-desc">
-                                                ✨ Reflect. Reconnect. Reignite.✨<br /><br />
-                                                The IEEE PES Kerala Chapter warmly invites all members to be part of the Annual
-                                                General Meeting 2026 — a key milestone where we reflect on our journey,
-                                                celebrate achievements, and set the course for the year ahead.<br /><br />
-                                                📅 Date: 1st February 2026<br />
-                                                🕙 Time: 10 am<br />
-                                                📍 Venue: IEEE Kochi Section Office<br />
-                                                🔗 Register now:<br />
-                                                👉 https://tinyurl.com/ieeepeskc-agm2026<br /><br />
-                                                Your presence matters. Let’s come together to carry forward the vision, passion,
-                                                and excellence that define IEEE PES Kerala Chapter. 💚⚡<br /><br />
-                                                #IEEEPES #IEEEPESKerala #AGM2026 #PowerAndEnergy #TogetherWeLead
+                            {displayEventsCards.length > 0 ? displayEventsCards.map((event, idx) => (
+                                <div className="col-md-4 col-lg-3" key={idx} data-aos="zoom-in" data-aos-delay={(idx + 1) * 100}>
+                                    <div className="event-card">
+                                        <div className="event-card-image">
+                                            <Image src={event.imageUrl || "/images/ieee-images/Events/agm2026.png"} alt={event.title} width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        </div>
+                                        <div className="event-card-body">
+                                            <div>
+                                                <span className="event-date"><i className="bi bi-calendar-check"></i> {new Date(event.date).toLocaleDateString()}</span>
+                                                <h3>{event.title}</h3>
+                                                <div className="event-desc">
+                                                    {event.description || event.details}
+                                                </div>
+                                                <div className="read-more-btn"><i className="ri-add-line"></i> Read More Content</div>
+                                                <p className="event-venue mb-1"><i className="bi bi-geo-alt-fill"></i> {event.location || "Online"}</p>
                                             </div>
-                                            <div className="read-more-btn"><i className="ri-add-line"></i> Read More Content</div>
-                                            <p className="event-venue mb-1"><i className="bi bi-geo-alt-fill"></i> Kochi Section Office
-                                            </p>
-                                            <p className="event-venue mb-3"><i className="bi bi-clock"></i> 10:00 AM</p>
+                                            {event.link || event.url ? (
+                                                <a href={event.link || event.url} target="_blank" className="btn-register">Register Now</a>
+                                            ) : (
+                                                <Link href="/pages/upcoming-events" className="btn-register">Learn More</Link>
+                                            )}
                                         </div>
-                                        <a href="https://tinyurl.com/ieeepeskc-agm2026" target="_blank"
-                                            className="btn-register">Register Now</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-                                <div className="event-card">
-                                    <div className="event-card-image">
-                                        <Image src="/images/ieee-images/Events/pesday_event.png" alt="IEEE PES Day" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                    </div>
-                                    <div className="event-card-body">
-                                        <div>
-                                            <span className="event-date"><i className="bi bi-calendar-check"></i> 28 Feb 2026</span>
-                                            <h3>IEEE PES Day</h3>
-                                            <div className="event-desc">
-                                                Celebrating the global impact of IEEE PES! Join our chapter's flagship
-                                                celebration featuring technical workshops, student competitions, and networking
-                                                with energy professionals. ⚡🌍
-                                            </div>
-                                            <div className="read-more-btn"><i className="ri-add-line"></i> Read More Content</div>
-                                            <p className="event-venue"><i className="bi bi-geo-alt-fill"></i> IIT Palakkad</p>
-                                        </div>
-                                        <a href="#" className="btn-register">Register Now</a>
-                                    </div>
+                            )) : (
+                                <div className="col-12 text-center p-5">
+                                    <p>Check back soon for more exciting events!</p>
                                 </div>
-                            </div>
-                            <div className="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-                                <div className="event-card">
-                                    <div className="event-card-image">
-                                        <Image src="/images/ieee-images/Events/smartgrid_event.png" alt="Smart Grid Workshop" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                    </div>
-                                    <div className="event-card-body">
-                                        <div>
-                                            <span className="event-date"><i className="bi bi-calendar-check"></i> 10 Mar 2026</span>
-                                            <h3>Smart Grid Workshop</h3>
-                                            <div className="event-desc">
-                                                An intensive hands-on session focusing on Smart Grid infrastructure, IoT in
-                                                power systems, and the future of grid management. Perfect for students and
-                                                early-career engineers. 💡🏗️
-                                            </div>
-                                            <div className="read-more-btn"><i className="ri-add-line"></i> Read More Content</div>
-                                            <p className="event-venue"><i className="bi bi-geo-alt-fill"></i> NIT Calicut</p>
-                                        </div>
-                                        <a href="#" className="btn-register">Register Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-3 d-md-none d-lg-block" data-aos="zoom-in" data-aos-delay="400">
-                                <div className="event-card">
-                                    <div className="event-card-image">
-                                        <Image src="/images/ieee-images/Events/renewable_event.png" alt="Renewable Energy Webinar" width={640} height={640} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                    </div>
-                                    <div className="event-card-body">
-                                        <div>
-                                            <span className="event-date"><i className="bi bi-calendar-check"></i> 18 Mar 2026</span>
-                                            <h3>Renewable Energy Webinar</h3>
-                                            <p className="event-venue"><i className="bi bi-geo-alt-fill"></i> Online</p>
-                                        </div>
-                                        <a href="#" className="btn-register">Register Now</a>
-                                    </div>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </section>
@@ -1033,61 +956,28 @@ export default function Home() {
 
                         <div className="swiper gallery-swiper" data-aos="fade-up">
                             <div className="swiper-wrapper">
-                                {/* Slide 1 */}
-                                <div className="swiper-slide">
-                                    <div className="gallery-card">
-                                        <div className="gallery-image-wrapper">
-                                            <Image src="/images/ieee-images/Gallery/gallery_1.png" alt="Technical Talk" width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        </div>
-                                        <div className="gallery-caption">
-                                            <h3>Knowledge Sharing Sessions</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* Slide 2 */}
-                                <div className="swiper-slide">
-                                    <div className="gallery-card">
-                                        <div className="gallery-image-wrapper">
-                                            <Image src="/images/ieee-images/Gallery/gallery_2.png" alt="Workshop" width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        </div>
-                                        <div className="gallery-caption">
-                                            <h3>Hands-on Workshops</h3>
+                                {gallery.length > 0 ? gallery.map((item, idx) => (
+                                    <div className="swiper-slide" key={idx}>
+                                        <div className="gallery-card">
+                                            <div className="gallery-image-wrapper">
+                                                <Image src={item.imageUrl || "/images/ieee-images/Gallery/gallery_1.png"} alt={item.title || "Gallery Image"} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                            </div>
+                                            <div className="gallery-caption">
+                                                <h3>{item.title || item.category || "Chapter Event"}</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                {/* Slide 3 */}
-                                <div className="swiper-slide">
-                                    <div className="gallery-card">
-                                        <div className="gallery-image-wrapper">
-                                            <Image src="/images/ieee-images/Gallery/gallery_3.png" alt="Volunteer Meet" width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                )) : (
+                                    [1, 2, 3, 4].map((i) => (
+                                        <div className="swiper-slide" key={i}>
+                                            <div className="gallery-card">
+                                                <div className="gallery-image-wrapper">
+                                                    <Image src={`/images/ieee-images/Gallery/gallery_${i}.png`} alt="Gallery" width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="gallery-caption">
-                                            <h3>Volunteer Gatherings</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* Slide 4 */}
-                                <div className="swiper-slide">
-                                    <div className="gallery-card">
-                                        <div className="gallery-image-wrapper">
-                                            <Image src="/images/ieee-images/Gallery/gallery_4.png" alt="Industrial Visit" width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        </div>
-                                        <div className="gallery-caption">
-                                            <h3>Industrial Visits</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* Slide 5 (Repeat or more if needed) */}
-                                <div className="swiper-slide">
-                                    <div className="gallery-card">
-                                        <div className="gallery-image-wrapper">
-                                            <Image src="/images/ieee-images/Gallery/gallery_1.png" alt="Seminar" width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        </div>
-                                        <div className="gallery-caption">
-                                            <h3>Annual General Meetings</h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                    ))
+                                )}
                             </div>
                             {/* Add Pagination */}
                             <div className="swiper-pagination"></div>

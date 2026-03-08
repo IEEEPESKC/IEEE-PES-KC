@@ -1,5 +1,5 @@
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 
 export const metadata = {
     title: 'Resources | IEEE PES Kerala Chapter',
@@ -56,23 +56,8 @@ export default function ResourcesPage() {
 
             <section className="section-padding">
                 <div className="container">
-                    <div className="section-header mb-5">
-                        <span className="section-badge">Resources</span>
-                        <h2 className="section-title mt-3">Technical Resources & Learning</h2>
-                        <p className="section-desc">A curated collection of resources for students, professionals, and researchers in the power engineering domain.</p>
-                    </div>
 
-                    {/* IEEE Xplore CTA */}
-                    <div className="cta-content-wrapper mb-5" style={{ borderRadius: 24 }}>
-                        <div className="cta-text">
-                            <span className="cta-badge">IEEE Xplore</span>
-                            <h3>Access 5M+ Technical Documents</h3>
-                            <p>As an IEEE member, you get access to the world&apos;s largest digital library of engineering knowledge.</p>
-                        </div>
-                        <div className="cta-actions">
-                            <a href="https://ieeexplore.ieee.org/" target="_blank" rel="noreferrer" className="btn-cta-primary">Open IEEE Xplore <i className="ri-external-link-line"></i></a>
-                        </div>
-                    </div>
+
 
                     <div className="row g-4">
                         {resources.map((cat, i) => (

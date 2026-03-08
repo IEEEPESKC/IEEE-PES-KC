@@ -19,9 +19,14 @@ export default function ExecomAdmin() {
 
     // Grouping logic
     const groupedMembers = members.reduce((acc, member) => {
+        const status = member.status === 'past' ? 'past' : 'current';
+        const year = member.year || 'Unknown Year';
         const cat = member.category || 'Uncategorized';
-        if (!acc[cat]) acc[cat] = [];
-        acc[cat].push(member);
+
+        const groupKey = status === 'past' ? `Past: ${year} - ${cat}` : `Current - ${cat}`;
+
+        if (!acc[groupKey]) acc[groupKey] = [];
+        acc[groupKey].push(member);
         return acc;
     }, {});
 
@@ -98,6 +103,17 @@ export default function ExecomAdmin() {
                                 <option value="gsac">GSAC</option>
                                 <option value="yp">YP</option>
                             </select>
+                        </div>
+                        <div className="admin-form-group">
+                            <label>Status (Current/Past)</label>
+                            <select name="status" defaultValue={selectedItem?.status || 'current'} className="admin-form-control" required>
+                                <option value="current">Current</option>
+                                <option value="past">Past</option>
+                            </select>
+                        </div>
+                        <div className="admin-form-group">
+                            <label>Year (e.g., 2025-2026)</label>
+                            <input type="text" name="year" defaultValue={selectedItem?.year || '2025-2026'} className="admin-form-control" placeholder="2025-2026" required />
                         </div>
                         <div className="admin-form-group">
                             <label>Profile Image</label>

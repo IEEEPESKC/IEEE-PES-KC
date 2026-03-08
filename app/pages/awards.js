@@ -1,54 +1,34 @@
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
-
-export const metadata = {
-    title: 'Awards | IEEE PES Kerala Chapter',
-    description: 'Awards and recognition programs by IEEE PES Kerala Chapter.',
-};
-
-const awards = [
-    {
-        icon: 'ri-medal-line',
-        title: 'Outstanding Professional Award',
-        desc: 'Recognizes IEEE PES members who have demonstrated exceptional professional contributions to the power and energy sector in Kerala.',
-        eligibility: 'Senior IEEE PES Members',
-        freq: 'Annual',
-    },
-    {
-        icon: 'ri-trophy-line',
-        title: 'Best Student Branch Chapter Award',
-        desc: 'Presented to the student branch chapter that has shown outstanding performance in technical activities, membership growth, and community impact.',
-        eligibility: 'All Student Branches',
-        freq: 'Annual',
-    },
-    {
-        icon: 'ri-star-line',
-        title: 'Best Student Volunteer Award',
-        desc: 'Recognizes a student member who has gone above and beyond in volunteering and contributing to the chapter&apos;s activities.',
-        eligibility: 'IEEE PES Student Members',
-        freq: 'Annual',
-    },
-    {
-        icon: 'ri-lightbulb-line',
-        title: 'Best Technical Paper Award',
-        desc: 'Awarded to the best research paper presented at AKPESSC or other chapter-organized conferences.',
-        eligibility: 'Student Presenters',
-        freq: 'Per Event',
-    },
-    {
-        icon: 'ri-user-star-line',
-        title: 'Young Professional Award',
-        desc: 'Acknowledges the remarkable contributions of young IEEE PES members (≤ 35 years) to the engineering community.',
-        eligibility: 'Young Professionals ≤ 35 yrs',
-        freq: 'Annual',
-    },
-];
+'use client';
+import { useState, useEffect } from 'react';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 
 export default function AwardsPage() {
+    const [awards, setAwards] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/admin');
+                const result = await response.json();
+                if (result.success && result.data && result.data.awards) {
+                    setAwards(result.data.awards);
+                }
+            } catch (error) {
+                console.error("Error fetching awards data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <PageLayout>
             <PageBanner
-                title="Awards &amp; Recognition"
+                title="Awards & Recognition"
                 subtitle="Excellence Matters"
                 breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Activities' }, { label: 'Awards' }]}
             />
@@ -73,29 +53,41 @@ export default function AwardsPage() {
                         </div>
                     </div>
 
-                    <div className="row g-4">
-                        {awards.map((a, i) => (
-                            <div key={i} className="col-md-6">
-                                <div className="update-box d-flex gap-4" style={{ alignItems: 'flex-start' }}>
-                                    <div className="icon-box flex-shrink-0" style={{ width: 60, height: 60, fontSize: 26, borderRadius: 16 }}>
-                                        <i className={a.icon}></i>
-                                    </div>
-                                    <div>
-                                        <h4 style={{ color: 'var(--header-color)', marginBottom: 8 }}>{a.title}</h4>
-                                        <p style={{ color: '#666', fontSize: 15, marginBottom: 12 }}>{a.desc}</p>
-                                        <div className="d-flex gap-3 flex-wrap">
-                                            <span style={{ background: '#f0f0f0', borderRadius: 50, padding: '4px 14px', fontSize: 12, fontWeight: 600 }}>
-                                                <i className="ri-group-line me-1"></i>{a.eligibility}
-                                            </span>
-                                            <span style={{ background: 'rgba(8,145,38,0.08)', color: 'var(--pes-green)', borderRadius: 50, padding: '4px 14px', fontSize: 12, fontWeight: 600 }}>
-                                                <i className="ri-calendar-line me-1"></i>{a.freq}
-                                            </span>
+                    {isLoading ? (
+                        <div className="text-center py-5">
+                            <div className="spinner-border text-success" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="row g-4">
+                            {awards.length > 0 ? awards.map((a, i) => (
+                                <div key={i} className="col-md-6">
+                                    <div className="update-box d-flex gap-4" style={{ alignItems: 'flex-start' }}>
+                                        <div className="icon-box flex-shrink-0" style={{ width: 60, height: 60, fontSize: 26, borderRadius: 16 }}>
+                                            <i className={a.icon || 'ri-medal-line'}></i>
+                                        </div>
+                                        <div>
+                                            <h4 style={{ color: 'var(--header-color)', marginBottom: 8 }}>{a.name || a.title}</h4>
+                                            <p style={{ color: '#666', fontSize: 15, marginBottom: 12 }}>{a.desc || a.description}</p>
+                                            <div className="d-flex gap-3 flex-wrap">
+                                                <span style={{ background: '#f0f0f0', borderRadius: 50, padding: '4px 14px', fontSize: 12, fontWeight: 600 }}>
+                                                    <i className="ri-group-line me-1"></i>{a.eligibility || 'All Members'}
+                                                </span>
+                                                <span style={{ background: 'rgba(8,145,38,0.08)', color: 'var(--pes-green)', borderRadius: 50, padding: '4px 14px', fontSize: 12, fontWeight: 600 }}>
+                                                    <i className="ri-calendar-line me-1"></i>{a.freq || 'Annual'}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            )) : (
+                                <div className="col-12 text-center py-5">
+                                    <p className="text-muted">No awards available currently.</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             </section>
         </PageLayout>

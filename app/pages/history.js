@@ -1,5 +1,5 @@
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 
 export const metadata = {
     title: 'History | IEEE PES Kerala Chapter',

@@ -66,10 +66,10 @@ export default function AdminSidebar() {
     return (
         <>
             <div className="admin-sidebar">
-                <div className="admin-brand">
+                <Link href="/" className="admin-brand" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                     <h2>IEEE PES</h2>
                     <p>Kerala Chapter</p>
-                </div>
+                </Link>
 
                 <nav className="admin-nav">
                     {navItems.map((item) => (

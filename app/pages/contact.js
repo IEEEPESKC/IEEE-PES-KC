@@ -1,6 +1,6 @@
 'use client';
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 import { useState } from 'react';
 
 export default function ContactPage() {

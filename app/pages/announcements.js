@@ -1,5 +1,5 @@
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 import Link from 'next/link';
 
 export const metadata = {

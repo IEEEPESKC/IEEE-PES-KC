@@ -1,72 +1,128 @@
-import PageLayout from '../../components/PageLayout';
-import PageBanner from '../../components/PageBanner';
-
-export const metadata = {
-    title: 'Newsletters | IEEE PES Kerala Chapter',
-    description: 'IEEE PES Kerala Chapter newsletters and publications.',
-};
-
-const newsletters = [
-    { title: 'PES Kerala Newsletter – Q4 2025', date: 'Dec 2025', desc: 'Year-end edition covering AKPESSC 2025, WoW program highlights, and the upcoming AGM 2026.', size: '2.4 MB' },
-    { title: 'PES Kerala Newsletter – Q3 2025', date: 'Sep 2025', desc: 'Special focus on renewable energy initiatives and Intellect 2025 quiz results.', size: '1.9 MB' },
-    { title: 'PES Kerala Newsletter – Q2 2025', date: 'Jun 2025', desc: 'PES Day 2025 celebrations, Smart Grid workshop coverage, and member spotlights.', size: '2.1 MB' },
-    { title: 'PES Kerala Newsletter – Q1 2025', date: 'Mar 2025', desc: 'AGM 2025 recap, new execom introduction, and plans for the year ahead.', size: '1.7 MB' },
-    { title: 'PES Kerala Newsletter – Q4 2024', date: 'Dec 2024', desc: 'Annual report, chapter achievements, and milestones of 2024.', size: '3.2 MB' },
-    { title: 'PES Kerala Newsletter – Q3 2024', date: 'Sep 2024', desc: 'Mid-year roundup of events and chapter highlights.', size: '2.0 MB' },
-];
+'use client';
+import { useState, useEffect } from 'react';
+import PageLayout from '../components/PageLayout';
+import PageBanner from '../components/PageBanner';
 
 export default function NewslettersPage() {
+    const [newsletters, setNewsletters] = useState([]);
+    const [magazines, setMagazines] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/admin');
+                const result = await response.json();
+                if (result.success && result.data) {
+                    if (result.data.newsletters) setNewsletters(result.data.newsletters);
+                    if (result.data.magazines) setMagazines(result.data.magazines);
+                }
+            } catch (error) {
+                console.error("Error fetching publications data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const renderPublicationCard = (item, iconClass = "ri-file-text-line") => (
+        <div className="col-md-6" key={item.id || item.title}>
+            <div className="update-box d-flex gap-4 align-items-start">
+                <div className="icon-box flex-shrink-0" style={{ width: 56, height: 56, borderRadius: 16, fontSize: 24, overflow: 'hidden', padding: item.imageUrl ? 0 : '', background: item.imageUrl ? '#fff' : '' }}>
+                    {item.imageUrl ? (
+                        <img src={item.imageUrl} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                        <i className={iconClass}></i>
+                    )}
+                </div>
+                <div className="flex-grow-1">
+                    <div className="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+                        <h4 style={{ fontSize: '1rem', color: 'var(--header-color)', marginBottom: 6 }}>{item.title}</h4>
+                        <span style={{ background: 'rgba(8,145,38,0.08)', color: 'var(--pes-green)', borderRadius: 50, padding: '3px 12px', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>
+                            {item.date || item.month || 'Published'}
+                        </span>
+                    </div>
+                    <p style={{ color: '#666', fontSize: 14, marginBottom: 12 }}>{item.desc || item.description}</p>
+                    <div className="d-flex gap-3 align-items-center">
+                        <span style={{ color: '#999', fontSize: 13 }}><i className="ri-file-pdf-line me-1"></i>PDF</span>
+                        {item.pdfUrl ? (
+                            <a href={item.pdfUrl} target="_blank" rel="noreferrer" className="btn-view-all" style={{ padding: '6px 16px', fontSize: 12 }}>
+                                Download <i className="ri-download-line"></i>
+                            </a>
+                        ) : (
+                            <span className="btn-view-all" style={{ padding: '6px 16px', fontSize: 12, opacity: 0.5, cursor: 'not-allowed' }}>
+                                Not Available
+                            </span>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
     return (
         <PageLayout>
             <PageBanner
-                title="Newsletters"
+                title="Publications"
                 subtitle="Stay Informed"
-                breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Newsletters' }]}
+                breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Publications' }]}
             />
 
             <section className="section-padding">
                 <div className="container">
-                    <div className="section-header mb-5">
-                        <span className="section-badge">Publications</span>
-                        <h2 className="section-title mt-3">Chapter Newsletters</h2>
-                        <p className="section-desc">Stay updated with our quarterly newsletters covering events, achievements, and technical insights.</p>
-                    </div>
+
+                    {isLoading ? (
+                        <div className="text-center py-5">
+                            <div className="spinner-border text-success" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            {/* Newsletters Section */}
+                            <div className="section-header mb-5">
+                                <span className="section-badge">Newsletters</span>
+                                <h2 className="section-title mt-3">Chapter Newsletters</h2>
+                                <p className="section-desc">Stay updated with our newsletters covering events, achievements, and technical insights.</p>
+                            </div>
+
+                            <div className="row g-4 mb-5 pb-4 border-bottom">
+                                {newsletters.length > 0 ? newsletters.map((n) => renderPublicationCard(n, 'ri-file-text-line')) : (
+                                    <div className="col-12 text-center py-4">
+                                        <p className="text-muted">No newsletters available currently.</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Magazines Section */}
+                            <div className="section-header mb-5 mt-5">
+                                <span className="section-badge">Magazines</span>
+                                <h2 className="section-title mt-3">Chapter Magazines</h2>
+                                <p className="section-desc">Deep dives into technical topics and comprehensive chapter reports in our magazines.</p>
+                            </div>
+
+                            <div className="row g-4 mb-5">
+                                {magazines.length > 0 ? magazines.map((m) => renderPublicationCard(m, 'ri-book-read-line')) : (
+                                    <div className="col-12 text-center py-4">
+                                        <p className="text-muted">No magazines available currently.</p>
+                                    </div>
+                                )}
+                            </div>
+                        </>
+                    )}
 
                     {/* Subscribe CTA */}
                     <div className="cta-content-wrapper mb-5" style={{ borderRadius: 24 }}>
                         <div className="cta-text">
                             <span className="cta-badge">Subscribe</span>
-                            <h3>Get Newsletters in Your Inbox</h3>
-                            <p>Never miss an edition. Subscribe to receive new newsletters directly by email.</p>
+                            <h3>Get Publications in Your Inbox</h3>
+                            <p>Never miss an edition. Subscribe to receive new newsletters and magazines directly by email.</p>
                         </div>
                         <div className="cta-actions">
-                            <a href="mailto:ieeepes.kerala@ieee.org?subject=Newsletter Subscription" className="btn-cta-primary">Subscribe <i className="ri-mail-send-line"></i></a>
+                            <a href="mailto:ieeepes.kerala@ieee.org?subject=Publication Subscription" className="btn-cta-primary">Subscribe <i className="ri-mail-send-line"></i></a>
                         </div>
-                    </div>
-
-                    <div className="row g-4">
-                        {newsletters.map((n, i) => (
-                            <div key={i} className="col-md-6">
-                                <div className="update-box d-flex gap-4 align-items-start">
-                                    <div className="icon-box flex-shrink-0" style={{ width: 56, height: 56, borderRadius: 16, fontSize: 24 }}>
-                                        <i className="ri-file-text-line"></i>
-                                    </div>
-                                    <div className="flex-grow-1">
-                                        <div className="d-flex justify-content-between align-items-start gap-2 flex-wrap">
-                                            <h4 style={{ fontSize: '1rem', color: 'var(--header-color)', marginBottom: 6 }}>{n.title}</h4>
-                                            <span style={{ background: 'rgba(8,145,38,0.08)', color: 'var(--pes-green)', borderRadius: 50, padding: '3px 12px', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{n.date}</span>
-                                        </div>
-                                        <p style={{ color: '#666', fontSize: 14, marginBottom: 12 }}>{n.desc}</p>
-                                        <div className="d-flex gap-3 align-items-center">
-                                            <span style={{ color: '#999', fontSize: 13 }}><i className="ri-file-download-line me-1"></i>{n.size}</span>
-                                            <a href="#" className="btn-view-all" style={{ padding: '6px 16px', fontSize: 12 }}>
-                                                Download PDF <i className="ri-download-line"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </section>

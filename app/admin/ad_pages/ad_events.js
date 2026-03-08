@@ -29,6 +29,22 @@ export default function EventsAdmin() {
         }
     }, [selectedItem]);
 
+    const getEventStatus = (dateString) => {
+        if (!dateString) return { text: 'Date TBD', class: '' };
+        const eventDate = new Date(dateString);
+        eventDate.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (eventDate > today) return { text: 'Upcoming', class: 'success' };
+
+        const diffTime = Math.abs(today - eventDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays <= 30) return { text: 'Recent', class: 'warning' };
+        return { text: 'Past', class: 'danger' };
+    };
+
     return (
         <>
             <div className="admin-header">
@@ -47,34 +63,37 @@ export default function EventsAdmin() {
             </div>
 
             <div className="admin-list">
-                {events.map((event, index) => (
-                    <div className="admin-card" key={index}>
-                        <div className="admin-card-content">
-                            {event.imageUrl ? (
-                                <img src={event.imageUrl} alt={event.title} className="admin-list-image" />
-                            ) : (
-                                <div className="admin-list-image" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <i className="ri-image-line" style={{ color: '#888', fontSize: '1.5rem' }}></i>
-                                </div>
-                            )}
-                            <div className="admin-card-info">
-                                <h3>
-                                    {event.title}
-                                    <span className="admin-badge">{event.status}</span>
-                                </h3>
-                                <div className="admin-card-meta">
-                                    <span><i className="ri-calendar-line"></i> {event.date}</span>
-                                    <span><i className="ri-map-pin-line"></i> {event.location}</span>
-                                    <span><i className="ri-price-tag-3-line"></i> {event.tag}</span>
+                {events.map((event, index) => {
+                    const status = getEventStatus(event.date);
+                    return (
+                        <div className="admin-card" key={index}>
+                            <div className="admin-card-content">
+                                {event.imageUrl ? (
+                                    <img src={event.imageUrl} alt={event.title} className="admin-list-image" />
+                                ) : (
+                                    <div className="admin-list-image" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <i className="ri-image-line" style={{ color: '#888', fontSize: '1.5rem' }}></i>
+                                    </div>
+                                )}
+                                <div className="admin-card-info">
+                                    <h3>
+                                        {event.title}
+                                        <span className={`admin-badge ${status.class}`}>{status.text}</span>
+                                    </h3>
+                                    <div className="admin-card-meta">
+                                        <span><i className="ri-calendar-line"></i> {event.date}</span>
+                                        <span><i className="ri-map-pin-line"></i> {event.location}</span>
+                                        <span><i className="ri-price-tag-3-line"></i> {event.tag}</span>
+                                    </div>
                                 </div>
                             </div>
+                            <div className="admin-card-actions">
+                                <button className="admin-btn-text" onClick={() => { setSelectedItem(event); setIsModalOpen(true); }}>Edit</button>
+                                <button className="admin-btn-text" style={{ color: '#dc3545' }} onClick={() => handleDelete(index, event.id)}>Delete</button>
+                            </div>
                         </div>
-                        <div className="admin-card-actions">
-                            <button className="admin-btn-text" onClick={() => { setSelectedItem(event); setIsModalOpen(true); }}>Edit</button>
-                            <button className="admin-btn-text" style={{ color: '#dc3545' }} onClick={() => handleDelete(index, event.id)}>Delete</button>
-                        </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
 
             <div className={`admin-sidepanel-overlay ${isModalOpen ? 'active' : ''}`} onClick={() => setIsModalOpen(false)}>
