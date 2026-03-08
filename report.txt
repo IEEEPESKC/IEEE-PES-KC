@@ -1,1 +1,369 @@
-gokul is not great 
+2026-03-08T10:34:57.345Z	Initializing build environment...
+2026-03-08T10:34:59.324Z	Success: Finished initializing build environment
+2026-03-08T10:34:59.803Z	Cloning repository...
+2026-03-08T10:35:01.872Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2026-03-08T10:35:01.873Z	Restoring from dependencies cache
+2026-03-08T10:35:01.876Z	Restoring from build output cache
+2026-03-08T10:35:01.996Z	Installing project dependencies: npm clean-install --progress=false
+2026-03-08T10:35:12.990Z	
+2026-03-08T10:35:12.993Z	added 343 packages, and audited 344 packages in 11s
+2026-03-08T10:35:12.994Z	
+2026-03-08T10:35:12.994Z	140 packages are looking for funding
+2026-03-08T10:35:12.994Z	  run `npm fund` for details
+2026-03-08T10:35:13.005Z	
+2026-03-08T10:35:13.005Z	3 vulnerabilities (1 moderate, 1 high, 1 critical)
+2026-03-08T10:35:13.005Z	
+2026-03-08T10:35:13.005Z	To address all issues, run:
+2026-03-08T10:35:13.005Z	  npm audit fix
+2026-03-08T10:35:13.005Z	
+2026-03-08T10:35:13.005Z	Run `npm audit` for details.
+2026-03-08T10:35:13.185Z	Executing user build command: npm run build
+2026-03-08T10:35:13.427Z	
+2026-03-08T10:35:13.427Z	> ieee-pes-kerala@0.1.0 build
+2026-03-08T10:35:13.427Z	> next build
+2026-03-08T10:35:13.427Z	
+2026-03-08T10:35:14.009Z	⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-03-08T10:35:14.010Z	Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-03-08T10:35:14.011Z	This information is used to shape Next.js' roadmap and prioritize features.
+2026-03-08T10:35:14.011Z	You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-03-08T10:35:14.011Z	https://nextjs.org/telemetry
+2026-03-08T10:35:14.011Z	
+2026-03-08T10:35:14.034Z	▲ Next.js 16.1.6 (Turbopack)
+2026-03-08T10:35:14.034Z	
+2026-03-08T10:35:14.090Z	  Creating an optimized production build ...
+2026-03-08T10:35:19.121Z	✓ Compiled successfully in 4.7s
+2026-03-08T10:35:19.121Z	  Running TypeScript ...
+2026-03-08T10:35:19.321Z	  Collecting page data using 1 worker ...
+2026-03-08T10:35:19.730Z	  Generating static pages using 1 worker (0/3) ...
+2026-03-08T10:35:19.897Z	✓ Generating static pages using 1 worker (3/3) in 167.0ms
+2026-03-08T10:35:19.902Z	  Finalizing page optimization ...
+2026-03-08T10:35:19.913Z	
+2026-03-08T10:35:19.915Z	Route (app)
+2026-03-08T10:35:19.917Z	┌ ○ /
+2026-03-08T10:35:19.917Z	└ ○ /_not-found
+2026-03-08T10:35:19.917Z	
+2026-03-08T10:35:19.917Z	
+2026-03-08T10:35:19.917Z	○  (Static)  prerendered as static content
+2026-03-08T10:35:19.918Z	
+2026-03-08T10:35:20.011Z	Success: Build command completed
+2026-03-08T10:35:20.193Z	Executing user deploy command: npx wrangler deploy
+2026-03-08T10:35:21.308Z	npm warn exec The following package was not found and will be installed: wrangler@4.71.0
+2026-03-08T10:35:29.425Z	
+2026-03-08T10:35:29.425Z	 ⛅️ wrangler 4.71.0
+2026-03-08T10:35:29.425Z	───────────────────
+2026-03-08T10:35:29.565Z	
+2026-03-08T10:35:29.565Z	Detected Project Settings:
+2026-03-08T10:35:29.565Z	 - Worker Name: ieeepeskc
+2026-03-08T10:35:29.565Z	 - Framework: Next.js
+2026-03-08T10:35:29.565Z	 - Build Command: npm run build
+2026-03-08T10:35:29.565Z	 - Output Directory: .next
+2026-03-08T10:35:29.566Z	
+2026-03-08T10:35:29.566Z	? Do you want to modify these settings?
+2026-03-08T10:35:29.566Z	🤖 Using fallback value in non-interactive context: no
+2026-03-08T10:35:29.568Z	
+2026-03-08T10:35:29.568Z	📦 Install packages:
+2026-03-08T10:35:29.572Z	 - wrangler (devDependency)
+2026-03-08T10:35:29.572Z	
+2026-03-08T10:35:29.572Z	📝 Update package.json scripts:
+2026-03-08T10:35:29.575Z	 - "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+2026-03-08T10:35:29.576Z	 - "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+2026-03-08T10:35:29.577Z	
+2026-03-08T10:35:29.577Z	📄 Create wrangler.jsonc:
+2026-03-08T10:35:29.577Z	  {
+2026-03-08T10:35:29.577Z	    "$schema": "node_modules/wrangler/config-schema.json",
+2026-03-08T10:35:29.577Z	    "name": "ieeepeskc",
+2026-03-08T10:35:29.577Z	    "compatibility_date": "2025-09-27",
+2026-03-08T10:35:29.577Z	    "observability": {
+2026-03-08T10:35:29.577Z	      "enabled": true
+2026-03-08T10:35:29.577Z	    },
+2026-03-08T10:35:29.578Z	    "compatibility_flags": [
+2026-03-08T10:35:29.581Z	      "nodejs_compat"
+2026-03-08T10:35:29.581Z	    ]
+2026-03-08T10:35:29.581Z	  }
+2026-03-08T10:35:29.581Z	
+2026-03-08T10:35:29.581Z	🛠️  Configuring project for Next.js with OpenNext by running `@opennextjs/cloudflare migrate`
+2026-03-08T10:35:29.581Z	
+2026-03-08T10:35:29.581Z	? Proceed with setup?
+2026-03-08T10:35:29.581Z	🤖 Using fallback value in non-interactive context: yes
+2026-03-08T10:35:34.154Z	npm warn exec The following package was not found and will be installed: @opennextjs/cloudflare@1.17.1
+2026-03-08T10:35:51.966Z	npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+2026-03-08T10:35:52.651Z	npm warn deprecated glob@9.3.5: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-03-08T10:36:01.612Z	
+2026-03-08T10:36:01.612Z	┌───────────────────────────────┐
+2026-03-08T10:36:01.612Z	│ OpenNext — Cloudflare migrate │
+2026-03-08T10:36:01.612Z	└───────────────────────────────┘
+2026-03-08T10:36:01.612Z	
+2026-03-08T10:36:01.612Z	🚀 Setting up the OpenNext Cloudflare adapter...
+2026-03-08T10:36:01.612Z	
+2026-03-08T10:36:01.620Z	⚙️  Installing dependencies...
+2026-03-08T10:36:01.621Z	
+2026-03-08T10:36:01.776Z	npm warn using --force Recommended protections disabled.
+2026-03-08T10:36:07.683Z	npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+2026-03-08T10:36:07.981Z	npm warn deprecated glob@9.3.5: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-03-08T10:36:10.346Z	
+2026-03-08T10:36:10.346Z	added 273 packages, and audited 644 packages in 9s
+2026-03-08T10:36:10.347Z	
+2026-03-08T10:36:10.347Z	187 packages are looking for funding
+2026-03-08T10:36:10.347Z	  run `npm fund` for details
+2026-03-08T10:36:10.351Z	
+2026-03-08T10:36:10.352Z	3 vulnerabilities (1 moderate, 1 high, 1 critical)
+2026-03-08T10:36:10.352Z	
+2026-03-08T10:36:10.352Z	To address all issues, run:
+2026-03-08T10:36:10.352Z	  npm audit fix
+2026-03-08T10:36:10.354Z	
+2026-03-08T10:36:10.355Z	Run `npm audit` for details.
+2026-03-08T10:36:10.532Z	npm warn using --force Recommended protections disabled.
+2026-03-08T10:36:12.514Z	
+2026-03-08T10:36:12.514Z	added 1 package, and audited 645 packages in 2s
+2026-03-08T10:36:12.517Z	
+2026-03-08T10:36:12.517Z	187 packages are looking for funding
+2026-03-08T10:36:12.517Z	  run `npm fund` for details
+2026-03-08T10:36:12.520Z	
+2026-03-08T10:36:12.520Z	3 vulnerabilities (1 moderate, 1 high, 1 critical)
+2026-03-08T10:36:12.520Z	
+2026-03-08T10:36:12.520Z	To address all issues, run:
+2026-03-08T10:36:12.521Z	  npm audit fix
+2026-03-08T10:36:12.522Z	
+2026-03-08T10:36:12.522Z	Run `npm audit` for details.
+2026-03-08T10:36:12.543Z	⚙️  Creating wrangler.jsonc...
+2026-03-08T10:36:12.543Z	
+2026-03-08T10:36:14.396Z	⚙️  Creating open-next.config.ts...
+2026-03-08T10:36:14.396Z	
+2026-03-08T10:36:14.396Z	⚙️  Creating .dev.vars file...
+2026-03-08T10:36:14.396Z	
+2026-03-08T10:36:14.397Z	⚙️  Creating public/_headers file...
+2026-03-08T10:36:14.397Z	
+2026-03-08T10:36:14.397Z	⚙️  Updating package.json scripts...
+2026-03-08T10:36:14.397Z	
+2026-03-08T10:36:14.397Z	⚙️  Updating .gitignore file...
+2026-03-08T10:36:14.398Z	
+2026-03-08T10:36:14.398Z	⚙️  Updating Next.js config...
+2026-03-08T10:36:14.398Z	
+2026-03-08T10:36:14.398Z	⚙️  Checking for edge runtime usage...
+2026-03-08T10:36:14.398Z	
+2026-03-08T10:36:14.406Z	🎉 OpenNext Cloudflare adapter complete!
+2026-03-08T10:36:14.406Z	
+2026-03-08T10:36:14.406Z	Next steps:
+2026-03-08T10:36:14.406Z	- Run: "npm run preview" to build and preview your Cloudflare application locally
+2026-03-08T10:36:14.407Z	- Run: "npm run deploy" to deploy your application to Cloudflare Workers
+2026-03-08T10:36:14.407Z	
+2026-03-08T10:36:14.520Z	├ Adding Wrangler files to the .gitignore file
+2026-03-08T10:36:14.520Z	│ updated .gitignore file
+2026-03-08T10:36:14.521Z	│
+2026-03-08T10:36:14.521Z	[build] Running: npx opennextjs-cloudflare build
+2026-03-08T10:36:16.431Z	[build] 
+2026-03-08T10:36:16.431Z	[build] ┌─────────────────────────────┐
+2026-03-08T10:36:16.431Z	[build] │ OpenNext — Cloudflare build │
+2026-03-08T10:36:16.431Z	[build] └─────────────────────────────┘
+2026-03-08T10:36:16.431Z	[build] 
+2026-03-08T10:36:16.432Z	[build] 
+2026-03-08T10:36:16.550Z	[build] App directory: /opt/buildhome/repo
+2026-03-08T10:36:16.550Z	[build] 
+2026-03-08T10:36:16.550Z	[build] Next.js version : 16.1.6
+2026-03-08T10:36:16.550Z	[build] 
+2026-03-08T10:36:16.553Z	[build] @opennextjs/cloudflare version: 1.17.1
+2026-03-08T10:36:16.554Z	[build] 
+2026-03-08T10:36:16.555Z	[build] @opennextjs/aws version: 3.9.16
+2026-03-08T10:36:16.555Z	[build] 
+2026-03-08T10:36:16.558Z	[build] 
+2026-03-08T10:36:16.558Z	[build] ┌─────────────────────────────────┐
+2026-03-08T10:36:16.558Z	[build] │ OpenNext — Building Next.js app │
+2026-03-08T10:36:16.559Z	[build] └─────────────────────────────────┘
+2026-03-08T10:36:16.559Z	[build] 
+2026-03-08T10:36:16.559Z	[build] 
+2026-03-08T10:36:16.703Z	[build] 
+2026-03-08T10:36:16.704Z	[build] > ieee-pes-kerala@0.1.0 build
+2026-03-08T10:36:16.704Z	[build] > next build
+2026-03-08T10:36:16.704Z	[build] 
+2026-03-08T10:36:16.704Z	[build] 
+2026-03-08T10:36:17.345Z	[build] ▲ Next.js 16.1.6 (Turbopack)
+2026-03-08T10:36:17.346Z	[build] 
+2026-03-08T10:36:17.346Z	[build] 
+2026-03-08T10:36:17.346Z	[build] 
+2026-03-08T10:36:18.344Z	[build] Using secrets defined in .dev.vars
+2026-03-08T10:36:18.345Z	[build] 
+2026-03-08T10:36:18.373Z	[build]   Creating an optimized production build ...
+2026-03-08T10:36:18.373Z	[build] 
+2026-03-08T10:36:19.670Z	[build] Using secrets defined in .dev.vars
+2026-03-08T10:36:19.670Z	[build] 
+2026-03-08T10:36:28.045Z	[build] ✓ Compiled successfully in 9.2s
+2026-03-08T10:36:28.045Z	[build] 
+2026-03-08T10:36:28.055Z	[build]   Running TypeScript ...
+2026-03-08T10:36:28.057Z	[build] 
+2026-03-08T10:36:28.273Z	[build]   Collecting page data using 1 worker ...
+2026-03-08T10:36:28.274Z	[build] 
+2026-03-08T10:36:28.937Z	[build]   Generating static pages using 1 worker (0/3) ...
+2026-03-08T10:36:28.937Z	[build] 
+2026-03-08T10:36:29.122Z	[build] ✓ Generating static pages using 1 worker (3/3) in 186.9ms
+2026-03-08T10:36:29.123Z	[build] 
+2026-03-08T10:36:29.131Z	[build]   Finalizing page optimization ...
+2026-03-08T10:36:29.131Z	[build] 
+2026-03-08T10:36:29.690Z	[build] 
+2026-03-08T10:36:29.690Z	[build] Route (app)
+2026-03-08T10:36:29.690Z	[build] ┌ ○ /
+2026-03-08T10:36:29.690Z	[build] └ ○ /_not-found
+2026-03-08T10:36:29.690Z	[build] 
+2026-03-08T10:36:29.690Z	[build] 
+2026-03-08T10:36:29.691Z	[build] ○  (Static)  prerendered as static content
+2026-03-08T10:36:29.691Z	[build] 
+2026-03-08T10:36:29.691Z	[build] 
+2026-03-08T10:36:29.782Z	[build] 
+2026-03-08T10:36:29.784Z	[build] ┌──────────────────────────────┐
+2026-03-08T10:36:29.785Z	[build] │ OpenNext — Generating bundle │
+2026-03-08T10:36:29.785Z	[build] └──────────────────────────────┘
+2026-03-08T10:36:29.785Z	[build] 
+2026-03-08T10:36:29.785Z	[build] 
+2026-03-08T10:36:29.835Z	[build] Bundling middleware function...
+2026-03-08T10:36:29.835Z	[build] 
+2026-03-08T10:36:29.881Z	[build] Bundling static assets...
+2026-03-08T10:36:29.882Z	[build] 
+2026-03-08T10:36:29.960Z	[build] Bundling cache assets...
+2026-03-08T10:36:29.961Z	[build] 
+2026-03-08T10:36:29.969Z	[build] Building server function: default...
+2026-03-08T10:36:29.970Z	[build] 
+2026-03-08T10:36:32.737Z	[build] Applying code patches: 2.457s
+2026-03-08T10:36:32.737Z	[build] 
+2026-03-08T10:36:33.176Z	[build] # copyPackageTemplateFiles
+2026-03-08T10:36:33.181Z	[build] 
+2026-03-08T10:36:33.181Z	[build] ⚙️ Bundling the OpenNext server...
+2026-03-08T10:36:33.181Z	[build] 
+2026-03-08T10:36:33.181Z	[build] 
+2026-03-08T10:36:34.744Z	[build] Worker saved in `.open-next/worker.js` 🚀
+2026-03-08T10:36:34.744Z	[build] 
+2026-03-08T10:36:34.746Z	[build] 
+2026-03-08T10:36:34.747Z	[build] OpenNext build complete.
+2026-03-08T10:36:34.748Z	[build] 
+2026-03-08T10:36:34.880Z	OpenNext project detected, calling `opennextjs-cloudflare deploy`
+2026-03-08T10:36:37.948Z	
+2026-03-08T10:36:37.948Z	┌──────────────────────────────┐
+2026-03-08T10:36:37.948Z	│ OpenNext — Cloudflare deploy │
+2026-03-08T10:36:37.949Z	└──────────────────────────────┘
+2026-03-08T10:36:37.949Z	
+2026-03-08T10:36:37.986Z	Using secrets defined in .dev.vars
+2026-03-08T10:36:38.783Z	
+2026-03-08T10:36:38.783Z	Populating R2 incremental cache...
+2026-03-08T10:36:40.496Z	Successfully populated cache with 3 assets
+2026-03-08T10:36:40.497Z	Tag cache does not need populating
+2026-03-08T10:36:41.567Z	
+2026-03-08T10:36:41.569Z	 ⛅️ wrangler 4.71.0
+2026-03-08T10:36:41.569Z	───────────────────
+2026-03-08T10:36:41.577Z	
+2026-03-08T10:36:41.577Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-03-08T10:36:42.763Z	? Would you like to continue?
+2026-03-08T10:36:42.764Z	🤖 Using fallback value in non-interactive context: yes
+2026-03-08T10:36:43.510Z	🌀 Building list of assets...
+2026-03-08T10:36:43.513Z	✨ Read 105 files from the assets directory /opt/buildhome/repo/.open-next/assets
+2026-03-08T10:36:43.617Z	🌀 Starting asset upload...
+2026-03-08T10:36:45.435Z	🌀 Found 1 new or modified static asset to upload. Proceeding with upload...
+2026-03-08T10:36:45.436Z	+ /BUILD_ID
+2026-03-08T10:36:46.358Z	Uploaded 1 of 1 asset
+2026-03-08T10:36:46.358Z	✨ Success! Uploaded 1 file (83 already uploaded) (0.92 sec)
+2026-03-08T10:36:46.358Z	
+2026-03-08T10:36:46.512Z	Total Upload: 6024.21 KiB / gzip: 1502.68 KiB
+2026-03-08T10:36:47.811Z	Your Worker has access to the following bindings:
+2026-03-08T10:36:47.812Z	Binding                                                            Resource       
+2026-03-08T10:36:47.812Z	env.NEXT_INC_CACHE_R2_BUCKET (ieee-pes-kerala-opennext-cache)      R2 Bucket      
+2026-03-08T10:36:47.812Z	env.WORKER_SELF_REFERENCE (ieee-pes-kerala)                        Worker         
+2026-03-08T10:36:47.812Z	env.IMAGES                                                         Images         
+2026-03-08T10:36:47.812Z	env.ASSETS                                                         Assets         
+2026-03-08T10:36:47.812Z	
+2026-03-08T10:36:47.817Z	
+2026-03-08T10:36:47.887Z	▲ [WARNING] The local configuration being used (generated from your local configuration file) differs from the remote configuration of your Worker set via the Cloudflare Dashboard:
+2026-03-08T10:36:47.887Z	
+2026-03-08T10:36:47.887Z	   {
+2026-03-08T10:36:47.888Z	  +  assets: {
+2026-03-08T10:36:47.888Z	  +    binding: "ASSETS"
+2026-03-08T10:36:47.888Z	  +  }
+2026-03-08T10:36:47.888Z	  -  compatibility_date: "2026-03-08"
+2026-03-08T10:36:47.888Z	  +  compatibility_date: "2025-09-27"
+2026-03-08T10:36:47.888Z	  -  workers_dev: false
+2026-03-08T10:36:47.888Z	  +  workers_dev: true
+2026-03-08T10:36:47.888Z	  -  preview_urls: false
+2026-03-08T10:36:47.888Z	  +  preview_urls: true
+2026-03-08T10:36:47.888Z	     r2_buckets: [
+2026-03-08T10:36:47.888Z	       {
+2026-03-08T10:36:47.888Z	  -      binding: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.888Z	  +      binding: "NEXT_INC_CACHE_R2_BUCKET"
+2026-03-08T10:36:47.888Z	  -      bucket_name: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.889Z	  +      bucket_name: "ieee-pes-kerala-opennext-cache"
+2026-03-08T10:36:47.889Z	       }
+2026-03-08T10:36:47.889Z	     ]
+2026-03-08T10:36:47.890Z	     observability: {
+2026-03-08T10:36:47.890Z	  -    enabled: false
+2026-03-08T10:36:47.890Z	  +    enabled: true
+2026-03-08T10:36:47.890Z	       logs: {
+2026-03-08T10:36:47.890Z	  -      enabled: false
+2026-03-08T10:36:47.890Z	  +      enabled: true
+2026-03-08T10:36:47.890Z	       }
+2026-03-08T10:36:47.890Z	     }
+2026-03-08T10:36:47.890Z	   }
+2026-03-08T10:36:47.890Z	  
+2026-03-08T10:36:47.890Z	  
+2026-03-08T10:36:47.890Z	  Deploying the Worker will override the remote configuration with your local one.
+2026-03-08T10:36:47.890Z	
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.891Z	✘ [ERROR] A request to the Cloudflare API (/accounts/c426fc3738d1fc036c8a6b90ad162485/workers/scripts/ieeepeskc/versions) failed.
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.891Z	  Service binding 'WORKER_SELF_REFERENCE' references Worker 'ieee-pes-kerala' which was not found. Verify the Worker exists in your account and that the service name in your configuration is correct. [code: 10143]
+2026-03-08T10:36:47.891Z	  To learn more about this error, visit: https://developers.cloudflare.com/workers/configuration/bindings/about-service-bindings/
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.891Z	  
+2026-03-08T10:36:47.891Z	  If you think this is a bug, please open an issue at: https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-08T10:36:47.891Z	
+2026-03-08T10:36:47.892Z	
+2026-03-08T10:36:47.892Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-08_10-36-41_332.log"
+2026-03-08T10:36:47.892Z	ERROR Wrangler deploy command failed:
+2026-03-08T10:36:47.892Z	▲ [WARNING] The local configuration being used (generated from your local configuration file) differs from the remote configuration of your Worker set via the Cloudflare Dashboard:
+2026-03-08T10:36:47.893Z	
+2026-03-08T10:36:47.893Z	   {
+2026-03-08T10:36:47.893Z	  +  assets: {
+2026-03-08T10:36:47.893Z	  +    binding: "ASSETS"
+2026-03-08T10:36:47.893Z	  +  }
+2026-03-08T10:36:47.893Z	  -  compatibility_date: "2026-03-08"
+2026-03-08T10:36:47.893Z	  +  compatibility_date: "2025-09-27"
+2026-03-08T10:36:47.893Z	  -  workers_dev: false
+2026-03-08T10:36:47.893Z	  +  workers_dev: true
+2026-03-08T10:36:47.893Z	  -  preview_urls: false
+2026-03-08T10:36:47.893Z	  +  preview_urls: true
+2026-03-08T10:36:47.893Z	     r2_buckets: [
+2026-03-08T10:36:47.893Z	       {
+2026-03-08T10:36:47.893Z	  -      binding: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.893Z	  +      binding: "NEXT_INC_CACHE_R2_BUCKET"
+2026-03-08T10:36:47.893Z	  -      bucket_name: "ieee-pes-kerala-media"
+2026-03-08T10:36:47.893Z	  +      bucket_name: "ieee-pes-kerala-opennext-cache"
+2026-03-08T10:36:47.894Z	       }
+2026-03-08T10:36:47.894Z	     ]
+2026-03-08T10:36:47.894Z	     observability: {
+2026-03-08T10:36:47.894Z	  -    enabled: false
+2026-03-08T10:36:47.894Z	  +    enabled: true
+2026-03-08T10:36:47.894Z	       logs: {
+2026-03-08T10:36:47.894Z	  -      enabled: false
+2026-03-08T10:36:47.894Z	  +      enabled: true
+2026-03-08T10:36:47.894Z	       }
+2026-03-08T10:36:47.894Z	     }
+2026-03-08T10:36:47.894Z	   }
+2026-03-08T10:36:47.894Z	  
+2026-03-08T10:36:47.894Z	  
+2026-03-08T10:36:47.894Z	  Deploying the Worker will override the remote configuration with your local one.
+2026-03-08T10:36:47.894Z	
+2026-03-08T10:36:47.894Z	
+2026-03-08T10:36:47.895Z	✘ [ERROR] A request to the Cloudflare API (/accounts/c426fc3738d1fc036c8a6b90ad162485/workers/scripts/ieeepeskc/versions) failed.
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	  Service binding 'WORKER_SELF_REFERENCE' references Worker 'ieee-pes-kerala' which was not found. Verify the Worker exists in your account and that the service name in your configuration is correct. [code: 10143]
+2026-03-08T10:36:47.895Z	  To learn more about this error, visit: https://developers.cloudflare.com/workers/configuration/bindings/about-service-bindings/
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	  
+2026-03-08T10:36:47.895Z	  If you think this is a bug, please open an issue at: https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.895Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-08_10-36-41_332.log"
+2026-03-08T10:36:47.895Z	
+2026-03-08T10:36:47.934Z	
+2026-03-08T10:36:47.985Z	✘ [ERROR] 
+2026-03-08T10:36:47.985Z	
+2026-03-08T10:36:47.985Z	
+2026-03-08T10:36:48.003Z	If you think this is a bug then please create an issue at https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-08T10:36:48.005Z	? Would you like to report this error to Cloudflare? Wrangler's output and the error details will be shared with the Wrangler team to help us diagnose and fix the issue.
+2026-03-08T10:36:48.005Z	🤖 Using fallback value in non-interactive context: no
+2026-03-08T10:36:48.025Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-08_10-35-28_726.log"
+2026-03-08T10:36:48.087Z	Failed: error occurred while running deploy command
