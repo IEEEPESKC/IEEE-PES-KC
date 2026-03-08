@@ -1282,7 +1282,7 @@ export default function Home() {
                         <div className="gallery-preview-close">
                             <i className="ri-close-line"></i>
                         </div>
-                        <img src="" id="previewImg" alt="Preview" />
+                        <img src={null} id="previewImg" alt="Preview" />
                         <div className="preview-timer-container">
                             <div className="preview-timer-bar" id="previewTimer"></div>
                         </div>

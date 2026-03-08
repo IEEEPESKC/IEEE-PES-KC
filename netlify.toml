@@ -1,0 +1,9 @@
+[build]
+  command   = "npm run build"
+  publish   = "out"           # Next.js static export outputs to `out/`
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# All routes are pre-generated as static files so no redirect rules needed.
+# trailingSlash: true in next.config.mjs handles /page → /page/index.html mapping.
