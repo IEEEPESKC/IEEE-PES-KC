@@ -257,8 +257,9 @@ export default function Home() {
                     {/* Navigation */}
                     <nav className="navbar navbar-expand-lg">
                         <div className="container-fluid px-4">
-                            <Link className="navbar-brand" href="/">
+                            <Link className="navbar-brand d-flex align-items-center" href="/">
                                 <Image src="/images/ieee-images/IEEE_logo.png" alt="IEEE PES Kerala" priority width={120} height={40} style={{ objectFit: 'contain' }} />
+                                <span className="ms-2 fw-bold" style={{ color: 'var(--header-color)', fontSize: '1.2rem' }}>IEEE PES Kerala</span>
                             </Link>
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                                 aria-label="Toggle navigation">

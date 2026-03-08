@@ -31,8 +31,9 @@ export default function Navbar() {
             {/* Navigation */}
             <nav className="navbar navbar-expand-lg">
                 <div className="container-fluid px-4">
-                    <Link className="navbar-brand" href="/">
+                    <Link className="navbar-brand d-flex align-items-center" href="/">
                         <Image src="/images/ieee-images/IEEE_logo.png" alt="IEEE PES Kerala" priority width={120} height={40} style={{ objectFit: 'contain' }} />
+                        <span className="ms-2 fw-bold" style={{ color: 'var(--header-color)', fontSize: '1.2rem' }}>IEEE PES Kerala</span>
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -45,7 +46,7 @@ export default function Navbar() {
                             <li className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">About</a>
                                 <ul className="dropdown-menu">
-                                    <li><Link href="/about" className="dropdown-item">About IEEE PES</Link></li>
+                                    <li><Link href="app/(pages)/about/page.js" className="dropdown-item">About IEEE PES</Link></li>
                                     <li><Link href="/vision-mission" className="dropdown-item">Vision &amp; Mission</Link></li>
                                     <li><Link href="/history" className="dropdown-item">History</Link></li>
                                 </ul>
