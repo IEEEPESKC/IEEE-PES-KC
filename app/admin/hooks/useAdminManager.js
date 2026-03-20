@@ -10,7 +10,7 @@ export default function useAdminManager(type) {
   const [uploading, setUploading] = useState(false);
   
   useEffect(() => {
-    fetch('/api/admin')
+    fetch('admin/api/admin')
       .then(res => res.json())
       .then(data => {
         if (data.data && data.data[type]) {
