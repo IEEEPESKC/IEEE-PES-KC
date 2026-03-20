@@ -6,57 +6,73 @@ import AdminSidebar from './components/AdminSidebar';
 
 export default function AdminLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
   
   useEffect(() => {
+    // Skip auth check for login page
+    if (pathname === '/admin/login') {
+      setIsAuthenticated(true);
+      setIsLoading(false);
+      return;
+    }
+    
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/admin/auth/verify');
-        const data = await res.json();
+        console.log('Checking auth...');
+        const res = await fetch('/api/admin/auth/verify', {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache'
+          }
+        });
         
-        // For testing, allow access if on login page or if we have a token
-        if (pathname === '/admin/login') {
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Auth response:', data);
+          
+          // For now, allow access to admin area (remove this in production)
+          // This is just to test the admin panel
           setIsAuthenticated(true);
-          return;
-        }
-        
-        // Check for token in cookies (simplified for now)
-        const hasToken = document.cookie.includes('admin_token');
-        if (!hasToken) {
-          router.push('/admin/login');
         } else {
-          setIsAuthenticated(true);
+          console.log('Auth failed, redirecting to login');
+          setIsAuthenticated(false);
+          router.push('/admin/login');
         }
       } catch (err) {
         console.error('Auth check failed:', err);
-        // Allow access for testing
+        // For development, allow access anyway
         setIsAuthenticated(true);
+      } finally {
+        setIsLoading(false);
       }
     };
     
     checkAuth();
-  }, [pathname]);
+  }, [pathname, router]);
   
   if (pathname === '/admin/login') {
     return children;
   }
   
-  if (isAuthenticated === null) {
+  if (isLoading) {
     return (
-      <div className="admin-loading" style={{ 
+      <div style={{ 
         minHeight: '100vh', 
         display: 'flex', 
         alignItems: 'center', 
-        justifyContent: 'center' 
+        justifyContent: 'center',
+        fontSize: '18px',
+        color: '#004643'
       }}>
-        <div>Loading...</div>
+        Loading admin panel...
       </div>
     );
   }
   
   if (!isAuthenticated) {
-    return null;
+    return null; // Will redirect in useEffect
   }
   
   return (

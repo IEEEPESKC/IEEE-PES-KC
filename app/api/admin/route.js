@@ -4,14 +4,12 @@ import path from 'path';
 
 const DATA_FILE = path.join(process.cwd(), 'data', 'content.json');
 
-// Helper to read data
-async function readData() {
+// Ensure data file exists
+async function ensureDataFile() {
   try {
-    const data = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error reading data:', error);
-    return {
+    await fs.access(DATA_FILE);
+  } catch {
+    const initialData = {
       events: [],
       announcements: [],
       gallery: [],
@@ -22,96 +20,74 @@ async function readData() {
       newsletters: [],
       magazines: []
     };
+    await fs.writeFile(DATA_FILE, JSON.stringify(initialData, null, 2));
   }
 }
 
-// Helper to write data
-async function writeData(data) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
-}
-
-// GET: Fetch all content
 export async function GET() {
   try {
-    const data = await readData();
+    await ensureDataFile();
+    const data = await fs.readFile(DATA_FILE, 'utf-8');
+    const parsedData = JSON.parse(data);
+    
+    console.log('API GET - Data loaded successfully');
+    
     return NextResponse.json({
       success: true,
-      data: data
+      data: parsedData
     });
   } catch (error) {
-    console.error('GET error:', error);
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 500 }
-    );
+    console.error('API GET Error:', error);
+    return NextResponse.json({
+      success: false,
+      error: error.message,
+      data: {
+        events: [],
+        announcements: [],
+        gallery: [],
+        execom: [],
+        chapters: [],
+        awards: [],
+        recognitions: [],
+        newsletters: [],
+        magazines: []
+      }
+    });
   }
 }
 
-// POST: Create new item
 export async function POST(req) {
   try {
+    await ensureDataFile();
     const formData = await req.formData();
     const type = formData.get('type');
-    const editId = formData.get('editId');
     
     if (!type) {
-      return NextResponse.json(
-        { error: 'Missing type parameter' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Type is required' }, { status: 400 });
     }
     
-    const db = await readData();
+    const data = await fs.readFile(DATA_FILE, 'utf-8');
+    const db = JSON.parse(data);
     
-    // Build the new item
     const newItem = {
-      id: editId || `${Date.now()}-${Math.random().toString(36).substr(2, 8)}`,
+      id: Date.now().toString(),
+      ...Object.fromEntries(formData.entries())
     };
     
-    // Add all form fields
-    for (const [key, value] of formData.entries()) {
-      if (key !== 'type' && key !== 'editId') {
-        newItem[key] = value;
-      }
-    }
+    delete newItem.type;
     
-    // Handle image if uploaded
-    const imageFile = formData.get('image');
-    if (imageFile && imageFile.size > 0 && typeof imageFile.arrayBuffer === 'function') {
-      // For now, store a placeholder URL
-      // In production, you'll upload to R2 here
-      const buffer = Buffer.from(await imageFile.arrayBuffer());
-      const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-      await fs.mkdir(uploadsDir, { recursive: true });
-      const filename = `${Date.now()}-${imageFile.name}`;
-      const filepath = path.join(uploadsDir, filename);
-      await fs.writeFile(filepath, buffer);
-      newItem.imageUrl = `/uploads/${filename}`;
-    }
+    if (!db[type]) db[type] = [];
+    db[type].unshift(newItem);
     
-    // Update database
-    if (editId) {
-      const index = db[type].findIndex(item => item.id === editId);
-      if (index !== -1) {
-        db[type][index] = { ...db[type][index], ...newItem };
-      }
-    } else {
-      db[type] = [newItem, ...(db[type] || [])];
-    }
-    
-    await writeData(db);
+    await fs.writeFile(DATA_FILE, JSON.stringify(db, null, 2));
     
     return NextResponse.json({ success: true, item: newItem });
   } catch (error) {
-    console.error('POST error:', error);
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 500 }
-    );
+    console.error('API POST Error:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-// DELETE: Remove item
 export async function DELETE(req) {
   try {
     const { searchParams } = new URL(req.url);
@@ -119,25 +95,20 @@ export async function DELETE(req) {
     const id = searchParams.get('id');
     
     if (!type || !id) {
-      return NextResponse.json(
-        { error: 'Missing parameters' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Type and ID required' }, { status: 400 });
     }
     
-    const db = await readData();
+    const data = await fs.readFile(DATA_FILE, 'utf-8');
+    const db = JSON.parse(data);
     
     if (db[type]) {
       db[type] = db[type].filter(item => item.id !== id);
-      await writeData(db);
+      await fs.writeFile(DATA_FILE, JSON.stringify(db, null, 2));
     }
     
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('DELETE error:', error);
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 500 }
-    );
+    console.error('API DELETE Error:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
