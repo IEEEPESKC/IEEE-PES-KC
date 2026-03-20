@@ -10,11 +10,15 @@ export default function useAdminManager(type) {
   const [uploading, setUploading] = useState(false);
   
   useEffect(() => {
-    fetch('admin/api/admin')
+    fetch('/api/admin')
       .then(res => res.json())
       .then(data => {
+        console.log(`Fetching ${type}:`, data);
+        // The API returns { success: true, data: {...} }
         if (data.data && data.data[type]) {
           setItems(data.data[type]);
+        } else {
+          setItems([]);
         }
       })
       .catch(err => console.error(`Error fetching ${type}:`, err));
@@ -22,7 +26,6 @@ export default function useAdminManager(type) {
   
   useEffect(() => {
     if (selectedItem) {
-      // Check for images array or single imageUrl
       if (selectedItem.images && selectedItem.images.length) {
         setTempImages(selectedItem.images);
       } else if (selectedItem.imageUrl) {
@@ -64,17 +67,8 @@ export default function useAdminManager(type) {
       }
     }
     
-    // Add files from newPreviews
-    // This requires that files are attached to the input
-    const fileInput = e.target.querySelector('input[type="file"]');
-    if (fileInput && fileInput.files.length > 0) {
-      for (let file of fileInput.files) {
-        formData.append('image', file);
-      }
-    }
-    
     try {
-      const res = await fetch('admin/api/admin', {
+      const res = await fetch('/api/admin', {
         method: selectedItem ? 'PUT' : 'POST',
         body: formData
       });
@@ -107,7 +101,7 @@ export default function useAdminManager(type) {
     
     if (confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
       try {
-        const res = await fetch(`admin/api/admin?type=${type}&id=${id}`, { method: 'DELETE' });
+        const res = await fetch(`/api/admin?type=${type}&id=${id}`, { method: 'DELETE' });
         if (res.ok) {
           setItems(prev => prev.filter((_, i) => i !== index));
         }

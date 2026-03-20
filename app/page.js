@@ -20,19 +20,25 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch('admin/api/admin')
-            .then(res => res.json())
-            .then(data => {
-                setEvents(data.events || []);
-                setAnnouncements(data.announcements || []);
-                setGallery(data.gallery || []);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                console.error("Error fetching home data:", err);
-                setIsLoading(false);
-            });
-    }, []);
+  console.log('Fetching data from /api/admin');
+  fetch('/api/admin')
+    .then(res => {
+      console.log('Response status:', res.status);
+      return res.json();
+    })
+    .then(data => {
+      console.log('Received data:', data);
+      // The API returns { success: true, data: {...} }
+      setEvents(data.data?.events || []);
+      setAnnouncements(data.data?.announcements || []);
+      setGallery(data.data?.gallery || []);
+      setIsLoading(false);
+    })
+    .catch(err => {
+      console.error("Error fetching home data:", err);
+      setIsLoading(false);
+    });
+}, []);
 
     useEffect(() => {
         if (isLoading) return;

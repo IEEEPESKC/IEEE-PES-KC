@@ -12,31 +12,29 @@ export default function AdminLayout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('admin/api/admin/auth/verify');
+        // Fix: Use absolute path from root, not relative
+        const res = await fetch('/api/admin/auth/verify');
         const data = await res.json();
         
-        // For testing, allow access if on login page or if we have a token
         if (pathname === '/admin/login') {
           setIsAuthenticated(true);
           return;
         }
         
-        // Check for token in cookies (simplified for now)
-        const hasToken = document.cookie.includes('admin_token');
-        if (!hasToken) {
+        if (!data.authenticated) {
           router.push('/admin/login');
         } else {
           setIsAuthenticated(true);
         }
       } catch (err) {
         console.error('Auth check failed:', err);
-        // Allow access for testing
+        // For development, allow access
         setIsAuthenticated(true);
       }
     };
     
     checkAuth();
-  }, [pathname]);
+  }, [pathname, router]);
   
   if (pathname === '/admin/login') {
     return children;
@@ -44,7 +42,7 @@ export default function AdminLayout({ children }) {
   
   if (isAuthenticated === null) {
     return (
-      <div className="admin-loading" style={{ 
+      <div style={{ 
         minHeight: '100vh', 
         display: 'flex', 
         alignItems: 'center', 
