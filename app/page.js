@@ -20,7 +20,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch('/api/admin')
+        fetch('admin/api/admin')
             .then(res => res.json())
             .then(data => {
                 setEvents(data.events || []);
