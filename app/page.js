@@ -24,18 +24,32 @@ export default function Home() {
   fetch('/api/admin')
     .then(res => {
       console.log('Response status:', res.status);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
       return res.json();
     })
     .then(data => {
       console.log('Received data:', data);
       // The API returns { success: true, data: {...} }
-      setEvents(data.data?.events || []);
-      setAnnouncements(data.data?.announcements || []);
-      setGallery(data.data?.gallery || []);
+      if (data.success && data.data) {
+        setEvents(data.data.events || []);
+        setAnnouncements(data.data.announcements || []);
+        setGallery(data.data.gallery || []);
+      } else {
+        // Fallback to empty arrays
+        setEvents([]);
+        setAnnouncements([]);
+        setGallery([]);
+      }
       setIsLoading(false);
     })
     .catch(err => {
       console.error("Error fetching home data:", err);
+      // Set empty arrays on error so the page still renders
+      setEvents([]);
+      setAnnouncements([]);
+      setGallery([]);
       setIsLoading(false);
     });
 }, []);

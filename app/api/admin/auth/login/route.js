@@ -1,38 +1,33 @@
 import { NextResponse } from 'next/server';
 
-// Simple authentication function
-async function authenticate(email, password) {
-  // For testing - replace with your actual admin credentials
-  const adminEmail = process.env.ADMIN_EMAILS?.split(',')[0] || 'admin@ieee.org';
-  const adminPassword = process.env.ADMIN_PASSWORDS?.split(',')[0] || 'admin123';
-  
-  if (email === adminEmail && password === adminPassword) {
-    return { success: true, token: 'admin-token' };
-  }
-  
-  return { success: false, error: 'Invalid credentials' };
-}
-
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
     
-    const result = await authenticate(email, password);
+    console.log('Login attempt for:', email);
     
-    if (result.success) {
-      const response = NextResponse.json({ success: true });
-      response.cookies.set('admin_token', result.token, {
+    // Simple hardcoded credentials for testing
+    if (email === 'admin@ieee.org' && password === 'admin123') {
+      const response = NextResponse.json({ 
+        success: true,
+        message: 'Login successful'
+      });
+      
+      response.cookies.set('admin_token', 'admin-token', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 24 * 60 * 60, // 24 hours
+        maxAge: 24 * 60 * 60,
         path: '/',
         sameSite: 'lax',
       });
+      
+      console.log('Login successful for:', email);
       return response;
     }
     
+    console.log('Login failed for:', email);
     return NextResponse.json(
-      { error: result.error || 'Invalid credentials' },
+      { error: 'Invalid credentials' },
       { status: 401 }
     );
   } catch (error) {

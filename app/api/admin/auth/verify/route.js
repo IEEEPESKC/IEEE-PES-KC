@@ -4,8 +4,10 @@ export async function GET(request) {
   // Get token from cookies
   const token = request.cookies.get('admin_token')?.value;
   
-  // Simple check - in production, verify token properly
-  if (token === 'test-token' || token === 'admin-token') {
+  console.log('Verify auth - token:', token ? 'present' : 'missing');
+  
+  // Simple check
+  if (token === 'admin-token' || token === 'test-token') {
     return NextResponse.json({ authenticated: true });
   }
   
