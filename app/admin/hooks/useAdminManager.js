@@ -74,7 +74,7 @@ export default function useAdminManager(type) {
     }
     
     try {
-      const res = await fetch('/api/admin', {
+      const res = await fetch('admin/api/admin', {
         method: selectedItem ? 'PUT' : 'POST',
         body: formData
       });
@@ -107,7 +107,7 @@ export default function useAdminManager(type) {
     
     if (confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
       try {
-        const res = await fetch(`/api/admin?type=${type}&id=${id}`, { method: 'DELETE' });
+        const res = await fetch(`admin/api/admin?type=${type}&id=${id}`, { method: 'DELETE' });
         if (res.ok) {
           setItems(prev => prev.filter((_, i) => i !== index));
         }

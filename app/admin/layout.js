@@ -12,7 +12,7 @@ export default function AdminLayout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/admin/auth/verify');
+        const res = await fetch('admin/api/admin/auth/verify');
         const data = await res.json();
         
         // For testing, allow access if on login page or if we have a token
