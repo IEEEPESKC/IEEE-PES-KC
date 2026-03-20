@@ -36,113 +36,101 @@ export default function AdminLogin() {
   };
   
   return (
-    <div className="admin-login-container">
-      <div className="admin-login-card">
-        <div className="admin-login-header">
-          <h1>IEEE PES Kerala</h1>
-          <p>Admin Dashboard Login</p>
+    <div className="admin-login-container" style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #004643 0%, #0b2b26 100%)',
+      padding: '20px',
+    }}>
+      <div style={{
+        background: 'white',
+        borderRadius: '24px',
+        padding: '40px',
+        width: '100%',
+        maxWidth: '400px',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h1 style={{ color: '#004643', fontSize: '24px', marginBottom: '8px' }}>IEEE PES Kerala</h1>
+          <p style={{ color: '#666' }}>Admin Dashboard Login</p>
         </div>
         
         <form onSubmit={handleSubmit}>
-          <div className="admin-form-group">
-            <label>Email Address</label>
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#333' }}>Email Address</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@ieee.org"
               required
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                border: '1px solid #ddd',
+                borderRadius: '12px',
+                fontSize: '16px',
+              }}
             />
           </div>
           
-          <div className="admin-form-group">
-            <label>Password</label>
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#333' }}>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                border: '1px solid #ddd',
+                borderRadius: '12px',
+                fontSize: '16px',
+              }}
             />
           </div>
           
-          {error && <div className="admin-error">{error}</div>}
+          {error && (
+            <div style={{
+              background: '#fee2e2',
+              color: '#dc2626',
+              padding: '12px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              fontSize: '14px',
+            }}>
+              {error}
+            </div>
+          )}
           
-          <button type="submit" disabled={loading}>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '14px',
+              background: '#004643',
+              color: 'white',
+              border: 'none',
+              borderRadius: '12px',
+              fontSize: '16px',
+              fontWeight: 600,
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.7 : 1,
+            }}
+          >
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+        
+        <div style={{ marginTop: '24px', textAlign: 'center', fontSize: '14px', color: '#666' }}>
+          <p>Use: admin@ieee.org / admin123</p>
+        </div>
       </div>
-      
-      <style jsx>{`
-        .admin-login-container {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: linear-gradient(135deg, #004643 0%, #0b2b26 100%);
-          padding: 20px;
-        }
-        .admin-login-card {
-          background: white;
-          border-radius: 24px;
-          padding: 40px;
-          width: 100%;
-          max-width: 400px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        .admin-login-header {
-          text-align: center;
-          margin-bottom: 32px;
-        }
-        .admin-login-header h1 {
-          color: #004643;
-          font-size: 24px;
-          margin-bottom: 8px;
-        }
-        .admin-login-header p {
-          color: #666;
-        }
-        .admin-form-group {
-          margin-bottom: 20px;
-        }
-        .admin-form-group label {
-          display: block;
-          margin-bottom: 8px;
-          font-weight: 600;
-          color: #333;
-        }
-        .admin-form-group input {
-          width: 100%;
-          padding: 12px 16px;
-          border: 1px solid #ddd;
-          border-radius: 12px;
-          font-size: 16px;
-        }
-        .admin-error {
-          background: #fee2e2;
-          color: #dc2626;
-          padding: 12px;
-          border-radius: 8px;
-          margin-bottom: 20px;
-          font-size: 14px;
-        }
-        button[type="submit"] {
-          width: 100%;
-          padding: 14px;
-          background: #004643;
-          color: white;
-          border: none;
-          border-radius: 12px;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-        }
-        button[type="submit"]:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-        }
-      `}</style>
     </div>
   );
 }

@@ -1,21 +1,21 @@
 import { NextResponse } from 'next/server';
-import { login } from '@/lib/auth';
 
 export async function POST(req) {
   const { email, password } = await req.json();
   
-  const result = await login(email, password);
-  
-  if (result.success) {
+  // Simple check for testing
+  if (email === 'admin@ieee.org' && password === 'admin123') {
     const response = NextResponse.json({ success: true });
-    response.cookies.set('admin_token', result.token, {
+    response.cookies.set('admin_token', 'test-token', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 24 * 60 * 60, // 24 hours
+      maxAge: 24 * 60 * 60,
       path: '/',
     });
     return response;
   }
   
-  return NextResponse.json({ error: result.error }, { status: 401 });
+  return NextResponse.json(
+    { error: 'Invalid credentials' },
+    { status: 401 }
+  );
 }
