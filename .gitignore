@@ -44,3 +44,7 @@ next-env.d.ts
 /app/admin/data/
 /app/admin/data.json
 /app/admin/trash/
+
+# data management
+data/
+*.local
