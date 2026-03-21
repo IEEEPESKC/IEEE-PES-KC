@@ -98,7 +98,7 @@ export default function Home() {
                     delay: 3000,
                     disableOnInteraction: false,
                 },
-                loop: true
+                loop: document.querySelectorAll('.gallery-swiper .swiper-slide').length > 4
             });
 
             // Initialize Update Carousels
@@ -109,7 +109,7 @@ export default function Home() {
                 autoplay: { delay: 4000 },
                 pagination: { el: '.upcoming-update-swiper .swiper-pagination', clickable: true },
                 navigation: { nextEl: '.upcoming-update-swiper .swiper-button-next', prevEl: '.upcoming-update-swiper .swiper-button-prev' },
-                loop: true
+                loop: document.querySelectorAll('.upcoming-update-swiper .swiper-slide').length > 1
             });
 
             new Swiper('.recent-update-swiper', {
@@ -118,7 +118,7 @@ export default function Home() {
                 spaceBetween: 15,
                 autoplay: { delay: 5000 },
                 navigation: { nextEl: '.recent-update-swiper .swiper-button-next', prevEl: '.recent-update-swiper .swiper-button-prev' },
-                loop: true
+                loop: document.querySelectorAll('.recent-update-swiper .swiper-slide').length > 1
             });
 
             // Initialize Flagship Swipers
@@ -126,7 +126,7 @@ export default function Home() {
                 modules: [Navigation, Pagination],
                 slidesPerView: 1,
                 spaceBetween: 30,
-                loop: true,
+                loop: document.querySelectorAll('.akpessc-swiper .swiper-slide').length > 1,
                 pagination: {
                     el: '.akpessc-swiper .swiper-pagination',
                     clickable: true,
@@ -148,7 +148,7 @@ export default function Home() {
                 modules: [Pagination, Autoplay],
                 slidesPerView: 1,
                 spaceBetween: 30,
-                loop: true,
+                loop: document.querySelectorAll('.dynamic-flagship-swiper .swiper-slide').length > 1,
                 autoplay: {
                     delay: 4000,
                     disableOnInteraction: false,
