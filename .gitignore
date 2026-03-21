@@ -41,7 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 # admin data
-<<<<<<< HEAD
 /app/admin/data/
 /app/admin/data.json
 /app/admin/trash/
@@ -49,6 +48,3 @@ next-env.d.ts
 # data management
 data/
 *.local
-=======
-
->>>>>>> 9e321e19fc506f1b236bda18028eb6ca12306733
