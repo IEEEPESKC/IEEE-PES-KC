@@ -29,6 +29,7 @@ export default function Footer() {
                             <li><Link href="/pages/resources">Resources</Link></li>
                             <li><Link href="/pages/newsletters">Newsletters</Link></li>
                             <li><Link href="/pages/awards">Awards</Link></li>
+                            <li><Link href="/admin" className="admin-footer-link">Admin Dashboard</Link></li>
                         </ul>
                     </div>
                     <div className="col-lg-2 col-md-6 col-6">
