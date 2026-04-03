@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAllContent } from '../../../../lib/wordpress';
+import { getAllContent } from '../../../lib/wordpress';
 
 /**
  * GET /api/admin
