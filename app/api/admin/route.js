@@ -39,7 +39,7 @@ export async function GET() {
  * Attempts to create a post via the WP REST API using Application Passwords.
  */
 export async function POST(req) {
-  const WP_BASE = process.env.NEXT_PUBLIC_WP_BASE_URL || 'https://pes.ieeekerala.org/wp-json/wp/v2';
+  const WP_BASE = process.env.WP_BASE_URL;
   const WP_USER = process.env.WP_ADMIN_USER;
   const WP_APP_PASS = process.env.WP_APP_PASSWORD;
 
@@ -92,7 +92,7 @@ export async function POST(req) {
  * Deletes from WordPress via REST API with Application Password auth.
  */
 export async function DELETE(req) {
-  const WP_BASE = process.env.NEXT_PUBLIC_WP_BASE_URL || 'https://pes.ieeekerala.org/wp-json/wp/v2';
+  const WP_BASE = process.env.WP_BASE_URL;
   const WP_USER = process.env.WP_ADMIN_USER;
   const WP_APP_PASS = process.env.WP_APP_PASSWORD;
 
