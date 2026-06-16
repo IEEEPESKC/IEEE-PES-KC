@@ -1,0 +1,542 @@
+{
+  "events": [],
+  "announcements": [],
+  "gallery": [],
+  "execom": [
+   {
+  "id": "1717000000001",
+  "name": "Dr. Boby Philip",
+  "role": "Chairperson",
+  "category": "professionals",
+  "status": "current",
+  "imageUrl": "/execom/boby.webp", 
+  "email": "",
+  "linkedin": ""
+},
+    {
+      "id": "1717000000002",
+      "name": "Er. Harikumar K P",
+      "role": "Vice Chairperson",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/harikumar.webp",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000003",
+      "name": "Dr. Rahul Satheesh",
+      "role": "Secretary",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/rahul.webp",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000004",
+      "name": "Er. Vishnu S",
+      "role": "Treasurer & slt Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/Vishnu.webp",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000004",
+      "name": "Dr. Ajith Gopi",
+      "role": "Immediate Past Chair",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/ajith.webp",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000004",
+      "name": "Dr. Shobha Manakkal",
+      "role": "Advisor SLT & YP",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/sobha.webp",
+      "email": "",
+      "linkedin": ""
+    },
+    {
+    "id": "1717000000004",
+    "name": "Er. Suhair A",
+    "role": "Strategic Advisor",
+    "category": "professionals",
+    "status": "current",
+    "imageUrl": "",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "1717000000004",
+    "name": "Prof. Muhammad Kasim",
+    "role": "Advisor & Mentor",
+    "category": "professionals",
+    "status": "current",
+    "imageUrl": "/execom/kasim.webp",
+    "email": "",
+    "linkedin": ""
+  },
+    {
+    "id": "1717000000004",
+    "name": "Dr. P S Chandramohan",
+    "role": "Advisor & Mentor",
+    "category": "professionals",
+    "status": "current",
+    "imageUrl": "",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "1717000000004",
+    "name": "Dr. Bijuna Kunju",
+    "role": "Advisor & Mentor",
+    "category": "professionals",
+    "status": "current",
+    "imageUrl": "/execom/bijuna.webp",
+    "email": "",
+    "linkedin": ""
+  },
+    {
+      "id": "1717000000004",
+      "name": "Dr. Nafeesa K",
+      "role": "Women in Power Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Er. Harikumar R",
+      "role": "Conference Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Er. Biju S S",
+      "role": "Power utility Engagement Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Dr. Raju Manuel",
+      "role": "Professional Development Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/raju.webp",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Dr. Athira Raju",
+      "role": "Industry Academia Collaboration Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/athira.webp",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Dr. Gomathy S",
+      "role": "Educational Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Er. Rensi Sam Mathew",
+      "role": "Educational Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/rensi.webp",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Er. Abhinav Rajeev",
+      "role": "Humanitarian Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/abhinav.webp",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Neethu Salim",
+      "role": "Membership Development Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Nimitha Muraleedharan",
+      "role": "Social Outreach Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Er. Nithin V M ",
+      "role": "Digital Initiatives & Communication Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Hariram N P",
+      "role": "International Collaborations Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "",
+      "email": "",
+      "linkedin": ""
+    },
+      {
+      "id": "1717000000004",
+      "name": "Naufal N",
+      "role": "Reasearch Activities Coordinator",
+      "category": "professionals",
+      "status": "current",
+      "imageUrl": "/execom/naufal.webp",
+      "email": "",
+      "linkedin": ""
+    },
+
+     {
+      "id": "1717000000004",
+      "name": "Vishnu S",
+      "role": "YP Activities Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/Vishnu.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Nithin Francis",
+      "role": "Humanitarian Activities Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/nithin.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Hariram NP",
+      "role": "Reasearch Activities Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/hari.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Mohammed fizal",
+      "role": "Industry & Entrepreneurship Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/fizal.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Akshay R S",
+      "role": "Membership Development Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/akshayjpeg.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Basil Eldhose",
+      "role": "Membership Development Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/basil.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Fardhil Aboo",
+      "role": "Design Lead",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/aboo.webp",
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000004",
+      "name": "Sreshtamol K G",
+      "role": "Educational Activities Coordinator",
+      "category": "yp",
+      "status": "current",
+      "imageUrl": "/execom/sreshtamol.webp",
+      "email": "ff",
+      "linkedin": "ff"
+    },
+
+
+
+
+
+
+
+    {
+      "id": "1717000000001",
+      "name": "VIDHU KRISHNAN",
+      "role": "STUDENT REPRESENTATIVE",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Vidhu Krishnan.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "SAHADIYA MUHAMMED",
+      "role": "WOMEN IN POWER SR",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/sahrdaya.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "ARJUN S NAIR",
+      "role": "TECHNICAL COORDINATOR SOUTH",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Arjun S Nair.png", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "AKSHAY PRADEEPAN",
+      "role": "TECHNICAL COORDINATOR NORTH",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Akshay Pradeepan.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "BHADRA G NAIR",
+      "role": "HSR (TRAVANCORE)",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/bhadra.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "NANDANA M",
+      "role": "HSR (KOCHI)",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/nandana.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "THEJUS B JUJITH",
+      "role": "HSR (MALABAR)",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Thejass.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "ALEENA FATHIMA",
+      "role": "DOCUMENTATION & REPORT",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Aleena Fathima.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "ADARSH ANIL",
+      "role": "MDC (TRAVANCORE)",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/adarsh.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "RYAN NELSON",
+      "role": "MDC (KOCHI)",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Ryan Nelson.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "FATHIMA RIYA",
+      "role": "MDC (MALABAR)",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Fathima Riya K.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "GOWRI V KUMAR",
+      "role": "CONTENT CREATOR",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Gowri.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "AFSAL VN",
+      "role": "INDUSTRY INTERNSHIP COORDINATOR",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/afsal.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "RAHUL R NAIR",
+      "role": "ECC",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Rahul R Nair.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "MOHAMMED SHARAFUDDEN",
+      "role": "NEWSLETTER EDITOR",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Sharafuddeen.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+    {
+      "id": "1717000000001",
+      "name": "CATHY MARIA NOBLE",
+      "role": "WEBMASTER",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Cathy mariya noble.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000001",
+      "name": "SARATH A",
+      "role": "WEBMASTER",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Sarath.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000001",
+      "name": "NITHIN SAMUEL",
+      "role": "WEBMASTER",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Nithin samuel.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000001",
+      "name": "ADITHYANATH S",
+      "role": "DESIGNER",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/adithyanath.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000001",
+      "name": "SHAKTI SATHISH KRISHNAN",
+      "role": "DESIGNER",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Shakthi Sathish.webp", 
+      "email": "",
+      "linkedin": ""
+    },
+     {
+      "id": "1717000000001",
+      "name": "ABHISHEK S",
+      "role": "DESIGNER",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "/execom/Abhishek S.webp", 
+      "email": "",
+      "linkedin": ""
+    }
+
+
+  ],
+  "chapters": [],
+  "awards": [],
+  "recognitions": [],
+  "newsletters": [],
+  "magazines": []
+}
