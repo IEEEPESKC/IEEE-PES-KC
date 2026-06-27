@@ -1,0 +1,221 @@
+.navbarContainer {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* IEEE Global Ribbon */
+.ieeeRibbon {
+    background-color: #000000;
+    padding: 6px 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ribbonLinks {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.ribbonLinks li {
+    margin: 0;
+    position: relative;
+}
+
+.ribbonLinks li:not(:last-child)::after {
+    content: '|';
+    color: #666;
+    position: absolute;
+    right: -10px;
+}
+
+.ribbonLinks a {
+    color: #ffffff;
+    font-size: 11px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.ribbonLinks a:hover {
+    text-decoration: underline;
+    color: #a3a3a3;
+}
+
+.topBar {
+    background-color: #1F3F19; /* dark green */
+    color: #d1d5db;
+    padding: 8px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.topBarLeft {
+    display: flex;
+    gap: 24px;
+}
+
+.topBarLeft a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d1d5db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.topBarLeft a:hover {
+    color: #ffffff;
+}
+
+.topBarRight {
+    display: flex;
+    gap: 18px;
+}
+
+.topBarRight a {
+    color: #d1d5db;
+    font-size: 16px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.topBarRight a:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.mainNav {
+    background-color: #121516; /* very dark */
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logoImage {
+    filter: invert(1) hue-rotate(180deg) brightness(1.2);
+    mix-blend-mode: screen;
+}
+
+.navLinks {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navLinks li {
+    margin: 0;
+}
+
+.navLinks a {
+    color: #a3a3a3;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.navLinks a:hover, .navLinks a.active {
+    color: #ffffff;
+}
+
+.navLinks a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #4a8d38; /* green underline */
+}
+
+.joinBtn {
+    background-color: #4a8d38; /* green */
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.joinBtn:hover {
+    background-color: #3f7930;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.mobileMenuBtn {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.closeMenuBtn {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .navLinks {
+        display: none;
+    }
+    
+    .joinBtn {
+        display: none;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+    
+    .navLinks.mobileActive {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #121516;
+        padding: 30px;
+        gap: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .navLinks.mobileActive .joinBtn {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+}

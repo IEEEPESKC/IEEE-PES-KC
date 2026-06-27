@@ -219,142 +219,134 @@ export default function Home() {
                 /* Premium Professional Hero Carousel */
                 .hero-section {
                     width: 100%;
+                    height: 100vh;
                     position: relative;
-                }
-                .hero-swiper {
-                    width: 100%;
-                    height: 85vh;
-                    min-height: 600px;
-                }
-                .slide {
-                    width: 100%;
-                    height: 100%;
+                    background-image: linear-gradient(to right, rgba(10, 20, 25, 0.9) 0%, rgba(10, 20, 25, 0.4) 100%), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
                     background-size: cover;
                     background-position: center;
-                    position: relative;
                     display: flex;
                     align-items: center;
                 }
-                .slide::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    background: linear-gradient(90deg, rgba(10, 25, 47, 0.95) 0%, rgba(10, 25, 47, 0.5) 100%);
-                    z-index: 1;
-                }
-                .slide-content-wrapper {
+                .hero-content-wrapper {
                     position: relative;
                     z-index: 2;
-                    max-width: 800px;
-                }
-                .hero-badge {
-                    display: inline-flex;
-                    align-items: center;
-                    padding: 0.5rem 1.25rem;
-                    background: rgba(0, 171, 132, 0.15);
-                    border: 1px solid rgba(0, 171, 132, 0.3);
-                    backdrop-filter: blur(10px);
-                    border-radius: 50px;
-                    color: #00e6b3;
-                    font-weight: 600;
-                    font-size: 0.85rem;
-                    text-transform: uppercase;
-                    letter-spacing: 1.5px;
-                    margin-bottom: 2rem;
-                    animation: fadeInDown 1s ease-out;
+                    max-width: 750px;
+                    padding-top: 50px;
                 }
                 .hero-title {
-                    font-size: clamp(3rem, 6vw, 4.5rem);
+                    font-size: clamp(3rem, 5.5vw, 4.5rem);
                     font-weight: 800;
                     color: #ffffff;
                     line-height: 1.1;
                     margin-bottom: 1.5rem;
-                    letter-spacing: -1px;
                 }
                 .hero-title span {
-                    color: #00e6b3;
+                    color: #4a8d38; /* green */
                 }
                 .hero-subtitle {
-                    font-size: clamp(1.1rem, 2vw, 1.25rem);
-                    color: rgba(255, 255, 255, 0.85);
+                    font-size: 1.1rem;
+                    color: rgba(255, 255, 255, 0.9);
                     line-height: 1.6;
                     margin-bottom: 2.5rem;
-                    max-width: 650px;
+                    max-width: 600px;
                 }
                 .hero-btn {
-                    padding: 1rem 2.5rem;
-                    font-weight: 600;
-                    border-radius: 50px;
+                    padding: 12px 24px;
+                    font-weight: 700;
+                    border-radius: 6px;
                     transition: all 0.3s ease;
-                    font-size: 1.05rem;
+                    font-size: 0.95rem;
                     display: inline-flex;
                     align-items: center;
                     gap: 10px;
                     text-decoration: none !important;
+                    text-transform: uppercase;
                 }
                 .btn-primary-custom {
-                    background-color: var(--pes-green);
+                    background-color: #4a8d38;
                     color: white;
-                    border: 2px solid var(--pes-green);
-                    box-shadow: 0 10px 20px rgba(0, 171, 132, 0.3);
+                    border: 1px solid #4a8d38;
                 }
                 .btn-primary-custom:hover {
-                    background-color: transparent;
-                    color: #00e6b3;
+                    background-color: #3f7930;
+                    color: white;
                     transform: translateY(-2px);
                 }
                 .btn-secondary-custom {
                     background-color: transparent;
                     color: white;
-                    border: 2px solid rgba(255,255,255,0.3);
+                    border: 1px solid rgba(255,255,255,0.4);
                 }
                 .btn-secondary-custom:hover {
                     border-color: white;
-                    background-color: white;
-                    color: #0a192f;
+                    background-color: rgba(255,255,255,0.1);
+                    color: white;
                     transform: translateY(-2px);
                 }
                 
-                @media (max-width: 767px) {
-                    .hero-swiper { height: 75vh; min-height: 500px; }
-                    .slide::before { background: linear-gradient(0deg, rgba(10, 25, 47, 0.95) 0%, rgba(10, 25, 47, 0.6) 100%); }
+                /* Stats Pill */
+                .hero-stats-pill {
+                    position: absolute;
+                    bottom: 40px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 90%;
+                    max-width: 1200px;
+                    background-color: #0b1a10; /* Very dark green */
+                    border-radius: 30px;
+                    padding: 20px 40px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                    border: 1px solid rgba(74, 141, 56, 0.2);
+                    z-index: 5;
                 }
-
-
-                    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                .hero-stat-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    flex: 1;
                 }
-
-                .hero-stat-card:hover {
-                    transform: translateY(-12px);
-                    box-shadow: 0 40px 60px -15px rgba(0,171,132,0.15);
+                .hero-stat-icon {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background-color: #2c4a30;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 24px;
+                }
+                .hero-stat-text h4 {
+                    color: white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    margin: 0 0 5px 0;
+                }
+                .hero-stat-text p {
+                    color: rgba(255,255,255,0.6);
+                    font-size: 0.8rem;
+                    margin: 0;
+                    line-height: 1.3;
                 }
 
                 @media (max-width: 991px) {
-                    .hero-section { padding: 6rem 0 8rem 0; }
-                    .hero-stats-wrapper { margin-top: -2rem; }
-                }
-
-                @media (max-width: 576px) {
-                    .hero-stats-wrapper { margin-top: 1rem; }
-                    .hero-section { padding: 5rem 0 3rem 0; }
-                }
-
-                .hero-btn:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 10px 25px rgba(0, 171, 132, 0.3) !important;
-                }
-                
-                .hero-btn-outline {
-                    border: 2px solid rgba(0, 0, 0, 0.1) !important;
-                    color: #1a202c !important;
-                    background: rgba(255, 255, 255, 0.8) !important;
-                    backdrop-filter: blur(10px);
-                }
-
-                .hero-btn-outline:hover {
-                    transform: translateY(-2px);
-                    border-color: rgba(0, 0, 0, 0.2) !important;
-                    background: #f8fafc !important;
+                    .hero-stats-pill {
+                        flex-direction: column;
+                        border-radius: 20px;
+                        gap: 20px;
+                        padding: 30px;
+                        bottom: 20px;
+                        position: relative;
+                        margin-top: 40px;
+                    }
+                    .hero-section {
+                        height: auto;
+                        padding-bottom: 40px;
+                        align-items: flex-start;
+                    }
                 }
 
                 /* Marquee & Gallery */
@@ -421,17 +413,19 @@ export default function Home() {
             <div className="box-layout">
                 <Navbar />
 
-                {/* Premium Professional Full-Width Slider Hero Section */}
+                {/* Dark Theme Hero Section with Slider */ }
                 <div id="hero" className="hero-section">
-                    <div className="swiper hero-swiper">
+                    
+                    {/* Swiper Slider */}
+                    <div className="swiper hero-swiper" style={{ width: '100%', height: '100%' }}>
                         <div className="swiper-wrapper">
+                            
                             {/* Slide 1 */}
                             <div className="swiper-slide">
-                                <div className="slide" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)' }}>
+                                <div className="slide" style={{ backgroundImage: 'linear-gradient(to right, rgba(10, 20, 25, 0.9) 0%, rgba(10, 20, 25, 0.4) 100%), url(https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)' }}>
                                     <div className="container h-100 position-relative">
                                         <div className="row h-100 align-items-center">
-                                            <div className="col-lg-9 slide-content-wrapper p-4 p-md-0" data-aos="fade-up" data-aos-duration="1000">
-
+                                            <div className="col-lg-10 hero-content-wrapper" data-aos="fade-up" data-aos-duration="1000">
                                                 <h1 className="hero-title">
                                                     Empowering the Future of <br className="d-none d-md-block" />
                                                     <span>Power &amp; Energy</span>
@@ -440,11 +434,11 @@ export default function Home() {
                                                     Join India's premier IEEE PES chapter. We foster technological innovation, excellence, and provide high-quality educational programs in the energy sector for the benefit of humanity.
                                                 </p>
                                                 <div className="d-flex flex-wrap gap-3">
-                                                    <Link href="/membership" className="hero-btn btn-primary-custom">
-                                                        Become a Member <i className="ri-arrow-right-line"></i>
+                                                    <Link href="https://www.ieee.org/membership/join/index.html" target="_blank" rel="noopener noreferrer" className="hero-btn btn-primary-custom">
+                                                        JOIN IEEE PES KERALA <i className="fa fa-arrow-right" aria-hidden="true"></i>
                                                     </Link>
-                                                    <Link href="/events" className="hero-btn btn-secondary-custom">
-                                                        Latest Activities
+                                                    <Link href="/pages/upcoming-events" className="hero-btn btn-secondary-custom">
+                                                        EXPLORE EVENTS <i className="fa fa-calendar" aria-hidden="true"></i>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -455,11 +449,10 @@ export default function Home() {
                             
                             {/* Slide 2 */}
                             <div className="swiper-slide">
-                                <div className="slide" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1508514177221-188b1fc16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)' }}>
+                                <div className="slide" style={{ backgroundImage: 'linear-gradient(to right, rgba(10, 20, 25, 0.9) 0%, rgba(10, 20, 25, 0.4) 100%), url(https://images.unsplash.com/photo-1508514177221-188b1fc16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)' }}>
                                     <div className="container h-100 position-relative">
                                         <div className="row h-100 align-items-center">
-                                            <div className="col-lg-9 slide-content-wrapper p-4 p-md-0">
-
+                                            <div className="col-lg-10 hero-content-wrapper">
                                                 <h1 className="hero-title">
                                                     Advancing Technology <br className="d-none d-md-block" />
                                                     <span>For Humanity</span>
@@ -468,8 +461,8 @@ export default function Home() {
                                                     Connect with over 1,200 power engineering professionals and experts. Gain access to exclusive technical seminars, industry insights, and career-defining networking opportunities.
                                                 </p>
                                                 <div className="d-flex flex-wrap gap-3">
-                                                    <Link href="/events" className="hero-btn btn-primary-custom">
-                                                        View Latest Events <i className="ri-arrow-right-line"></i>
+                                                    <Link href="/pages/upcoming-events" className="hero-btn btn-primary-custom">
+                                                        VIEW LATEST EVENTS <i className="fa fa-arrow-right" aria-hidden="true"></i>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -478,6 +471,46 @@ export default function Home() {
                                 </div>
                             </div>
                             
+                        </div>
+                    </div>
+                    
+                    {/* Stats Footer Pill (Fixed over slider) */}
+                    <div className="hero-stats-pill" data-aos="fade-up" data-aos-delay="200">
+                        <div className="hero-stat-item">
+                            <div className="hero-stat-icon">
+                                <i className="fa fa-users"></i>
+                            </div>
+                            <div className="hero-stat-text">
+                                <h4>Strong Community</h4>
+                                <p>Network with professionals<br/>and experts.</p>
+                            </div>
+                        </div>
+                        <div className="hero-stat-item">
+                            <div className="hero-stat-icon">
+                                <i className="fa fa-lightbulb-o"></i>
+                            </div>
+                            <div className="hero-stat-text">
+                                <h4>Knowledge Sharing</h4>
+                                <p>Access workshops, seminars<br/>and resources.</p>
+                            </div>
+                        </div>
+                        <div className="hero-stat-item">
+                            <div className="hero-stat-icon">
+                                <i className="fa fa-certificate"></i>
+                            </div>
+                            <div className="hero-stat-text">
+                                <h4>Career Growth</h4>
+                                <p>Enhance your skills and<br/>advance your career.</p>
+                            </div>
+                        </div>
+                        <div className="hero-stat-item">
+                            <div className="hero-stat-icon">
+                                <i className="fa fa-globe"></i>
+                            </div>
+                            <div className="hero-stat-text">
+                                <h4>Global Impact</h4>
+                                <p>Contribute to a sustainable<br/>energy future.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
