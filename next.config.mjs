@@ -7,6 +7,20 @@ const nextConfig = {
       'cdn.yourdomain.com',
       'localhost'
     ],
+    localPatterns: [
+      {
+        pathname: '/api/admin/file*',
+      },
+      {
+        pathname: '/images/**',
+      },
+      {
+        pathname: '/pes-theme/**',
+      },
+      {
+        pathname: '/uploads/**',
+      },
+    ],
     // For Cloudflare R2 images
     remotePatterns: [
       {
@@ -16,6 +30,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.yourdomain.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pub-c13015ac09ec4a868fff8c8caaa675fa.r2.dev',
       },
     ],
   },
