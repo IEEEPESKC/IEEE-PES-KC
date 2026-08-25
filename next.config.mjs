@@ -2,15 +2,28 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    localPatterns: [
+      {
+        pathname: '/api/admin/file*',
+      },
+      {
+        pathname: '/images/**',
+      },
+      {
+        pathname: '/pes-theme/**',
+      },
+      {
+        pathname: '/uploads/**',
+      },
+    ],
     remotePatterns: [
       {
         protocol: 'https',
-       
-        hostname: 'pub-c13015ac09ec4a868fff8c8caaa675fa.r2.dev', 
+        hostname: 'pub-c13015ac09ec4a868fff8c8caaa675fa.r2.dev',
       },
       {
         protocol: 'https',
-        hostname: '*.ieeepeskc.workers.dev', 
+        hostname: '*.ieeepeskc.workers.dev',
       },
       {
         protocol: 'http',
