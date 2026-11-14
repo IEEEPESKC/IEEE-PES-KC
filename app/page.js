@@ -213,7 +213,7 @@ export default function Home() {
                     width: 100%;
                     min-height: 540px;
                     display: flex;
-                    align-items: center;
+                    align-items: stretch;
                     overflow: hidden;
                     background-color: #1a271d;
                 }
@@ -250,17 +250,22 @@ export default function Home() {
                     max-width: 1240px;
                     width: 100%;
                     margin: 0 auto;
-                    padding: 40px 24px;
+                    padding: 0 24px;
                     display: flex;
                     justify-content: flex-end;
+                    align-items: stretch;
                 }
 
                 .pes-hero-card {
                     background: rgba(74, 127, 53, 0.92);
-                    padding: 44px 42px;
+                    padding: 60px 46px;
                     max-width: 540px;
                     width: 100%;
                     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-height: 100%;
                 }
 
                 .pes-hero-card h1 {
@@ -269,6 +274,7 @@ export default function Home() {
                     font-size: 2.35rem;
                     color: #ffffff;
                     line-height: 1.15;
+                    margin-top: 0;
                     margin-bottom: 16px;
                     letter-spacing: -0.5px;
                 }
@@ -329,15 +335,15 @@ export default function Home() {
 
                 @media (max-width: 768px) {
                     .pes-hero {
-                        min-height: 440px;
-                        align-items: flex-end;
+                        min-height: 480px;
+                        align-items: stretch;
                     }
                     .pes-hero-container {
                         justify-content: center;
-                        padding: 24px 16px;
+                        padding: 0;
                     }
                     .pes-hero-card {
-                        padding: 32px 24px;
+                        padding: 40px 24px;
                         max-width: 100%;
                     }
                     .pes-hero-card h1 {
