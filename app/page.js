@@ -349,6 +349,9 @@ export default function Home() {
                    2. ABOUT / WHO WE ARE
                    ========================================================================== */
                 .pes-about-section {
+                    position: relative;
+                    z-index: 2;
+                    clear: both;
                     padding: 80px 0 60px;
                     background: #ffffff;
                 }
@@ -979,8 +982,11 @@ export default function Home() {
                 <section className="pes-hero">
                     <div className="pes-hero-bg">
                         <img
-                            src="/pes-theme/wp-content/uploads/sites/78/2019/12/shutterstock_681206938-slider.jpg"
-                            alt="Power transmission lines at sunset — IEEE PES Kerala Chapter"
+                            src="/images/ieee-images/hero-bg.jpg"
+                            onError={(e) => {
+                                e.currentTarget.src = "/pes-theme/wp-content/uploads/sites/78/2019/12/shutterstock_681206938-slider.jpg";
+                            }}
+                            alt="IEEE PES Kerala Chapter"
                         />
                     </div>
                     <div className="pes-hero-container">
