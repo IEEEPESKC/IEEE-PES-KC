@@ -210,31 +210,38 @@ export default function Home() {
                    ========================================================================== */
                 .pes-hero {
                     position: relative;
-<<<<<<< HEAD
                     width: 100%;
-                    min-height: 520px;
-=======
-                    background: linear-gradient(rgba(5, 10, 5, 0.45), rgba(5, 10, 5, 0.45)),
-                                url('/images/ieee-images/hero-bg.jpg') center/cover no-repeat;
-                    min-height: min(86vh, 720px);
->>>>>>> c8327b42db33943ef0bd9f6839080ace22bdc1ad
+                    min-height: 540px;
                     display: flex;
                     align-items: center;
                     overflow: hidden;
-                    background-color: #2b392a;
+                    background-color: #1a271d;
                 }
 
                 .pes-hero-bg {
                     position: absolute;
-                    inset: 0;
-                    z-index: 0;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                    overflow: hidden;
                 }
 
                 .pes-hero-bg img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                    object-position: center;
                     display: block;
+                }
+
+                .pes-hero-bg::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(to right, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 100%);
+                    pointer-events: none;
                 }
 
                 .pes-hero-container {
