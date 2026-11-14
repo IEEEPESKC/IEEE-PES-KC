@@ -532,7 +532,8 @@
       "name": "Nimitha Muraleedharan",
       "role": "Social Outreach Coordinator",
       "email": "example@ieee.org",
-      "linkedin": ""
+      "linkedin": "",
+      "imageUrl": "/images/ieee-images/execom/nimitha-muraleedharan.jpg"
     },
     {
       "id": "1782467415818",
@@ -566,6 +567,16 @@
       "email": "example@ieee.org",
       "linkedin": "",
       "imageUrl": "https://pub-c13015ac09ec4a868fff8c8caaa675fa.r2.dev/execom/1782467165898-naufal.webp"
+    },
+    {
+      "id": "1717000000005",
+      "name": "trail",
+      "role": "Trial Coordinator",
+      "category": "slt",
+      "status": "current",
+      "imageUrl": "",
+      "email": "trail@example.com",
+      "linkedin": ""
     }
   ],
   "chapters": [],

@@ -1,6 +1,5 @@
 import './globals.css';
 import Script from 'next/script';
-import MaintenanceBanner from './components/MaintenanceBanner';
 
 export const metadata = {
   title: 'IEEE PES Kerala Chapter - Power & Energy Society',
@@ -25,8 +24,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/pes-theme/css/green.css" />
       </head>
       <body>
-        <MaintenanceBanner />
-        {children}
+{children}
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" strategy="afterInteractive" />
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="afterInteractive" />
         <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" strategy="afterInteractive" />

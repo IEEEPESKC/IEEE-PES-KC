@@ -210,8 +210,14 @@ export default function Home() {
                    ========================================================================== */
                 .pes-hero {
                     position: relative;
+<<<<<<< HEAD
                     width: 100%;
                     min-height: 520px;
+=======
+                    background: linear-gradient(rgba(5, 10, 5, 0.45), rgba(5, 10, 5, 0.45)),
+                                url('/images/ieee-images/hero-bg.jpg') center/cover no-repeat;
+                    min-height: min(86vh, 720px);
+>>>>>>> c8327b42db33943ef0bd9f6839080ace22bdc1ad
                     display: flex;
                     align-items: center;
                     overflow: hidden;
