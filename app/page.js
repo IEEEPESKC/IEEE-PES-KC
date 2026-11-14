@@ -266,7 +266,8 @@ export default function Home() {
                 .hero-section {
                     width: 100%;
                     position: relative;
-                    background: #0a0f09;
+                    background: linear-gradient(rgba(5, 10, 5, 0.45), rgba(5, 10, 5, 0.45)),
+                                url('/images/ieee-images/hero-bg.jpg') center/cover no-repeat;
                     min-height: min(86vh, 720px);
                     display: flex;
                     align-items: center;
