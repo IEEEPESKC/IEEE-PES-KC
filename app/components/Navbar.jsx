@@ -122,7 +122,7 @@ export default function Navbar() {
                         />
                         <div className={styles.brandTitles}>
                             <span className={styles.brandChapter}>IEEE PES Kerala Chapter</span>
-                            <span className={styles.brandTagline}>Power &amp; Energy Society · Kerala Section</span>
+                            
                         </div>
                     </Link>
 
