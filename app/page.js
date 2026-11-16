@@ -240,7 +240,7 @@ export default function Home() {
                     content: '';
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(to right, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.6) 100%);
+                    background: linear-gradient(to right, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.4) 100%);
                     pointer-events: none;
                 }
 
@@ -257,7 +257,9 @@ export default function Home() {
                 }
 
                 .pes-hero-card {
-                    background: rgba(74, 127, 53, 0.92);
+                    background: rgba(74, 127, 53, 0.62);
+                    backdrop-filter: blur(2px);
+                    -webkit-backdrop-filter: blur(2px);
                     padding: 60px 46px;
                     max-width: 540px;
                     width: 100%;
@@ -277,6 +279,7 @@ export default function Home() {
                     margin-top: 0;
                     margin-bottom: 16px;
                     letter-spacing: -0.5px;
+                    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
                 }
 
                 .pes-hero-card p {
@@ -284,7 +287,8 @@ export default function Home() {
                     font-size: 0.95rem;
                     line-height: 1.7;
                     margin-bottom: 26px;
-                    opacity: 0.95;
+                    opacity: 0.98;
+                    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
                 }
 
                 .pes-hero-actions {
