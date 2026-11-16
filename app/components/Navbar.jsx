@@ -78,7 +78,7 @@ export default function Navbar() {
         const elapsed = Math.max(1, Date.now() - dragState.current.startTime);
         const deltaX = dragState.current.deltaX;
         const velocity = Math.abs(deltaX) / elapsed;
-        const drawerWidth = drawerRef.current ? drawerRef.current.offsetWidth : 360;
+        const drawerWidth = drawerRef.current ? drawerRef.current.offsetWidth : 320;
         const shouldClose = Math.abs(deltaX) > drawerWidth * 0.3 || velocity > 0.5;
 
         if (drawerRef.current) {
@@ -100,7 +100,7 @@ export default function Navbar() {
 
     return (
         <header className={styles.navbarContainer} role="banner">
-            {/* IEEE Global Ribbon */}
+            {/* Tier 1: IEEE Global Ribbon */}
             <div className={styles.ieeeRibbon}>
                 <ul className={styles.ribbonLinks}>
                     <li><a href="https://www.ieee.org" target="_blank" rel="noopener noreferrer">IEEE.org</a></li>
@@ -111,34 +111,73 @@ export default function Navbar() {
                 </ul>
             </div>
 
-            {/* Main Navbar */}
-            <div className={styles.mainNav}>
-                <div className={styles.logoContainer}>
-                    <Link href="/" title="IEEE PES Kerala Chapter">
-                        <Image src="/images/ieee-images/IEEE_logo.png" alt="IEEE PES Kerala" priority width={250} height={70} style={{ objectFit: 'contain' }} className={styles.logoImage} />
+            {/* Tier 2: Chapter Branding Bar (White Background) */}
+            <div className={styles.brandBar}>
+                <div className={styles.brandContainer}>
+                    <Link href="/" title="IEEE PES Kerala Chapter" className={styles.brandLink}>
+                        <img
+                            src="/pes-theme/wp-content/uploads/sites/78/2019/12/logo-pes.png"
+                            alt="IEEE PES Kerala"
+                            className={styles.pesEmblem}
+                        />
+                        <div className={styles.brandTitles}>
+                            <span className={styles.brandChapter}>IEEE PES Kerala Chapter</span>
+                            
+                        </div>
                     </Link>
+
+                    <a
+                        href="https://www.ieee.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.ieeeLogoLink}
+                        title="IEEE - Advancing Technology for Humanity"
+                    >
+                        <img
+                            src="/pes-theme/images/logo-ieee.png"
+                            alt="IEEE"
+                            className={styles.ieeeLogo}
+                        />
+                    </a>
                 </div>
-
-                <ul className={styles.navLinks}>
-                    {NAV_LINKS.map(link => (
-                        <li key={link.path}>
-                            <Link href={link.path} className={pathname === link.path ? styles.active : ''}>
-                                {link.name}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-
-                <a href="https://www.ieee.org/membership/join/index.html" target="_blank" rel="noopener noreferrer" className={styles.joinBtn}>
-                    JOIN IEEE <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
-
-                <button className={styles.mobileMenuBtn} onClick={() => setIsMenuOpen(true)} aria-label="Open menu">
-                    <i className="fa fa-bars" aria-hidden="true"></i>
-                </button>
             </div>
 
-            {/* Mobile right-side drawer — dismiss via backdrop tap, Escape, or swiping left */}
+            {/* Tier 3: Main Navigation Bar (PES Green) */}
+            <nav className={styles.mainNav} aria-label="Main Navigation">
+                <div className={styles.navContainer}>
+                    <ul className={styles.navLinks}>
+                        {NAV_LINKS.map(link => (
+                            <li key={link.path}>
+                                <Link
+                                    href={link.path}
+                                    className={pathname === link.path ? styles.active : ''}
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <a
+                        href="https://www.ieee.org/membership/join/index.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.joinBtn}
+                    >
+                        JOIN IEEE <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+
+                    <button
+                        className={styles.mobileMenuBtn}
+                        onClick={() => setIsMenuOpen(true)}
+                        aria-label="Open menu"
+                    >
+                        <i className="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </nav>
+
+            {/* Mobile drawer */}
             <div
                 className={`${styles.navBackdrop} ${isMenuOpen ? styles.active : ''}`}
                 onClick={() => setIsMenuOpen(false)}
@@ -154,6 +193,16 @@ export default function Navbar() {
                 onTouchEnd={handleTouchEnd}
                 onTouchCancel={handleTouchEnd}
             >
+                <div className="d-flex justify-content-between align-items-center pb-3 border-bottom">
+                    <span className="fw-bold" style={{ color: '#4a7f35', fontFamily: 'Open Sans Condensed', fontSize: '1.25rem' }}>MENU</span>
+                    <button
+                        onClick={() => setIsMenuOpen(false)}
+                        className="btn btn-sm btn-light"
+                        aria-label="Close menu"
+                    >
+                        ✕
+                    </button>
+                </div>
                 <ul className={styles.mobileNavList}>
                     {NAV_LINKS.map(link => (
                         <li key={link.path}>
@@ -167,7 +216,13 @@ export default function Navbar() {
                         </li>
                     ))}
                     <li>
-                        <a href="https://www.ieee.org/membership/join/index.html" target="_blank" rel="noopener noreferrer" className={styles.joinBtn} onClick={() => setIsMenuOpen(false)}>
+                        <a
+                            href="https://www.ieee.org/membership/join/index.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.joinBtn}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
                             JOIN IEEE <i className="fa fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </li>
