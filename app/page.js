@@ -1,17 +1,22 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Swiper from 'swiper';
+import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 export default function Home() {
     const [events, setEvents] = useState([]);
     const [announcements, setAnnouncements] = useState([]);
     const [gallery, setGallery] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    // Lightbox modal state for gallery
-    const [activePhoto, setActivePhoto] = useState(null);
 
     // Fetch data from API
     useEffect(() => {
@@ -37,6 +42,144 @@ export default function Home() {
             });
     }, []);
 
+    // Initialize scripts after data loads
+    useEffect(() => {
+        if (isLoading) return;
+
+        const initScripts = () => {
+            // Initialize AOS
+            AOS.init({
+                duration: 600,
+                easing: 'ease-out',
+                once: true,
+                offset: 50
+            });
+
+            // Hero cursor-reactive glow (desktop pointer only)
+            const heroSection = document.getElementById('hero');
+            const heroGlow = document.getElementById('heroGlow');
+            let heroGlowRaf = null;
+            const handleHeroPointerMove = (e) => {
+                if (heroGlowRaf) return;
+                heroGlowRaf = requestAnimationFrame(() => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    heroGlow.style.setProperty('--mx', `${x}%`);
+                    heroGlow.style.setProperty('--my', `${y}%`);
+                    heroGlowRaf = null;
+                });
+            };
+            if (heroSection && heroGlow && window.matchMedia('(hover: hover)').matches) {
+                heroSection.addEventListener('mousemove', handleHeroPointerMove);
+            }
+
+            // Upcoming Events Swiper
+            const upcomingSlides = document.querySelectorAll('.upcoming-events-swiper .swiper-slide');
+            if (upcomingSlides.length > 0) {
+                new Swiper('.upcoming-events-swiper', {
+                    modules: [Pagination, Autoplay, EffectFade],
+                    slidesPerView: 1,
+                    autoplay: { delay: 3500, disableOnInteraction: false },
+                    pagination: { el: '.upcoming-swiper-pagination', clickable: true },
+                    loop: upcomingSlides.length > 1,
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true }
+                });
+            }
+
+            // Recent Events Swiper
+            const recentSlides = document.querySelectorAll('.recent-events-swiper .swiper-slide');
+            if (recentSlides.length > 0) {
+                new Swiper('.recent-events-swiper', {
+                    modules: [Pagination, Autoplay],
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    breakpoints: {
+                        768: { slidesPerView: 2, spaceBetween: 24 },
+                        1024: { slidesPerView: 3, spaceBetween: 24 },
+                        1200: { slidesPerView: 4, spaceBetween: 24 }
+                    },
+                    autoplay: { delay: 4000, disableOnInteraction: false },
+                    pagination: { el: '.recent-events-pagination', clickable: true },
+                    loop: recentSlides.length > 3,
+                });
+            }
+
+            // Gallery Marquee Scroll Effect — infinite, wraps seamlessly, driven by page scroll position
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const handleMarqueeScroll = () => {
+                if (prefersReducedMotion) return;
+                const marquee = document.querySelector('.marquee-container');
+                if (marquee) {
+                    const halfWidth = marquee.scrollWidth / 2;
+                    if (halfWidth > 0) {
+                        const offset = (window.scrollY * 0.6) % halfWidth;
+                        marquee.style.transform = `translateX(${-offset}px)`;
+                    }
+                }
+            };
+            if (!prefersReducedMotion) {
+                window.addEventListener('scroll', handleMarqueeScroll, { passive: true });
+                window.addEventListener('resize', handleMarqueeScroll, { passive: true });
+                handleMarqueeScroll();
+            }
+
+            // Gallery Preview Logic
+            let galleryTimer;
+            const modal = document.getElementById('galleryPreview');
+            const img = document.getElementById('previewImg');
+            const timerBar = document.getElementById('previewTimer');
+
+            const openGalleryPreview = (imgSrc) => {
+                if (!img || !modal || !timerBar) return;
+                img.src = imgSrc;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                timerBar.style.transition = 'none';
+                timerBar.style.width = '100%';
+
+                setTimeout(() => {
+                    timerBar.style.transition = 'width 10s linear';
+                    timerBar.style.width = '0%';
+                }, 50);
+
+                clearTimeout(galleryTimer);
+                galleryTimer = setTimeout(closeGalleryPreview, 10000);
+            };
+
+            const closeGalleryPreview = () => {
+                if (!modal) return;
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                clearTimeout(galleryTimer);
+            };
+
+            if (modal) modal.onclick = closeGalleryPreview;
+
+            document.querySelectorAll('.gallery-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const imgElement = card.querySelector('img');
+                    if (imgElement) openGalleryPreview(imgElement.src);
+                });
+            });
+
+            const closeBtn = document.querySelector('.gallery-preview-close');
+            if (closeBtn) closeBtn.addEventListener('click', closeGalleryPreview);
+
+            return () => {
+                window.removeEventListener('scroll', handleMarqueeScroll);
+                window.removeEventListener('resize', handleMarqueeScroll);
+                if (heroSection) heroSection.removeEventListener('mousemove', handleHeroPointerMove);
+                if (heroGlowRaf) cancelAnimationFrame(heroGlowRaf);
+            };
+        };
+
+        const timer = setTimeout(initScripts, 300);
+        return () => clearTimeout(timer);
+    }, [isLoading, events, gallery, announcements]);
+
     // Helper function to categorize events
     const getCategorizedEvents = () => {
         const today = new Date();
@@ -61,101 +204,35 @@ export default function Home() {
 
     const { upcoming, recent } = getCategorizedEvents();
 
-    // Fallback Data to ensure rich, authentic content is always visible
+    // Fallback Data
     const fallbackAnnouncements = [
-        {
-            date: "March 15, 2026",
-            title: "Call for Papers: Power Systems Conference 2026",
-            description: "Submit your research papers for the upcoming international conference on modern power systems and grid integration.",
-            link: "/pages/announcements"
-        },
-        {
-            date: "March 10, 2026",
-            title: "New Student Chapter Launched at CET",
-            description: "Welcoming the newest addition to our growing network of over 50 Student Branch Chapters across Kerala.",
-            link: "/pages/announcements"
-        },
-        {
-            date: "March 1, 2026",
-            title: "Membership Drive 2026 Begins",
-            description: "Join IEEE PES Kerala Chapter to access technical publications, mentorship, and professional growth opportunities.",
-            link: "/pages/membership-benefits"
-        }
+        { date: "March 15, 2026", title: "Call for Papers: Power Systems Conference 2026", description: "Submit your research papers for the upcoming international conference on power systems." },
+        { date: "March 10, 2026", title: "New Student Chapter Launched at CET", description: "Welcoming the newest addition to our growing student chapter network." },
+        { date: "March 1, 2026", title: "Membership Drive 2026 Begins", description: "Join IEEE PES Kerala Chapter and get exclusive benefits." }
     ];
 
     const displayAnnouncements = announcements.length > 0 ? announcements : fallbackAnnouncements;
 
-    const fallbackRecentEvents = [
-        {
-            title: "Workshop on Renewable Energy Systems",
-            imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            date: "2026-03-18",
-            tag: "WORKSHOP",
-            description: "Comprehensive training and hands-on session on solar and wind energy integration into sustainable power networks."
-        },
-        {
-            title: "Power Electronics Seminar",
-            imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            date: "2026-03-15",
-            tag: "TECHNICAL SEMINAR",
-            description: "Advanced topics in power conversion, control systems, and high-efficiency inverter design for clean energy."
-        },
-        {
-            title: "Student Chapter Technical Meet",
-            imageUrl: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            date: "2026-03-12",
-            tag: "STUDENT CHAPTER EVENT",
-            description: "Annual networking and symposium for student branch leadership and collegiate members across all districts of Kerala."
-        }
+    const galleryImages = [
+        { img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "IEEE PES Conference 2025" },
+        { img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Workshop on Smart Grids" },
+        { img: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Technical Seminar Series" },
+        { img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Student Chapter Meeting" },
+        { img: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Industry Expert Talk" },
+        { img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Networking Event" },
     ];
 
-    const displayRecent = recent.length > 0 ? recent : fallbackRecentEvents;
-
-    const fallbackGallery = [
-        {
-            img: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            title: "Conferences & Technical Sessions"
-        },
-        {
-            img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            title: "Renewable Energy Workshop"
-        },
-        {
-            img: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            title: "Power Electronics Laboratory"
-        }
-    ];
-
-    const displayGallery = gallery.length > 0 ? gallery.map(g => ({ img: g.imageUrl || g.url, title: g.title || g.name })) : fallbackGallery;
-
-    const formatDate = (dateStr) => {
-        if (!dateStr) return '';
-        if (isNaN(Date.parse(dateStr))) return dateStr;
-        return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    };
-
-    const featuredEvent = upcoming.length > 0 ? upcoming[0] : null;
+    const displayGallery = gallery.length > 0 ? gallery.map(g => ({ img: g.imageUrl || g.url, title: g.title || g.name })) : galleryImages;
 
     return (
         <>
             <style jsx global>{`
-                /* ==========================================================================
-                   IEEE PES Official Template Styling System
-                   Clean, authoritative, human-crafted design with zero AI artifacts
-                   ========================================================================== */
                 :root {
-                    --pes-green: #5a9641;
-                    --pes-green-dark: #467a32;
-                    --pes-green-light: rgba(90, 150, 65, 0.08);
-                    --pes-dark: #222222;
-                    --pes-gray-dark: #374151;
-                    --pes-gray: #555555;
-                    --pes-gray-light: #6b7280;
-                    --pes-bg-gray: #f7f9f6;
-                    --pes-border: #e2e8f0;
-                    --pes-border-light: #edf2f7;
-                    --font-heading: 'Open Sans Condensed', 'Arial Narrow', sans-serif;
-                    --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                    --pes-green: #659b45;
+                    --pes-dark: #1a1a1a;
+                    --pes-light: #f8f9fa;
+                    --pes-white: #ffffff;
+                    --pes-gray: #666666;
                 }
 
                 * {
@@ -164,1264 +241,819 @@ export default function Home() {
                     box-sizing: border-box;
                 }
 
-                body {
-                    font-family: var(--font-body);
-                    color: var(--pes-dark);
-                    background-color: #ffffff;
-                    line-height: 1.65;
-                    font-size: 15px;
-                    -webkit-font-smoothing: antialiased;
+                html {
+                    scroll-behavior: smooth;
                 }
 
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+
+                /* Link styles */
                 a {
                     color: var(--pes-green);
                     text-decoration: none;
-                    transition: color 0.2s ease;
+                    transition: color 0.2s ease-out;
                 }
 
                 a:hover {
-                    color: var(--pes-green-dark);
+                    color: #4a7833;
                 }
 
-                /* Section Headings */
-                .pes-kicker {
-                    display: inline-block;
-                    font-family: var(--font-body);
-                    font-size: 0.72rem;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    letter-spacing: 1.2px;
-                    color: var(--pes-green);
-                    margin-bottom: 8px;
-                }
-
-                .pes-section-title {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 2.2rem;
-                    color: var(--pes-dark);
-                    line-height: 1.2;
-                    letter-spacing: -0.5px;
-                    margin-bottom: 24px;
-                }
-
-                /* ==========================================================================
-                   1. HERO SECTION
-                   ========================================================================== */
-                .pes-hero {
-                    position: relative;
+                /* IEEE PES Theme: Hero Section — minimal, typography-led, cursor-reactive */
+                .hero-section {
                     width: 100%;
-                    min-height: 540px;
+                    position: relative;
+                    background: linear-gradient(rgba(5, 10, 5, 0.45), rgba(5, 10, 5, 0.45)),
+                                url('/images/ieee-images/hero-bg.jpg') center/cover no-repeat;
+                    min-height: min(86vh, 720px);
                     display: flex;
-                    align-items: stretch;
+                    align-items: center;
                     overflow: hidden;
-                    background-color: #1a271d;
+                    cursor: default;
                 }
 
-                .pes-hero-bg {
+                .hero-glow {
                     position: absolute;
+                    inset: 0;
+                    background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 40%), rgba(101, 155, 69, 0.22), transparent 65%);
+                    transition: opacity 300ms ease-out;
+                    pointer-events: none;
+                }
+
+                @media (max-width: 767px), (hover: none) {
+                    .hero-glow { display: none; }
+                }
+
+                .hero-content {
+                    position: relative;
+                    z-index: 2;
+                    width: 100%;
+                    max-width: 840px;
+                    padding: 40px;
+                    color: white;
+                }
+
+                .hero-title {
+                    font-size: clamp(2.5rem, 5.4vw + 1rem, 5.25rem);
+                    font-weight: 800;
+                    color: white;
+                    line-height: 1.02;
+                    margin-bottom: 1.5rem;
+                    letter-spacing: -0.035em;
+                    text-wrap: balance;
+                }
+
+                .hero-title span {
+                    color: var(--pes-green);
+                }
+
+                .hero-subtitle {
+                    font-size: clamp(1rem, 0.4vw + 0.9rem, 1.2rem);
+                    color: rgba(255, 255, 255, 0.7);
+                    line-height: 1.65;
+                    margin-bottom: 2.5rem;
+                    max-width: 580px;
+                    font-weight: 400;
+                }
+
+                .hero-btn {
+                    padding: 14px 30px;
+                    font-weight: 600;
+                    border-radius: 4px;
+                    transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease-out, border-color 180ms ease-out;
+                    font-size: 0.9rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    text-decoration: none;
+                    border: none;
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    letter-spacing: 0.6px;
+                }
+
+                .hero-btn:active {
+                    transform: scale(0.97);
+                }
+
+                .btn-primary-custom {
+                    background-color: var(--pes-green);
+                    color: white;
+                    box-shadow: 0 4px 14px rgba(101, 155, 69, 0.3);
+                }
+
+                .btn-primary-custom:hover {
+                    background-color: #75ad52;
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 22px rgba(101, 155, 69, 0.4);
+                }
+
+                .btn-primary-custom i {
+                    transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+                }
+
+                .btn-primary-custom:hover i {
+                    transform: translateX(3px);
+                }
+
+                .btn-secondary-custom {
+                    background-color: transparent;
+                    color: white;
+                    border: 1.5px solid rgba(255, 255, 255, 0.3);
+                }
+
+                .btn-secondary-custom:hover {
+                    background-color: rgba(255, 255, 255, 0.08);
+                    border-color: rgba(255, 255, 255, 0.7);
+                    transform: translateY(-2px);
+                }
+
+                @media (max-width: 768px) {
+                    .hero-section { min-height: min(90vh, 600px); }
+                    .hero-content { padding: 30px 24px; }
+                }
+
+                /* Cards & Components */
+                .card {
+                    background: white;
+                    border-radius: 4px;
+                    border: 1px solid #e0e0e0;
+                    overflow: hidden;
+                    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                }
+
+                .card:hover {
+                    transform: translateY(-6px);
+                    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+                }
+
+                .card img {
+                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    display: block;
+                }
+
+                .card:hover img {
+                    transform: scale(1.05);
+                }
+
+                /* Gallery & Event Cards */
+                .gallery-card {
+                    transition: all 0.3s ease-out;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    background: white;
+                    border: 1px solid #e0e0e0;
+                }
+
+                .gallery-card:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+                }
+
+                .gallery-img {
+                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                }
+
+                .gallery-card:hover .gallery-img {
+                    transform: scale(1.08);
+                }
+
+                /* Responsive gallery image heights */
+                @media (min-width: 1024px) {
+                    .gallery-card > div:first-child {
+                        height: 220px !important;
+                    }
+                }
+
+                @media (min-width: 768px) and (max-width: 1023px) {
+                    .gallery-card > div:first-child {
+                        height: 200px !important;
+                    }
+                }
+
+                @media (min-width: 600px) and (max-width: 767px) {
+                    .gallery-card > div:first-child {
+                        height: 180px !important;
+                    }
+                }
+
+                @media (max-width: 599px) {
+                    .gallery-card > div:first-child {
+                        height: 160px !important;
+                    }
+                }
+
+                .event-card-hover {
+                    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                    border: 1px solid #e0e0e0;
+                    border-radius: 4px;
+                }
+
+                .event-card-hover:hover {
+                    transform: translateY(-6px);
+                    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+                }
+
+                .event-card-img {
+                    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                }
+
+                .event-card-hover:hover .event-card-img {
+                    transform: scale(1.05);
+                }
+
+                /* Preview Modal */
+                .gallery-preview-modal {
+                    position: fixed;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    z-index: 1;
-                    overflow: hidden;
+                    background: rgba(8, 10, 8, 0.92);
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 9999;
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
+                    opacity: 0;
+                    transition: opacity 220ms cubic-bezier(0.23, 1, 0.32, 1);
                 }
 
-                .pes-hero-bg img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    object-position: center;
+                .gallery-preview-modal.active {
+                    display: flex;
+                    opacity: 1;
+                }
+
+                .gallery-preview-content {
+                    position: relative;
+                    max-width: 92%;
+                    max-height: 85vh;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    transform: scale(0.96);
+                    opacity: 0;
+                    transition: transform 260ms cubic-bezier(0.23, 1, 0.32, 1), opacity 260ms cubic-bezier(0.23, 1, 0.32, 1);
+                }
+
+                .gallery-preview-modal.active .gallery-preview-content {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                .gallery-preview-content img {
+                    max-width: 100%;
+                    max-height: 72vh;
+                    object-fit: contain;
+                    border-radius: 8px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
                     display: block;
                 }
 
-                .pes-hero-bg::after {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    background: linear-gradient(to right, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.4) 100%);
-                    pointer-events: none;
-                }
-
-                .pes-hero-container {
-                    position: relative;
-                    z-index: 2;
-                    max-width: 1240px;
-                    width: 100%;
-                    margin: 0 auto;
-                    padding: 0 24px;
-                    display: flex;
-                    justify-content: flex-end;
-                    align-items: stretch;
-                }
-
-                .pes-hero-card {
-                    background: rgba(74, 127, 53, 0.62);
-                    backdrop-filter: blur(2px);
-                    -webkit-backdrop-filter: blur(2px);
-                    padding: 60px 46px;
-                    max-width: 540px;
-                    width: 100%;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    min-height: 100%;
-                }
-
-                .pes-hero-card h1 {
-                    font-family: var(--font-heading);
+                .preview-caption {
+                    color: white;
                     font-weight: 700;
-                    font-size: 2.35rem;
-                    color: #ffffff;
-                    line-height: 1.15;
-                    margin-top: 0;
-                    margin-bottom: 16px;
-                    letter-spacing: -0.5px;
-                    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+                    font-size: 1rem;
+                    margin-top: 18px;
+                    text-align: center;
+                    max-width: 80ch;
                 }
 
-                .pes-hero-card p {
-                    color: #ffffff;
-                    font-size: 0.95rem;
-                    line-height: 1.7;
-                    margin-bottom: 26px;
-                    opacity: 0.98;
-                    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-                }
-
-                .pes-hero-actions {
+                .gallery-preview-close {
+                    position: fixed;
+                    top: 24px;
+                    right: 24px;
+                    width: 44px;
+                    height: 44px;
                     display: flex;
-                    flex-wrap: wrap;
-                    gap: 12px;
-                }
-
-                .pes-btn-hero-primary {
-                    background: #ffffff;
-                    color: #4a7f35 !important;
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 14px;
-                    text-transform: uppercase;
-                    letter-spacing: 0.6px;
-                    padding: 12px 26px;
-                    border-radius: 2px;
-                    display: inline-flex;
                     align-items: center;
-                    gap: 8px;
-                    transition: all 0.2s ease;
+                    justify-content: center;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    color: white;
+                    font-size: 1.25rem;
+                    cursor: pointer;
+                    transition: background-color 180ms ease-out, transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+                    z-index: 2;
                 }
 
-                .pes-btn-hero-primary:hover {
-                    background: #f0f7ed;
-                    transform: translateY(-2px);
+                .gallery-preview-close:hover {
+                    background: rgba(255, 255, 255, 0.18);
                 }
 
-                .pes-btn-hero-secondary {
-                    background: transparent;
-                    color: #ffffff !important;
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 14px;
-                    text-transform: uppercase;
-                    letter-spacing: 0.6px;
-                    padding: 12px 24px;
-                    border: 1.5px solid rgba(255, 255, 255, 0.8);
+                .gallery-preview-close:active {
+                    transform: scale(0.92);
+                }
+
+                .preview-nav {
+                    position: fixed;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 48px;
+                    height: 48px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    color: white;
+                    font-size: 1.4rem;
+                    cursor: pointer;
+                    transition: background-color 180ms ease-out, transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+                    z-index: 2;
+                }
+
+                .preview-nav:hover {
+                    background: rgba(255, 255, 255, 0.18);
+                }
+
+                .preview-nav:active {
+                    transform: translateY(-50%) scale(0.92);
+                }
+
+                .preview-nav-prev { left: 24px; }
+                .preview-nav-next { right: 24px; }
+
+                @media (max-width: 767px) {
+                    .preview-nav { display: none; }
+                }
+
+                .preview-timer-container {
+                    position: relative;
+                    margin-top: 14px;
+                    width: min(320px, 60vw);
+                    height: 3px;
+                    background: rgba(255, 255, 255, 0.18);
                     border-radius: 2px;
-                    transition: all 0.2s ease;
+                    overflow: hidden;
                 }
 
-                .pes-btn-hero-secondary:hover {
-                    background: rgba(255, 255, 255, 0.15);
-                    border-color: #ffffff;
+                .preview-timer-bar {
+                    height: 100%;
+                    background: var(--pes-green);
+                    width: 100%;
+                }
+
+                /* Section Spacing */
+                .section-padding {
+                    padding: 60px 24px;
                 }
 
                 @media (max-width: 768px) {
-                    .pes-hero {
-                        min-height: 480px;
-                        align-items: stretch;
-                    }
-                    .pes-hero-container {
-                        justify-content: center;
-                        padding: 0;
-                    }
-                    .pes-hero-card {
-                        padding: 40px 24px;
-                        max-width: 100%;
-                    }
-                    .pes-hero-card h1 {
-                        font-size: 1.85rem;
+                    .section-padding {
+                        padding: 40px 16px;
                     }
                 }
 
-                /* ==========================================================================
-                   2. ABOUT / WHO WE ARE
-                   ========================================================================== */
-                .pes-about-section {
-                    position: relative;
-                    z-index: 2;
-                    clear: both;
-                    padding: 80px 0 60px;
-                    background: #ffffff;
+                @media (max-width: 480px) {
+                    .section-padding {
+                        padding: 30px 12px;
+                    }
                 }
 
-                .pes-about-lead {
-                    font-size: 1.15rem;
-                    font-weight: 700;
-                    color: var(--pes-dark);
-                    line-height: 1.6;
-                    margin-bottom: 16px;
+                /* Gallery Responsiveness */
+                .gallery-section {
+                    overflow: hidden;
                 }
 
-                .pes-about-body {
-                    color: var(--pes-gray);
-                    font-size: 0.95rem;
-                    line-height: 1.8;
-                    margin-bottom: 20px;
-                    text-align: justify;
-                }
-
-                .pes-text-link {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 6px;
-                    font-weight: 700;
-                    font-size: 0.9rem;
-                    color: var(--pes-green);
-                }
-
-                .pes-text-link:hover {
-                    color: var(--pes-green-dark);
-                    transform: translateX(3px);
-                }
-
-                /* ==========================================================================
-                   3. VISION & MISSION CARDS (Clean editorial style)
-                   ========================================================================== */
-                .pes-vm-section {
-                    padding: 0 0 70px;
-                    background: #ffffff;
-                }
-
-                .pes-vm-card {
-                    background: #ffffff;
-                    border: 1px solid var(--pes-border);
-                    border-top: 3px solid var(--pes-green);
-                    padding: 32px 28px;
-                    height: 100%;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                }
-
-                .pes-vm-card:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-                }
-
-                .pes-vm-header {
+                .marquee-container {
                     display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    margin-bottom: 16px;
+                    flex-wrap: nowrap;
+                    overflow: visible;
+                    padding-left: 24px;
+                    will-change: transform;
                 }
 
-                .pes-vm-icon {
-                    width: 44px;
-                    height: 44px;
-                    border-radius: 4px;
-                    background: var(--pes-green-light);
-                    color: var(--pes-green);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 22px;
+                .gallery-card {
                     flex-shrink: 0;
-                }
-
-                .pes-vm-card h3 {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 1.5rem;
-                    color: var(--pes-dark);
-                    margin: 0;
-                }
-
-                .pes-vm-card p {
-                    color: var(--pes-gray);
-                    font-size: 0.92rem;
-                    line-height: 1.7;
-                    margin: 0;
-                }
-
-                /* ==========================================================================
-                   4. FROM THE CHAPTER (Announcements & Featured Event)
-                   ========================================================================== */
-                .pes-from-chapter-section {
-                    padding: 72px 0;
-                    background: var(--pes-bg-gray);
-                    border-top: 1px solid var(--pes-border-light);
-                    border-bottom: 1px solid var(--pes-border-light);
-                }
-
-                .pes-announcement-card {
-                    padding: 18px 0;
-                    border-bottom: 1px solid var(--pes-border);
-                }
-
-                .pes-announcement-card:last-of-type {
-                    border-bottom: none;
-                }
-
-                .pes-announcement-date {
-                    display: inline-block;
-                    background: var(--pes-green);
-                    color: #ffffff;
-                    font-size: 0.7rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                    padding: 3px 8px;
-                    margin-bottom: 8px;
-                }
-
-                .pes-announcement-title {
-                    font-size: 1.05rem;
-                    font-weight: 700;
-                    line-height: 1.4;
-                    margin-bottom: 6px;
-                }
-
-                .pes-announcement-title a {
-                    color: var(--pes-dark);
-                }
-
-                .pes-announcement-title a:hover {
-                    color: var(--pes-green);
-                }
-
-                .pes-announcement-desc {
-                    color: var(--pes-gray);
-                    font-size: 0.88rem;
-                    line-height: 1.6;
-                    margin-bottom: 6px;
-                }
-
-                .pes-featured-event-box {
-                    background: #ffffff;
-                    border: 1px solid var(--pes-border);
-                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .pes-featured-event-img {
-                    width: 100%;
-                    height: 240px;
-                    object-fit: cover;
-                    display: block;
-                }
-
-                .pes-featured-event-body {
-                    padding: 28px;
-                    display: flex;
-                    flex-direction: column;
-                    flex-grow: 1;
-                }
-
-                .pes-featured-event-body h3 {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 1.5rem;
-                    color: var(--pes-dark);
-                    margin-bottom: 8px;
-                    line-height: 1.25;
-                }
-
-                .pes-featured-event-meta {
-                    color: var(--pes-green);
-                    font-size: 0.82rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                    margin-bottom: 12px;
-                }
-
-                .pes-featured-event-body p {
-                    color: var(--pes-gray);
-                    font-size: 0.9rem;
-                    line-height: 1.65;
-                    margin-bottom: 20px;
-                    flex-grow: 1;
-                }
-
-                /* ==========================================================================
-                   5. RECENT EVENTS
-                   ========================================================================== */
-                .pes-recent-events-section {
-                    padding: 80px 0;
-                    background: #ffffff;
-                }
-
-                .pes-event-card {
-                    background: #ffffff;
-                    border: 1px solid var(--pes-border);
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                }
-
-                .pes-event-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-                }
-
-                .pes-event-img-wrap {
-                    width: 100%;
-                    height: 200px;
-                    overflow: hidden;
-                    background: #eef2ec;
-                }
-
-                .pes-event-img-wrap img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    display: block;
-                    transition: transform 0.4s ease;
-                }
-
-                .pes-event-card:hover .pes-event-img-wrap img {
-                    transform: scale(1.04);
-                }
-
-                .pes-event-card-body {
-                    padding: 22px;
-                    display: flex;
-                    flex-direction: column;
-                    flex-grow: 1;
-                }
-
-                .pes-event-tag {
-                    color: var(--pes-green);
-                    font-size: 0.7rem;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    margin-bottom: 6px;
-                }
-
-                .pes-event-title {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 1.25rem;
-                    color: var(--pes-dark);
-                    line-height: 1.3;
-                    margin-bottom: 10px;
-                }
-
-                .pes-event-desc {
-                    color: var(--pes-gray);
-                    font-size: 0.88rem;
-                    line-height: 1.6;
-                    margin-bottom: 18px;
-                    flex-grow: 1;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 3;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                }
-
-                .pes-btn-outline {
-                    display: inline-block;
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 14px;
-                    text-transform: uppercase;
-                    letter-spacing: 0.8px;
-                    color: var(--pes-green);
-                    border: 2px solid var(--pes-green);
-                    padding: 10px 28px;
-                    background: transparent;
-                    transition: all 0.2s ease;
-                }
-
-                .pes-btn-outline:hover {
-                    background: var(--pes-green);
-                    color: #ffffff;
-                }
-
-                /* ==========================================================================
-                   6. COMMUNITY IN FOCUS (Gallery Grid)
-                   ========================================================================== */
-                .pes-community-section {
-                    padding: 72px 0;
-                    background: var(--pes-bg-gray);
-                    border-top: 1px solid var(--pes-border-light);
-                    border-bottom: 1px solid var(--pes-border-light);
-                }
-
-                .pes-gallery-item {
+                    transition: all 0.3s ease-out;
                     cursor: pointer;
+                    border-radius: 4px;
                     overflow: hidden;
-                    background: #ffffff;
-                    border: 1px solid var(--pes-border);
+                    background: white;
+                    border: 1px solid #e0e0e0;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
                 }
 
-                .pes-gallery-item img {
-                    width: 100%;
-                    height: 220px;
-                    object-fit: cover;
-                    display: block;
-                    transition: transform 0.4s ease;
+                .gallery-card:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
                 }
 
-                .pes-gallery-item:hover img {
-                    transform: scale(1.05);
+                /* Desktop: 320px cards */
+                @media (min-width: 1024px) {
+                    .gallery-card {
+                        width: 320px;
+                    }
                 }
 
-                .pes-gallery-caption {
-                    font-size: 0.85rem;
-                    font-weight: 600;
-                    color: var(--pes-dark);
-                    padding: 10px 12px;
-                    background: #ffffff;
-                    margin: 0;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                /* Tablet: 280px cards */
+                @media (min-width: 768px) and (max-width: 1023px) {
+                    .gallery-card {
+                        width: 280px;
+                    }
+                    .marquee-container {
+                        gap: 20px;
+                    }
                 }
 
-                /* ==========================================================================
-                   7. STUDENT BRANCH NETWORK (Stats)
-                   ========================================================================== */
-                .pes-network-section {
-                    padding: 80px 0;
-                    background: #ffffff;
+                /* Small tablets & large phones: 240px cards */
+                @media (min-width: 600px) and (max-width: 767px) {
+                    .gallery-card {
+                        width: 240px;
+                    }
+                    .marquee-container {
+                        gap: 16px;
+                        padding-left: 16px;
+                    }
                 }
 
-                .pes-stat-number {
-                    font-family: var(--font-heading);
-                    font-size: 5rem;
-                    font-weight: 700;
-                    color: var(--pes-green);
-                    line-height: 1;
-                    margin-bottom: 4px;
-                }
-
-                .pes-stat-label {
-                    font-family: var(--font-heading);
-                    font-size: 1.4rem;
-                    font-weight: 700;
-                    color: var(--pes-dark);
-                    margin-bottom: 24px;
-                }
-
-                .pes-network-pathways {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 16px;
-                    border-top: 1px solid var(--pes-border);
-                    padding-top: 20px;
-                }
-
-                .pes-pathway h5 {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 1.15rem;
-                    color: var(--pes-dark);
-                    margin-bottom: 4px;
-                }
-
-                .pes-pathway p {
-                    font-size: 0.85rem;
-                    color: var(--pes-gray);
-                    line-height: 1.5;
-                    margin: 0;
-                }
-
-                @media (max-width: 576px) {
-                    .pes-network-pathways {
-                        grid-template-columns: 1fr;
+                /* Mobile: 200px cards with responsive adjustment */
+                @media (max-width: 599px) {
+                    .gallery-card {
+                        width: 200px;
+                    }
+                    .marquee-container {
                         gap: 12px;
+                        padding-left: 12px;
                     }
-                }
-
-                /* ==========================================================================
-                   8. KEEP LEARNING. STAY CONNECTED.
-                   ========================================================================== */
-                .pes-resources-section {
-                    padding: 72px 0;
-                    background: var(--pes-bg-gray);
-                    border-top: 1px solid var(--pes-border-light);
-                    border-bottom: 1px solid var(--pes-border-light);
-                }
-
-                .pes-resource-block {
-                    border-bottom: 1px solid var(--pes-border);
-                    padding-bottom: 16px;
-                }
-
-                @media (min-width: 768px) {
-                    .pes-resource-block {
-                        border-bottom: none;
-                        padding-bottom: 0;
+                    .gallery-section {
+                        padding: 30px 0 !important;
                     }
-                }
-
-                .pes-resource-block h4 {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 1.3rem;
-                    margin-bottom: 8px;
-                }
-
-                .pes-resource-block p {
-                    color: var(--pes-gray);
-                    font-size: 0.9rem;
-                    line-height: 1.6;
-                    margin-bottom: 12px;
-                }
-
-                /* ==========================================================================
-                   9. ABOUT IEEE AND PES (The Original WordPress Template Section)
-                   ========================================================================== */
-                .pes-about-dual-section {
-                    padding: 80px 0;
-                    background: #ffffff;
-                }
-
-                .pes-boxed-title-wrap {
-                    text-align: center;
-                    margin-bottom: 40px;
-                }
-
-                .pes-boxed-title {
-                    display: inline-block;
-                    font-family: var(--font-heading);
-                    font-size: 1.35rem;
-                    font-weight: 700;
-                    color: var(--pes-green);
-                    border: 2px solid var(--pes-green);
-                    padding: 10px 32px;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }
-
-                .pes-dual-card {
-                    background: #ffffff;
-                    border: 1px solid var(--pes-border);
-                    border-left: 4px solid var(--pes-green);
-                    padding: 36px 32px;
-                    height: 100%;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .pes-dual-card h4 {
-                    font-family: var(--font-heading);
-                    font-size: 1.45rem;
-                    font-weight: 700;
-                    color: var(--pes-dark);
-                    margin-bottom: 14px;
-                }
-
-                .pes-dual-card p {
-                    color: var(--pes-gray);
-                    font-size: 0.95rem;
-                    line-height: 1.8;
-                    margin-bottom: 24px;
-                    flex-grow: 1;
-                }
-
-                .pes-btn-outline-green {
-                    font-family: var(--font-heading);
-                    font-size: 14px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.8px;
-                    color: var(--pes-green);
-                    border: 2px solid var(--pes-green);
-                    padding: 8px 22px;
-                    display: inline-block;
-                    width: fit-content;
-                    transition: all 0.2s ease;
-                }
-
-                .pes-btn-outline-green:hover {
-                    background: var(--pes-green);
-                    color: #ffffff;
-                }
-
-                /* ==========================================================================
-                   10. CTA BANNER (Dark Theme)
-                   ========================================================================== */
-                .pes-cta-section {
-                    padding: 72px 0;
-                    background-color: #1a1a1a;
-                    color: #ffffff;
-                    text-align: center;
-                }
-
-                .pes-cta-section h2 {
-                    font-family: var(--font-heading);
-                    font-weight: 700;
-                    font-size: 2.3rem;
-                    color: #ffffff;
-                    margin-bottom: 14px;
-                    letter-spacing: -0.5px;
-                }
-
-                .pes-cta-section p {
-                    color: rgba(255, 255, 255, 0.8);
-                    font-size: 0.98rem;
-                    max-width: 680px;
-                    margin: 0 auto 28px;
-                    line-height: 1.7;
-                }
-
-                .pes-cta-actions {
-                    display: flex;
-                    justify-content: center;
-                    gap: 16px;
-                    flex-wrap: wrap;
-                }
-
-                .pes-btn-cta-primary {
-                    background: var(--pes-green);
-                    color: #ffffff !important;
-                    font-family: var(--font-heading);
-                    font-size: 14px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.8px;
-                    padding: 12px 30px;
-                    border-radius: 2px;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    transition: all 0.2s ease;
-                }
-
-                .pes-btn-cta-primary:hover {
-                    background: var(--pes-green-dark);
-                    transform: translateY(-2px);
-                }
-
-                .pes-btn-cta-secondary {
-                    background: transparent;
-                    color: #ffffff !important;
-                    font-family: var(--font-heading);
-                    font-size: 14px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.8px;
-                    padding: 12px 28px;
-                    border: 1.5px solid rgba(255, 255, 255, 0.4);
-                    border-radius: 2px;
-                    transition: all 0.2s ease;
-                }
-
-                .pes-btn-cta-secondary:hover {
-                    background: rgba(255, 255, 255, 0.1);
-                    border-color: #ffffff;
-                }
-
-                /* ==========================================================================
-                   11. LIGHTBOX MODAL
-                   ========================================================================== */
-                .pes-lightbox-overlay {
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(0, 0, 0, 0.85);
-                    z-index: 99999;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 20px;
-                }
-
-                .pes-lightbox-content {
-                    position: relative;
-                    max-width: 900px;
-                    width: 100%;
-                    max-height: 90vh;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                .pes-lightbox-img {
-                    max-width: 100%;
-                    max-height: 75vh;
-                    object-fit: contain;
-                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-                }
-
-                .pes-lightbox-caption {
-                    color: #ffffff;
-                    margin-top: 14px;
-                    font-size: 1rem;
-                    text-align: center;
-                }
-
-                .pes-lightbox-close {
-                    position: absolute;
-                    top: -44px;
-                    right: 0;
-                    background: transparent;
-                    border: none;
-                    color: #ffffff;
-                    font-size: 32px;
-                    cursor: pointer;
-                    line-height: 1;
+                    .gallery-section .container {
+                        padding: 0 16px;
+                    }
                 }
             `}</style>
 
             <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
             <div className="box-layout">
-                {/* 3-Tier Professional IEEE PES Navbar */}
                 <Navbar />
 
-                {/* =================================================================
-                    1. HERO SECTION (Photographic Transmission Sunset + Green Overlay Box)
-                    ================================================================= */}
-                <section className="pes-hero">
-                    <div className="pes-hero-bg">
-                        <img
-                            src="/images/ieee-images/hero-bg.jpg"
-                            onError={(e) => {
-                                e.currentTarget.src = "/pes-theme/wp-content/uploads/sites/78/2019/12/shutterstock_681206938-slider.jpg";
-                            }}
-                            alt="IEEE PES Kerala Chapter"
-                        />
-                    </div>
-                    <div className="pes-hero-container">
-                        <div className="pes-hero-card">
-                            <h1>Powering progress. Connecting people.</h1>
-                            <p>
-                                A professional community advancing power and energy engineering in Kerala — through knowledge, collaboration, and service. Empowering the future of electrical and sustainable power systems.
+                {/* Hero Section — minimal, cursor-reactive, typography-led */}
+                <div id="hero" className="hero-section">
+                    <div className="hero-glow" id="heroGlow"></div>
+
+                    <div className="container">
+                        <div className="hero-content" data-aos="fade-up" data-aos-duration="700">
+                            <h1 className="hero-title">
+                                Empowering the future of <span>power &amp; energy</span>
+                            </h1>
+                            <p className="hero-subtitle">
+                                IEEE PES Kerala Chapter brings together engineers, researchers, and students advancing technology for humanity — through technical excellence, mentorship, and community in the energy sector.
                             </p>
-                            <div className="pes-hero-actions">
-                                <Link href="/pages/membership-benefits" className="pes-btn-hero-primary">
+                            <div className="d-flex flex-wrap gap-3">
+                                <Link href="/pages/membership-benefits" className="hero-btn btn-primary-custom">
                                     Become a Member <i className="ri-arrow-right-line"></i>
                                 </Link>
-                                <Link href="/pages/upcoming-events" className="pes-btn-hero-secondary">
+                                <Link href="/pages/upcoming-events" className="hero-btn btn-secondary-custom">
                                     Explore Events
                                 </Link>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                {/* =================================================================
-                    2. ABOUT SECTION (Engineering Knowledge Shared Across Kerala)
-                    ================================================================= */}
-                <section className="pes-about-section">
-                    <div className="container">
-                        <div className="row align-items-start g-5">
-                            <div className="col-lg-5">
-                                <span className="pes-kicker">WHO WE ARE</span>
-                                <h2 className="pes-section-title">
-                                    Engineering knowledge. Shared across Kerala.
-                                </h2>
-                                <p className="pes-about-lead">
-                                    Since 1999, IEEE PES Kerala Chapter has brought engineers, researchers, and students together to exchange ideas and advance the power and energy profession.
+
+
+                {/* About Message Section */}
+                <div className="container py-5 mt-4">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="py-2" data-aos="fade-up">
+                                <p style={{ textAlign: "justify", fontSize: "1.1rem", lineHeight: "1.8", color: '#444' }}>
+                                    The <strong>IEEE PES Kerala Chapter</strong> was founded in 1999 with just 12 members and has since grown into one of the most recognized chapters in the world. It won the Outstanding Chapter Award in 2012 and the PES Membership Growth Award in 2013, and claimed first place in the IEEE PES Chapters Website Contest the same year. Membership surpassed 1,200 by 2017, elevating it to large chapter status. Its mission is to be the leading provider of scientific and engineering knowledge on electric power and energy for the betterment of society. With 50+ Student Branch Chapters and numerous technical events, it remains a highly active and award-winning chapter under the IEEE Kerala Section.
                                 </p>
-                            </div>
-                            <div className="col-lg-7">
-                                <p className="pes-about-body">
-                                    The <strong>IEEE PES Kerala Chapter</strong> was founded in 1999 with just 12 members and has since grown into one of the most recognized chapters in the world. It won the Outstanding Chapter Award in 2012 and the PES Membership Growth Award in 2013, and claimed first place in the IEEE PES Chapters Website Contest the same year. Membership surpassed 1,200 by 2017, elevating it to large chapter status.
-                                </p>
-                                <p className="pes-about-body">
-                                    Its mission is to be the leading provider of scientific and engineering knowledge on electric power and energy for the betterment of society. With 50+ Student Branch Chapters and numerous technical events, it remains a highly active and award-winning chapter under the IEEE Kerala Section.
-                                </p>
-                                <Link href="/pages/about" className="pes-text-link">
-                                    Read our full story →
-                                </Link>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                {/* =================================================================
-                    3. VISION & MISSION SECTION (Original Content Preserved)
-                    ================================================================= */}
-                <section className="pes-vm-section">
-                    <div className="container">
-                        <div className="row g-4">
-                            <div className="col-md-6">
-                                <div className="pes-vm-card">
-                                    <div className="pes-vm-header">
-                                        <div className="pes-vm-icon">
-                                            <i className="ri-eye-line"></i>
-                                        </div>
-                                        <h3>Our Vision</h3>
+                {/* Vision & Mission Section */}
+                <div className="container pb-5">
+                    <div className="row g-4 pt-3">
+                        <div className="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div className="p-4 p-md-5 rounded-4 border bg-white shadow-sm h-100 position-relative mt-4" style={{ transition: 'transform 0.3s ease', cursor: 'default' }} onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                                <div className="position-absolute top-0 start-0 translate-middle ms-5 bg-white p-2 rounded-circle shadow-sm" style={{ marginTop: '-4px' }}>
+                                    <div className="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px' }}>
+                                        <i className="ri-eye-line fs-3" style={{ color: 'var(--pes-green)' }}></i>
                                     </div>
-                                    <p>
-                                        To be the leading provider of scientific and engineering information on electric power and energy for the betterment of society, and the preferred professional development source for our members.
-                                    </p>
                                 </div>
+                                <h3 className="fw-bold mt-3 mb-3" style={{ color: '#0f172a' }}>Our Vision</h3>
+                                <p className="text-secondary mb-0" style={{ lineHeight: '1.7' }}>
+                                    To be the leading provider of scientific and engineering information on electric power and energy for the betterment of society, and the preferred professional development source for our members.
+                                </p>
                             </div>
-                            <div className="col-md-6">
-                                <div className="pes-vm-card">
-                                    <div className="pes-vm-header">
-                                        <div className="pes-vm-icon">
-                                            <i className="ri-rocket-2-line"></i>
-                                        </div>
-                                        <h3>Our Mission</h3>
+                        </div>
+                        <div className="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                            <div className="p-4 p-md-5 rounded-4 border bg-white shadow-sm h-100 position-relative mt-4" style={{ transition: 'transform 0.3s ease', cursor: 'default' }} onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                                <div className="position-absolute top-0 start-0 translate-middle ms-5 bg-white p-2 rounded-circle shadow-sm" style={{ marginTop: '-4px' }}>
+                                    <div className="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px' }}>
+                                        <i className="ri-rocket-2-line fs-3 text-primary"></i>
                                     </div>
-                                    <p>
-                                        To foster technological innovation and excellence for the benefit of humanity by providing high-quality publications, engaging conferences, and valuable educational programs in power and energy.
-                                    </p>
                                 </div>
+                                <h3 className="fw-bold mt-3 mb-3" style={{ color: '#0f172a' }}>Our Mission</h3>
+                                <p className="text-secondary mb-0" style={{ lineHeight: '1.7' }}>
+                                    To foster technological innovation and excellence for the benefit of humanity by providing high-quality publications, engaging conferences, and valuable educational programs in power and energy.
+                                </p>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                {/* =================================================================
-                    4. FROM THE CHAPTER (Announcements & Featured Event)
-                    ================================================================= */}
-                <section className="pes-from-chapter-section">
-                    <div className="container">
-                        <div className="row g-5">
-                            {/* Announcements List */}
-                            <div className="col-lg-6">
-                                <span className="pes-kicker">NEWS &amp; ANNOUNCEMENTS</span>
-                                <h2 className="pes-section-title">From the chapter</h2>
 
-                                <div className="pes-announcements-list">
+
+                {/* Announcements & Upcoming Events Section */}
+                <div className="container my-5">
+                    <div className="row align-items-stretch g-4">
+                        {/* Announcements */}
+                        <div className="col-lg-6" data-aos="fade-up">
+                            <div className="p-4 p-md-5 rounded border bg-white shadow-sm h-100" style={{ borderTop: "4px solid var(--pes-green)" }}>
+                                <h4 className="mb-4 fw-bold d-flex align-items-center gap-2">
+                                    <i className="ri-megaphone-line text-success"></i>
+                                    Announcements
+                                </h4>
+                                <ul className="list-unstyled">
                                     {displayAnnouncements.slice(0, 3).map((ann, idx) => (
-                                        <div className="pes-announcement-card" key={idx}>
-                                            <span className="pes-announcement-date">
-                                                {formatDate(ann.date)}
-                                            </span>
-                                            <h4 className="pes-announcement-title">
-                                                <Link href={ann.link || "/pages/announcements"}>
+                                        <li className={`mb-4 pb-3 ${idx < 2 ? 'border-bottom' : ''}`} key={idx}>
+                                            <small className="text-secondary fw-bold text-uppercase d-block mb-2">
+                                                {isNaN(Date.parse(ann.date)) ? ann.date : new Date(ann.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                                            </small>
+                                            <h5 className="fw-bold mt-1 mb-2">
+                                                <Link href={ann.link || "#"} className="text-dark text-decoration-none hover-green">
                                                     {ann.title}
                                                 </Link>
-                                            </h4>
-                                            <p className="pes-announcement-desc">
-                                                {ann.description || ann.details}
-                                            </p>
-                                            <Link href={ann.link || "/pages/announcements"} className="pes-text-link">
+                                            </h5>
+                                            <p className="text-muted small mb-2">{ann.description || ann.details}</p>
+                                            <Link href={ann.link || "#"} className="text-success small fw-bold text-decoration-none">
                                                 Read More →
                                             </Link>
-                                        </div>
+                                        </li>
                                     ))}
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Upcoming Events Carousel */}
+                        <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                            <div className="rounded overflow-hidden shadow-lg position-relative h-100" style={{ backgroundColor: 'var(--pes-green)', minHeight: '450px' }}>
+                                <div className="position-absolute top-0 end-0 bg-dark text-white px-3 py-2 m-3 rounded shadow" style={{ fontSize: '0.85rem', zIndex: 10 }}>
+                                    <i className="ri-calendar-event-line me-2"></i>Upcoming Events
                                 </div>
 
-                                <div className="mt-4">
-                                    <Link href="/pages/announcements" className="pes-text-link fw-bold">
-                                        View all announcements →
+                                <div className="swiper upcoming-events-swiper h-100 w-100">
+                                    <div className="swiper-wrapper h-100">
+                                        {upcoming.length > 0 ? (
+                                            upcoming.map((evt, idx) => (
+                                                <div className="swiper-slide h-100" key={idx}>
+                                                    <div className="h-100 d-flex flex-column bg-white">
+                                                        <div style={{ height: '260px', overflow: 'hidden' }}>
+                                                            <img
+                                                                src={evt.imageUrl || "/images/ieee-images/Events/pesgre_event.png"}
+                                                                alt={evt.title}
+                                                                className="w-100 h-100 object-fit-cover"
+                                                            />
+                                                        </div>
+                                                        <div className="p-4 d-flex flex-column justify-content-center flex-grow-1">
+                                                            <div className="mb-2">
+                                                                <span className="badge rounded-pill px-3 py-2" style={{ backgroundColor: 'var(--pes-green)', fontSize: '0.75rem' }}>
+                                                                    {new Date(evt.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                                </span>
+                                                            </div>
+                                                            <h3 className="h5 fw-bold mb-2 text-dark">{evt.title}</h3>
+                                                            <p className="text-muted mb-3" style={{ fontSize: '0.9rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                                                                {evt.description || evt.details || "Join us for this exciting event."}
+                                                            </p>
+                                                            <Link
+                                                                href={evt.link || evt.url || "#"}
+                                                                className="fw-bold text-decoration-none mt-auto d-inline-block"
+                                                                style={{ color: 'var(--pes-green)' }}
+                                                            >
+                                                                Learn More →
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="swiper-slide h-100">
+                                                <div className="h-100 d-flex flex-column bg-white">
+                                                    <div style={{ height: '260px', overflow: 'hidden' }}>
+                                                        <img
+                                                            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                                            alt="Upcoming Event"
+                                                            className="w-100 h-100 object-fit-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="p-4 d-flex flex-column justify-content-center flex-grow-1">
+                                                        <div className="mb-2">
+                                                            <span className="badge rounded-pill px-3 py-2" style={{ backgroundColor: 'var(--pes-green)', fontSize: '0.75rem' }}>Coming Soon</span>
+                                                        </div>
+                                                        <h3 className="h5 fw-bold mb-2 text-dark">Smart Grid Symposium 2026</h3>
+                                                        <p className="text-muted mb-3" style={{ fontSize: '0.9rem' }}>
+                                                            Join industry experts for an in-depth exploration of cutting-edge smart grid technologies.
+                                                        </p>
+                                                        <Link href="/pages/upcoming-events" className="fw-bold text-decoration-none mt-auto d-inline-block" style={{ color: 'var(--pes-green)' }}>
+                                                            Learn More →
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="upcoming-swiper-pagination swiper-pagination position-absolute w-100" style={{ bottom: '15px' }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Recent Events Section */}
+                <div className="container my-5 py-5 bg-light rounded-4">
+                    <div className="text-center mb-5" data-aos="fade-up">
+                        <h2 className="fw-bold fs-1 text-dark mb-3">
+                            Recent <span style={{ color: 'var(--pes-green)' }}>Events</span>
+                        </h2>
+                        <p className="text-muted mx-auto" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
+                            Explore our latest workshops, seminars, and networking events
+                        </p>
+                    </div>
+
+                    <div className="swiper recent-events-swiper pb-5 position-relative px-2">
+                        <div className="swiper-wrapper">
+                            {(recent.length > 0 ? recent : [
+                                { title: "Workshop on Renewable Energy Systems", img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", date: "2026-03-18", desc: "Comprehensive training on solar and wind energy integration." },
+                                { title: "Power Electronics Seminar", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", date: "2026-03-15", desc: "Advanced topics in power conversion and control systems." },
+                                { title: "Student Chapter Technical Meet", img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", date: "2026-03-12", desc: "Networking event for student members across Kerala." },
+                                { title: "Industry Expert Talk Series", img: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", date: "2026-03-08", desc: "Insights from leading professionals in the power sector." }
+                            ]).map((event, idx) => (
+                                <div className="swiper-slide h-auto" key={idx}>
+                                    <Link href={event.link || event.url || "#"} className="card h-100 border-0 text-decoration-none event-card-hover" style={{ borderRadius: '12px', overflow: 'hidden' }}>
+                                        <div style={{ height: '200px', overflow: 'hidden' }}>
+                                            <img src={event.img || event.imageUrl || "https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} alt={event.title} className="w-100 h-100 object-fit-cover event-card-img" />
+                                        </div>
+                                        <div className="card-body p-4 d-flex flex-column bg-white">
+                                            <div className="mb-3">
+                                                <span className="badge bg-light text-dark px-3 py-2" style={{ fontSize: '0.7rem', fontWeight: '600' }}>
+                                                    {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                </span>
+                                            </div>
+                                            <h4 className="card-title fw-bold fs-6 text-dark mb-3" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', minHeight: '3rem' }}>
+                                                {event.title}
+                                            </h4>
+                                            <p className="card-text text-muted mb-4 flex-grow-1" style={{ fontSize: '0.9rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                                                {event.desc || event.description || "Highlights from this impactful IEEE PES event."}
+                                            </p>
+                                            <span className="fw-bold mt-auto d-inline-block small" style={{ color: 'var(--pes-green)' }}>
+                                                View Details →
+                                            </span>
+                                        </div>
                                     </Link>
                                 </div>
-                            </div>
-
-                            {/* Featured Event Card */}
-                            <div className="col-lg-6">
-                                <div className="pes-featured-event-box">
-                                    <img
-                                        src={featuredEvent?.imageUrl || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"}
-                                        alt={featuredEvent?.title || "Smart Grid Symposium 2026"}
-                                        className="pes-featured-event-img"
-                                    />
-                                    <div className="pes-featured-event-body">
-                                        <span className="pes-kicker">FEATURED UPCOMING PROGRAMME</span>
-                                        <h3>{featuredEvent?.title || "Smart Grid Symposium 2026"}</h3>
-                                        <div className="pes-featured-event-meta">
-                                            {featuredEvent?.date ? formatDate(featuredEvent.date) : "Date to be announced"}
-                                            {featuredEvent?.location ? ` · ${featuredEvent.location}` : ""}
-                                        </div>
-                                        <p>
-                                            {featuredEvent?.description || featuredEvent?.details || "Join industry leaders and academic researchers for an in-depth exploration of smart grids, renewable penetration, and power system modernization across Kerala."}
-                                        </p>
-                                        <div>
-                                            <Link href={featuredEvent?.customUrl || featuredEvent?.link || "/pages/upcoming-events"} className="pes-text-link fw-bold">
-                                                Programme details &amp; Registration →
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* =================================================================
-                    5. RECENT EVENTS (3-Column Grid)
-                    ================================================================= */}
-                <section className="pes-recent-events-section">
-                    <div className="container">
-                        <div className="d-flex flex-wrap justify-content-between align-items-end mb-4">
-                            <div>
-                                <span className="pes-kicker">EVENTS &amp; PROGRAMMES</span>
-                                <h2 className="pes-section-title mb-0">Recent events</h2>
-                            </div>
-                            <Link href="/pages/past-events" className="pes-text-link d-none d-md-inline-flex">
-                                View all events archive →
-                            </Link>
-                        </div>
-
-                        <div className="row g-4">
-                            {displayRecent.slice(0, 3).map((event, idx) => (
-                                <div className="col-md-6 col-lg-4" key={idx}>
-                                    <div className="pes-event-card">
-                                        <div className="pes-event-img-wrap">
-                                            <img
-                                                src={event.imageUrl || event.img || "https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
-                                                alt={event.title}
-                                            />
-                                        </div>
-                                        <div className="pes-event-card-body">
-                                            <div className="pes-event-tag">
-                                                {event.tag || "CHAPTER EVENT"}
-                                            </div>
-                                            <h4 className="pes-event-title">{event.title}</h4>
-                                            <p className="pes-event-desc">
-                                                {event.description || event.desc || event.details || "Highlights from this impactful IEEE PES Kerala Chapter technical gathering."}
-                                            </p>
-                                            <Link href={event.link || event.url || "/pages/past-events"} className="pes-text-link mt-auto">
-                                                Read event report →
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
                             ))}
                         </div>
+                        <div className="recent-events-pagination swiper-pagination position-absolute w-100" style={{ bottom: '0px' }}></div>
+                    </div>
+                </div>
 
-                        <div className="text-center mt-5">
-                            <Link href="/pages/past-events" className="pes-btn-outline">
-                                View all past events
-                            </Link>
+                {/* Gallery Section */}
+                <section className="gallery-section position-relative py-5 mt-4" style={{ background: 'linear-gradient(to bottom, #f8fafb, #ffffff)' }}>
+                    <div className="container mb-5">
+                        <div className="text-center" data-aos="fade-up">
+                            <h2 className="fw-bold text-dark mb-3" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)' }}>
+                                Event <span style={{ color: 'var(--pes-green)' }}>Gallery</span>
+                            </h2>
+                            <p className="text-muted mx-auto" style={{ maxWidth: '600px', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', lineHeight: '1.6' }}>
+                                Glimpses from our conferences, workshops, and community gatherings
+                            </p>
                         </div>
                     </div>
-                </section>
 
-                {/* =================================================================
-                    6. OUR COMMUNITY IN FOCUS (Photo Gallery)
-                    ================================================================= */}
-                <section className="pes-community-section">
-                    <div className="container">
-                        <div className="d-flex flex-wrap justify-content-between align-items-end mb-4">
-                            <div>
-                                <span className="pes-kicker">PHOTO ARCHIVE</span>
-                                <h2 className="pes-section-title mb-0">Our community in focus</h2>
-                            </div>
-                            <Link href="/pages/gallery" className="pes-text-link d-none d-md-inline-flex">
-                                View entire gallery →
-                            </Link>
-                        </div>
+                    <div className="position-relative">
+                        <div className="position-absolute top-0 start-0" style={{ width: 'clamp(40px, 10%, 80px)', height: '100%', background: 'linear-gradient(to right, #f8fafb, transparent)', pointerEvents: 'none', zIndex: 10 }}></div>
+                        <div className="position-absolute top-0 end-0" style={{ width: 'clamp(40px, 10%, 80px)', height: '100%', background: 'linear-gradient(to left, #ffffff, transparent)', pointerEvents: 'none', zIndex: 10 }}></div>
 
-                        <div className="row g-4">
-                            {displayGallery.slice(0, 3).map((item, idx) => (
-                                <div className="col-md-4" key={idx}>
-                                    <div className="pes-gallery-item" onClick={() => setActivePhoto(item)}>
-                                        <img src={item.img} alt={item.title} />
-                                        <p className="pes-gallery-caption">{item.title}</p>
+                        <div className="overflow-hidden py-3">
+                            <div className="marquee-container" style={{ paddingRight: '24px' }}>
+                                {[...displayGallery, ...displayGallery].map((item, idx) => (
+                                    <div key={idx} className="gallery-card rounded-4" data-title={item.title}>
+                                        <div style={{ height: '220px', overflow: 'hidden' }}>
+                                            <img src={item.img} alt={item.title} className="w-100 h-100 object-fit-cover gallery-img" />
+                                        </div>
+                                        <div className="p-3 bg-white">
+                                            <h6 className="fw-bold text-dark mb-0 text-truncate" style={{ fontSize: '0.9rem' }}>{item.title}</h6>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-
-                        <div className="text-center mt-4 d-md-none">
-                            <Link href="/pages/gallery" className="pes-text-link fw-bold">
-                                View entire gallery →
-                            </Link>
-                        </div>
+                        <p className="text-center text-muted mt-4 mb-0" style={{ fontSize: '14px', opacity: 0.6 }}>
+                            Click on any image to preview • Auto-scrolling
+                        </p>
                     </div>
                 </section>
 
-                {/* =================================================================
-                    7. STUDENT BRANCH CHAPTERS (Local connections. Lifelong possibilities.)
-                    ================================================================= */}
-                <section className="pes-network-section">
-                    <div className="container">
-                        <div className="row align-items-center g-5">
-                            <div className="col-lg-6">
-                                <span className="pes-kicker">STUDENT &amp; PROFESSIONAL NETWORK</span>
-                                <h2 className="pes-section-title">
-                                    Local connections. Lifelong possibilities.
-                                </h2>
-                                <p className="pes-about-body">
-                                    Our student branch chapters and affinity groups span engineering colleges across Kerala, giving students direct access to IEEE PES resources, industry mentorship, and global technical networks.
-                                </p>
-                                <Link href="/pages/student-branches" className="pes-text-link fw-bold">
-                                    Find a chapter near you →
+                {/* Join IEEE PES CTA Section */}
+                <div className="container py-4 my-3 position-relative" data-aos="fade-up">
+                    <div className="rounded-4 overflow-hidden shadow-lg position-relative p-5 text-center" style={{ background: 'linear-gradient(135deg, #020b14 0%, #001f3f 100%)' }}>
+                        <div className="position-absolute top-0 start-0 w-100 h-100" style={{ 
+                            backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(0, 171, 132, 0.15), transparent 50%), radial-gradient(circle at 80% 50%, rgba(0, 98, 155, 0.15), transparent 50%)',
+                            zIndex: 0
+                        }}></div>
+                        
+                        <div className="position-relative" style={{ zIndex: 1 }}>
+                            <h2 className="display-5 fw-bold text-white mb-3">Elevate Your Engineering Career</h2>
+                            <p className="lead text-white-50 mx-auto mb-4" style={{ maxWidth: '700px' }}>
+                                Join the IEEE Power & Energy Society today to unlock exclusive resources, networking opportunities, and professional development in the energy sector.
+                            </p>
+                            <div className="d-flex flex-wrap gap-3 justify-content-center">
+                                <a href="https://www.ieee.org/membership/join/index.html" target="_blank" rel="noreferrer" className="btn btn-lg rounded-pill fw-bold text-white px-5 py-3 shadow hero-btn" style={{ backgroundColor: 'var(--pes-green)' }}>
+                                    Join IEEE PES Now
+                                </a>
+                                <Link href="/pages/membership-benefits" className="btn btn-lg rounded-pill fw-bold px-4 py-3 text-white hero-btn-outline border-white border-opacity-25" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'white !important' }}>
+                                    Discover Benefits
                                 </Link>
                             </div>
-                            <div className="col-lg-6">
-                                <div className="pes-stat-number">50+</div>
-                                <div className="pes-stat-label">Student Branch Chapters across Kerala</div>
-                                <div className="pes-network-pathways">
-                                    <div className="pes-pathway">
-                                        <h5>Learn</h5>
-                                        <p>Access technical workshops, webinars, and training.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* About IEEE and PES Section (Exact Requested Markup) */}
+                <div className="vc_row wpb_row vc_row-fluid mt-4 mb-5 pb-5">
+                    <div className="wpb_column vc_column_container vc_col-sm-12">
+                        <div className="vc_column-inner text-center">
+                            <div className="wpb_wrapper container">
+                                <h3 className="fw-bold" style={{ marginBottom: "20px", display: "inline-block", padding: "12px 35px", border: "3px solid var(--pes-green)", color: "var(--pes-green)", fontSize: "1.4rem", textTransform: "uppercase" }}>
+                                    About IEEE and PES
+                                </h3>
+                                <div className="row text-start mt-5">
+                                    <div className="col-md-6 mb-4">
+                                        <div className="p-4 p-md-5 bg-white shadow-sm border rounded h-100 border-start border-4 border-success">
+                                            <h4 className="mb-4 text-dark fw-bold">What is IEEE?</h4>
+                                            <p className="mb-5 text-muted lh-lg">
+                                                IEEE is the world’s largest technical professional organization dedicated to advancing technology for the benefit of humanity.
+                                            </p>
+                                            <a className="btn btn-outline-success fw-bold px-4 py-2" href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join" title="Join IEEE" target="_blank" rel="noreferrer" style={{ borderRadius: "0px", borderWidth: "2px" }}>
+                                                Join IEEE
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div className="pes-pathway">
-                                        <h5>Connect</h5>
-                                        <p>Meet peers, researchers, and power industry leaders.</p>
+                                    <div className="col-md-6 mb-4">
+                                        <div className="p-4 p-md-5 bg-white shadow-sm border rounded h-100 border-start border-4 border-success">
+                                            <h4 className="mb-4 text-dark fw-bold">What is the IEEE Power &amp; Energy Society?</h4>
+                                            <p className="mb-5 text-muted lh-lg">
+                                                The mission of IEEE Power &amp; Energy Society is to be the leading provider of scientific and engineering information on electric power and energy for the betterment of society, and preferred professional development source of its members.
+                                            </p>
+                                            <a className="btn btn-outline-success fw-bold px-4 py-2" href="https://www.ieee.org/membership-catalog/productdetail/showProductDetailPage.html?product=MEMPE031&amp;refProd=MEMPE031" title="Join IEEE PES" target="_blank" rel="noreferrer" style={{ borderRadius: "0px", borderWidth: "2px" }}>
+                                                Join IEEE PES
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div className="pes-pathway">
-                                        <h5>Contribute</h5>
-                                        <p>Lead a student branch team and make a local impact.</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                {/* =================================================================
-                    8. KEEP LEARNING. STAY CONNECTED.
-                    ================================================================= */}
-                <section className="pes-resources-section">
-                    <div className="container">
-                        <span className="pes-kicker">RESOURCES &amp; PUBLICATIONS</span>
-                        <h2 className="pes-section-title">Keep learning. Stay connected.</h2>
-
-                        <div className="row g-4 mt-2">
-                            <div className="col-md-4">
-                                <div className="pes-resource-block">
-                                    <h4>Technical resources</h4>
-                                    <p>
-                                        Access publications, research papers, tutorials, and standards from IEEE PES professionals worldwide.
-                                    </p>
-                                    <Link href="/pages/resources" className="pes-text-link">
-                                        Access technical materials →
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="pes-resource-block">
-                                    <h4>Chapter newsletters</h4>
-                                    <p>
-                                        Stay up to date with chapter activities, upcoming events, and member achievements through our regular periodicals.
-                                    </p>
-                                    <Link href="/pages/newsletters" className="pes-text-link">
-                                        Read latest newsletters →
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="pes-resource-block">
-                                    <h4>Chapter gallery</h4>
-                                    <p>
-                                        Browse photos, symposium recaps, and memorable highlights from conferences and community meets across Kerala.
-                                    </p>
-                                    <Link href="/pages/gallery" className="pes-text-link">
-                                        Explore the gallery →
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* =================================================================
-                    9. ABOUT IEEE AND PES (Original Official Template Content)
-                    ================================================================= */}
-                <section className="pes-about-dual-section">
-                    <div className="container">
-                        <div className="pes-boxed-title-wrap">
-                            <span className="pes-boxed-title">About IEEE and PES</span>
-                        </div>
-
-                        <div className="row g-4">
-                            <div className="col-md-6">
-                                <div className="pes-dual-card">
-                                    <h4>What is IEEE?</h4>
-                                    <p>
-                                        IEEE is the world’s largest technical professional organization dedicated to advancing technology for the benefit of humanity.
-                                    </p>
-                                    <a
-                                        href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="pes-btn-outline-green"
-                                    >
-                                        Join IEEE
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="pes-dual-card">
-                                    <h4>What is the IEEE Power &amp; Energy Society?</h4>
-                                    <p>
-                                        The mission of IEEE Power &amp; Energy Society is to be the leading provider of scientific and engineering information on electric power and energy for the betterment of society, and preferred professional development source of its members.
-                                    </p>
-                                    <a
-                                        href="https://www.ieee.org/membership-catalog/productdetail/showProductDetailPage.html?product=MEMPE031&refProd=MEMPE031"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="pes-btn-outline-green"
-                                    >
-                                        Join IEEE PES
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* =================================================================
-                    10. CTA BANNER (Your expertise belongs here)
-                    ================================================================= */}
-                <section className="pes-cta-section">
-                    <div className="container">
-                        <span className="pes-kicker" style={{ color: '#88c96f' }}>MEMBERSHIP IN IEEE PES</span>
-                        <h2>Your expertise belongs here.</h2>
-                        <p>
-                            Join engineers, researchers, and students who are shaping the power and energy landscape. Elevate your engineering career with global networking and professional resources.
-                        </p>
-                        <div className="pes-cta-actions">
-                            <a
-                                href="https://www.ieee.org/membership/join/index.html"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="pes-btn-cta-primary"
-                            >
-                                Join IEEE PES Now <i className="ri-arrow-right-line"></i>
-                            </a>
-                            <Link href="/pages/membership-benefits" className="pes-btn-cta-secondary">
-                                Discover Benefits
-                            </Link>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Professional Footer */}
                 <Footer />
 
-                {/* Lightbox Modal for Gallery Inspection */}
-                {activePhoto && (
-                    <div
-                        className="pes-lightbox-overlay"
-                        onClick={() => setActivePhoto(null)}
-                        role="dialog"
-                        aria-modal="true"
-                    >
-                        <div className="pes-lightbox-content" onClick={(e) => e.stopPropagation()}>
-                            <button
-                                className="pes-lightbox-close"
-                                onClick={() => setActivePhoto(null)}
-                                aria-label="Close photo preview"
-                            >
-                                ×
-                            </button>
-                            <img
-                                src={activePhoto.img}
-                                alt={activePhoto.title}
-                                className="pes-lightbox-img"
-                            />
-                            <p className="pes-lightbox-caption">{activePhoto.title}</p>
+                {/* Gallery Preview Modal */}
+                <div className="gallery-preview-modal" id="galleryPreview">
+                    <div className="gallery-preview-content">
+                        <div className="gallery-preview-close" role="button" aria-label="Close preview">
+                            <i className="ri-close-line"></i>
+                        </div>
+                        {/* impeccable-disable broken-image - src populated dynamically when user clicks gallery items */}
+                        <img id="previewImg" alt="Preview" style={{ display: 'block' }} />
+                        <div className="preview-timer-container">
+                            <div className="preview-timer-bar" id="previewTimer"></div>
                         </div>
                     </div>
-                )}
+                </div>
             </div>
         </>
     );

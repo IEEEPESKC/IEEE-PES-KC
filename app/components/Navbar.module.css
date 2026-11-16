@@ -3,15 +3,12 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Inter', 'Roboto', sans-serif;
 }
 
 /* IEEE Global Ribbon */
 .ieeeRibbon {
-    background-color: rgba(90, 150, 65, 0.1);
-    border-bottom: 1px solid rgba(90, 150, 65, 0.25);
+    background-color: #000000;
     padding: 6px 30px;
     display: flex;
     justify-content: flex-start;
@@ -23,11 +20,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 16px;
+    gap: 15px;
     flex-wrap: wrap;
-    max-width: 1240px;
-    width: 100%;
-    margin: 0 auto;
 }
 
 .ribbonLinks li {
@@ -37,109 +31,95 @@
 
 .ribbonLinks li:not(:last-child)::after {
     content: '|';
-    color: rgba(90, 150, 65, 0.45);
+    color: #666;
     position: absolute;
     right: -10px;
 }
 
 .ribbonLinks a {
-    color: #4a7f35;
+    color: #ffffff;
     font-size: 11px;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .ribbonLinks a:hover {
-    color: #2b551d;
     text-decoration: underline;
+    color: #a3a3a3;
 }
 
-/* Branding Bar */
-.brandBar {
-    background: #ffffff;
-    padding: 14px 30px;
-    border-bottom: 1px solid #edf2ec;
-}
-
-.brandContainer {
-    max-width: 1240px;
-    margin: 0 auto;
+.topBar {
+    background-color: #1F3F19; /* dark green */
+    color: #d1d5db;
+    padding: 8px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 13px;
+    font-weight: 500;
 }
 
-.brandLink {
+.topBarLeft {
+    display: flex;
+    gap: 24px;
+}
+
+.topBarLeft a {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
+    color: #d1d5db;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.pesEmblem {
-    height: 58px;
-    width: auto;
-    object-fit: contain;
+.topBarLeft a:hover {
+    color: #ffffff;
 }
 
-.brandTitles {
+.topBarRight {
     display: flex;
-    flex-direction: column;
+    gap: 18px;
 }
 
-.brandChapter {
-    font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
-    font-size: 1.65rem;
-    font-weight: 700;
-    color: #4a7f35;
-    line-height: 1.15;
-    letter-spacing: -0.3px;
+.topBarRight a {
+    color: #d1d5db;
+    font-size: 16px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.brandTagline {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #666666;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-top: 2px;
+.topBarRight a:hover {
+    color: #ffffff;
+    transform: scale(1.1);
 }
 
-.ieeeLogoLink {
-    display: flex;
-    align-items: center;
-}
-
-.ieeeLogo {
-    height: 34px;
-    width: auto;
-    object-fit: contain;
-}
-
-/* Main Navigation Bar (Official PES Green) */
 .mainNav {
-    background-color: #5a9641;
-    padding: 0 30px;
-    border-bottom: 2px solid #487c34;
-}
-
-.navContainer {
-    max-width: 1240px;
-    margin: 0 auto;
+    background-color: #121516; /* very dark */
+    padding: 12px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logoImage {
+    filter: invert(1) hue-rotate(180deg) brightness(1.2);
+    mix-blend-mode: screen;
 }
 
 .navLinks {
     display: flex;
-    gap: 0;
+    gap: 22px;
     list-style: none;
     margin: 0;
     padding: 0;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .navLinks li {
@@ -147,44 +127,49 @@
 }
 
 .navLinks a {
-    display: block;
-    color: #ffffff;
+    color: #a3a3a3;
     text-decoration: none;
-    font-family: 'Open Sans Condensed', 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
+    transition: color 0.3s ease;
     letter-spacing: 0.5px;
-    padding: 13px 14px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
 }
 
-.navLinks a:hover,
-.navLinks a.active {
-    background-color: #487c34;
+.navLinks a:hover, .navLinks a.active {
     color: #ffffff;
+}
+
+.navLinks a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #4a8d38; /* green underline */
 }
 
 .joinBtn {
-    background-color: #ffffff;
-    color: #4a7f35 !important;
+    background-color: #4a8d38; /* green */
+    color: #ffffff;
     padding: 6px 14px;
-    border-radius: 3px;
+    border-radius: 4px;
     text-decoration: none;
-    font-family: 'Open Sans Condensed', sans-serif;
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    display: inline-flex;
+    font-size: 11px;
+    display: flex;
     align-items: center;
     gap: 6px;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .joinBtn:hover {
-    background-color: #f2f7f0;
-    transform: translateY(-1px);
+    background-color: #3f7930;
+    color: #ffffff;
+    transform: translateY(-2px);
 }
 
 .mobileMenuBtn {
@@ -194,48 +179,31 @@
     color: #ffffff;
     font-size: 24px;
     cursor: pointer;
-    padding: 10px 0;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .navLinks {
         display: none;
     }
+
     .joinBtn {
         display: none;
     }
+
     .mobileMenuBtn {
         display: block;
     }
-    .brandChapter {
-        font-size: 1.3rem;
-    }
-    .pesEmblem {
-        height: 46px;
-    }
-    .ieeeLogo {
-        height: 28px;
-    }
-    .brandBar {
-        padding: 10px 16px;
-    }
-    .mainNav {
-        padding: 0 16px;
-    }
-    .ieeeRibbon {
-        padding: 6px 16px;
-    }
 }
 
-/* Mobile Drawer */
+/* Mobile right-side drawer */
 .navBackdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.55);
     z-index: 1998;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 250ms ease-out;
+    transition: opacity 300ms ease-out;
 }
 
 .navBackdrop.active {
@@ -248,14 +216,14 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(320px, 85vw);
-    background-color: #ffffff;
+    width: min(340px, 85vw);
+    background-color: #121516;
     z-index: 1999;
     overflow-y: auto;
     transform: translateX(100%);
-    transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.2);
-    padding: 24px 20px;
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.4);
+    padding: 88px 28px 32px;
     touch-action: pan-y;
 }
 
@@ -265,38 +233,38 @@
 
 .mobileNavList {
     list-style: none;
-    margin: 16px 0 0;
+    margin: 0;
     padding: 0;
 }
 
 .mobileNavList li {
     width: 100%;
-    border-bottom: 1px solid #edf2ec;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mobileNavList a {
     display: block;
-    padding: 13px 0;
-    color: #333333;
+    padding: 16px 0;
+    color: #a3a3a3;
     text-decoration: none;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .mobileNavList a:hover,
 .mobileNavList a.active {
-    color: #5a9641;
-    transform: translateX(4px);
+    color: #ffffff;
+    transform: translateX(8px);
+}
+
+.mobileNavList a.active {
+    color: #4a8d38;
 }
 
 .mobileNavList .joinBtn {
-    display: flex;
     justify-content: center;
     margin-top: 20px;
-    background-color: #5a9641;
-    color: #ffffff !important;
 }
