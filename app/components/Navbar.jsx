@@ -10,7 +10,7 @@ const NAV_LINKS = [
     { name: 'ABOUT', path: '/pages/about' },
     { name: 'EXCOM', path: '/pages/execom' },
     { name: 'ACTIVITIES', path: '/pages/initiatives' },
-    { name: 'EVENTS', path: '/pages/upcoming-events' },
+    { name: 'EVENTS', path: '/pages/events' },
     { name: 'MEMBERSHIP', path: '/pages/membership-benefits' },
     { name: 'GALLERY', path: '/pages/gallery' },
     { name: 'RESOURCES', path: '/pages/resources' },
@@ -25,6 +25,14 @@ export default function Navbar() {
     const pathname = usePathname();
     const drawerRef = useRef(null);
     const dragState = useRef({ startX: 0, startY: 0, deltaX: 0, dragging: false, intentChecked: false, startTime: 0 });
+
+    const isLinkActive = (linkPath) => {
+        if (pathname === linkPath) return true;
+        if (linkPath === '/pages/events' && (pathname === '/events' || pathname === '/pages/events' || pathname === '/pages/upcoming-events' || pathname === '/pages/past-events')) {
+            return true;
+        }
+        return false;
+    };
 
     useEffect(() => {
         document.body.style.overflow = isMenuOpen ? 'hidden' : '';
@@ -150,7 +158,7 @@ export default function Navbar() {
                             <li key={link.path}>
                                 <Link
                                     href={link.path}
-                                    className={pathname === link.path ? styles.active : ''}
+                                    className={isLinkActive(link.path) ? styles.active : ''}
                                 >
                                     {link.name}
                                 </Link>
@@ -208,7 +216,7 @@ export default function Navbar() {
                         <li key={link.path}>
                             <Link
                                 href={link.path}
-                                className={pathname === link.path ? styles.active : ''}
+                                className={isLinkActive(link.path) ? styles.active : ''}
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 {link.name}
