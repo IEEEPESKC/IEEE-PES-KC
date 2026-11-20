@@ -6,6 +6,7 @@ const pages = {
   'announcements': dynamic(() => import('../announcements')),
   'awards': dynamic(() => import('../awards')),
   'contact': dynamic(() => import('../contact')),
+  'events': dynamic(() => import('../events')),
   'execom': dynamic(() => import('../execom')),
   'gallery': dynamic(() => import('../gallery')),
   'history': dynamic(() => import('../history')),
